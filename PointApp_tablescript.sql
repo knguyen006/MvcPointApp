@@ -1,3 +1,6 @@
+GO
+CREATE DATABASE PointAppDB
+GO
 use PointAppDB
 go
 -- student table
@@ -59,17 +62,12 @@ alter table contactemail add constraint contactemail_contact_fk foreign key (con
 -------------------------------------------
 -- activity table
 -- member has join in different activity such as volunteer, administrative member, jazz, etc.
-go
-create table activity 
-(
-  activityid int not null,
-  actname nvarchar(50),
-  active nchar(1)
+GO
+CREATE TABLE [dbo].[activity] (
+    [activityid]    INT NOT NULL,
+    [actname] INT NOT NULL,
+	CONSTRAINT [activity_pk] PRIMARY KEY ([activityid])
 );
-
--- constraint
-go
-alter table activity add constraint activity_pk primary key (activityid);
 	
 	
 -----------------------
@@ -125,38 +123,26 @@ alter table member2student add constraint member2student_student_fk foreign key 
 ---------------------------
 -- member2contact
 -- assign contact
-go
-create table member2contact 
-(
-  memberid int not null,
-  contactid int not null  
+GO
+CREATE TABLE [dbo].[member2contact] (
+    [memberid]    INT NOT NULL,
+    [contactid] INT NOT NULL,
+	CONSTRAINT [member2contact_pk] PRIMARY KEY ([memberid], [contactid]),
+    CONSTRAINT [member2contact_member_fk] FOREIGN KEY ([memberid]) REFERENCES [dbo].[member] ([memberid]),
+	CONSTRAINT [member2contact_contact_fk] FOREIGN KEY ([contactid]) REFERENCES [dbo].[contact] ([contactid])
 );
-
--- constraint
-go
-alter table member2contact add constraint member2contact_pk primary key (memberid, studentid);
-go
-alter table member2contact add constraint member2contact_member_fk foreign key (memberid) references member(memberid);
-go
-alter table member2contact add constraint member2contact_contact_fk foreign key (contactid) references contact(contactid);
 
 ---------------------------
 -- member2dependent
 -- assign dependent
-go
-create table member2dependent 
-(
-  memberid int not null,
-  dependentid int not null  
+GO
+CREATE TABLE [dbo].[member2dependent] (
+    [memberid]    INT NOT NULL,
+    [dependentid] INT NOT NULL,
+	CONSTRAINT [member2dependent_pk] PRIMARY KEY ([memberid], [dependentid]),
+    CONSTRAINT [member2dependent_member_fk] FOREIGN KEY ([memberid]) REFERENCES [dbo].[member] ([memberid]),
+	CONSTRAINT [member2dependent_dependent_fk] FOREIGN KEY ([dependentid]) REFERENCES [dbo].[member] ([memberid])
 );
-
--- constraint
-go
-alter table member2dependent add constraint member2dependent_pk primary key (memberid, studentid);
-go
-alter table member2dependent add constraint member2dependent_member_fk foreign key (memberid) references member(memberid);
-go
-alter table member2dependent add constraint member2dependent_dependent_fk foreign key (dependentid) references member(dependentid);
 
 --------------------------------------
 -- session_cal table
@@ -200,20 +186,15 @@ alter table signup add constraint signup_sessioncal_fk foreign key (sessioncalid
 
 ---------------------------------------
 -- member2activity table
-go
-create table member2activity 
+GO
+CREATE TABLE [dbo].[member2activity]
 (
-  memberid int,
-  activityid int  
-);
-
--- constraint
-go
-alter table member2activity add constraint member2activity_pk primary key (memberid, activityid);
-go
-alter table member2activity add constraint member2activity_member_fk foreign key (memberid) references member(memberid);
-go
-alter table member2activity add constraint member2activity_activity_fk foreign key (activityid) references activity(activityid);
+	[memberid] INT NOT NULL, 
+    [activityid] INT NOT NULL,
+	CONSTRAINT [member2activity_pk] PRIMARY KEY ([memberid], [activityid]),
+	CONSTRAINT [member2activity_member_fk] FOREIGN KEY ([memberid]) REFERENCES [dbo].[member] ([memberid]),
+	CONSTRAINT [member2activity_act_fk] FOREIGN KEY ([activityid]) REFERENCES [dbo].[activity] ([activityid])
+)
 
 	
 
