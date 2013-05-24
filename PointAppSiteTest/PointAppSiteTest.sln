@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointAppSiteTest", "PointAppSiteTest\PointAppSiteTest.csproj", "{63978DE0-31D0-485A-927B-BF9000A909B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointAppSiteTest.Tests", "PointAppSiteTest.Tests\PointAppSiteTest.Tests.csproj", "{C7E2C659-6EB6-4496-80D0-6E4B6B891964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{690300C4-1B5C-4F57-8436-EF98E12715DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63978DE0-31D0-485A-927B-BF9000A909B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63978DE0-31D0-485A-927B-BF9000A909B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63978DE0-31D0-485A-927B-BF9000A909B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63978DE0-31D0-485A-927B-BF9000A909B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E2C659-6EB6-4496-80D0-6E4B6B891964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E2C659-6EB6-4496-80D0-6E4B6B891964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E2C659-6EB6-4496-80D0-6E4B6B891964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E2C659-6EB6-4496-80D0-6E4B6B891964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{690300C4-1B5C-4F57-8436-EF98E12715DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690300C4-1B5C-4F57-8436-EF98E12715DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690300C4-1B5C-4F57-8436-EF98E12715DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690300C4-1B5C-4F57-8436-EF98E12715DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
