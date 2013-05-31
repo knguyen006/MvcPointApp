@@ -4,16 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="75c1f3fec0534da7b154d169240b0d47" Name="Diagram1" ZoomLevel="57">
-        <EntityTypeShape EntityType="PointAppDBModel.activity" Width="1.5" PointX="11.185464676090266" PointY="11.326824640541721" />
-        <EntityTypeShape EntityType="PointAppDBModel.contact" Width="1.5" PointX="8.9158345372024144" PointY="7.10113533171878" />
-        <EntityTypeShape EntityType="PointAppDBModel.contactemail" Width="1.5" PointX="8.351697551250318" PointY="8.075535703485615" />
-        <EntityTypeShape EntityType="PointAppDBModel.feerequest" Width="1.5" PointX="8.1962449812312812" PointY="5.8350773778907383" />
-        <EntityTypeShape EntityType="PointAppDBModel.member" Width="1.5" PointX="2.6128718846537509" PointY="14.228242478439697" />
-        <EntityTypeShape EntityType="PointAppDBModel.sessioncal" Width="1.5" PointX="4.1694624611034357" PointY="24.011620830749916" />
-        <EntityTypeShape EntityType="PointAppDBModel.sessiontype" Width="1.5" PointX="9.9233984527752721" PointY="20.777559781809131" />
-        <EntityTypeShape EntityType="PointAppDBModel.signup" Width="1.5" PointX="8.5156454483585655" PointY="21.864134813595626" />
-        <EntityTypeShape EntityType="PointAppDBModel.student" Width="1.5" PointX="3.2907111082648446" PointY="12.568735739481047" />
+      <Diagram DiagramId="75c1f3fec0534da7b154d169240b0d47" Name="Diagram1" ZoomLevel="50">
+        <EntityTypeShape EntityType="PointAppDBModel.activity" Width="1.5" PointX="9.967790638081631" PointY="23.960124801825788" />
+        <EntityTypeShape EntityType="PointAppDBModel.approle" Width="1.5" PointX="1.86654808086648" PointY="15.984468929462354" />
+        <EntityTypeShape EntityType="PointAppDBModel.contact" Width="1.5" PointX="2.21361245504283" PointY="8.595015261599336" />
+        <EntityTypeShape EntityType="PointAppDBModel.contactemail" Width="1.5" PointX="7.8190199769190611" PointY="3.6196662800478125" />
+        <EntityTypeShape EntityType="PointAppDBModel.feerequest" Width="1.5" PointX="9.3608247476447488" PointY="22.082172001750287" />
+        <EntityTypeShape EntityType="PointAppDBModel.member" Width="1.5" PointX="2.2104176200043493" PointY="9.4097810878463939" />
+        <EntityTypeShape EntityType="PointAppDBModel.sessioncal" Width="1.5" PointX="4.62710796512063" PointY="9.2115598661878888" />
+        <EntityTypeShape EntityType="PointAppDBModel.sessiontype" Width="1.5" PointX="11.68089545317036" PointY="24.800697412714687" />
+        <EntityTypeShape EntityType="PointAppDBModel.signup" Width="1.5" PointX="11.715379893647217" PointY="19.699925148719888" />
+        <EntityTypeShape EntityType="PointAppDBModel.student" Width="1.5" PointX="5.5101877215831481" PointY="7.1614349219768467" />
+        <AssociationConnector Association="PointAppDBModel.member_approle_fk" />
         <AssociationConnector Association="PointAppDBModel.contactemail_contact_fk" />
         <AssociationConnector Association="PointAppDBModel.feerequest_member_fk" />
         <AssociationConnector Association="PointAppDBModel.signup_member_fk" />

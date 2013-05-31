@@ -5,27 +5,19 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <h3>Add new Activity</h3>
-    <p>I cannot make add record work because I have problem with System.Data.Entity.DbContext.</p>
-    <table border="1">
-        <tr>
-            <td>Activity Name</td>
-            <td>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Add" />
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <asp:Button ID="Button2" runat="server" onclick="Button2_Click" Text="Cancel" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <asp:Label ID="Label1" runat="server"></asp:Label>
-            </td>
-        </tr>
-    </table>
+    <asp:EntityDataSource ID="ActivityEntityDataSource" runat="server" 
+        ConnectionString="name=PointAppDBContainer" DefaultContainerName="PointAppDBContainer" 
+        EnableFlattening="False" EntitySetName="activities"
+        EnableInsert="true">
+    </asp:EntityDataSource>
+    <asp:DetailsView ID="ActivityDetailsView" runat="server" AutoGenerateRows="false"
+        DataSourceID="ActivityEntityDataSource" DataKeyNames="activityid"
+        DefaultMode="Insert">
+        <Fields>
+            <asp:BoundField DataField="actname" HeaderText="actname" />
+            <asp:CommandField ShowInsertButton="true" />
+        </Fields>
+    </asp:DetailsView>
+    <p><a id="A1" runat="server" href="~/Activity.aspx">Go back to activity list</a></p>
     <br />
 </asp:Content>

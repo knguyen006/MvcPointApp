@@ -5,17 +5,21 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <h3>Session Type List</h3>
+    <p><a href="AddSessionType.aspx">Add new Session Type</a></p>
+    
 
-    <asp:EntityDataSource ID="EntityDataSource" runat="server" ConnectionString="name=PointAppDBContainer" DefaultContainerName="PointAppDBContainer" EnableDelete="True" EnableFlattening="False" EnableInsert="True" EnableUpdate="True" EntitySetName="sessiontypes">
+    <asp:EntityDataSource ID="SessionTypeEntityDataSource" runat="server" ConnectionString="name=PointAppDBContainer" DefaultContainerName="PointAppDBContainer" EnableDelete="True" EnableFlattening="False" EnableInsert="True" EnableUpdate="True" EntitySetName="sessiontypes">
     </asp:EntityDataSource>
-    <asp:GridView ID="GridView" runat="server" AutoGenerateColumns="False" DataKeyNames="sessiontypeid" DataSourceID="EntityDataSource" AllowPaging="True" AllowSorting="True">
+    
+
+    <asp:GridView ID="SessionTypeGridView" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="sessiontypeid" DataSourceID="SessionTypeEntityDataSource">
         <Columns>
             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
-            <asp:BoundField DataField="sessiontypeid" HeaderText="id" ReadOnly="True" SortExpression="sessiontypeid" />
-            <asp:BoundField DataField="typename" HeaderText="type" SortExpression="typename" />
+            <asp:BoundField DataField="typename" HeaderText="Type" SortExpression="typename" />
             <asp:BoundField DataField="note" HeaderText="note" SortExpression="note" />
         </Columns>
     </asp:GridView>
+    
 
     <br />
 </asp:Content>

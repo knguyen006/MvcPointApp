@@ -10,33 +10,42 @@
 namespace PointSiteTest {
     
     
-    public partial class AddActivity {
+    public partial class Member {
         
         /// <summary>
-        /// ActivityEntityDataSource control.
+        /// MemberEntityDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.EntityDataSource ActivityEntityDataSource;
+        protected global::System.Web.UI.WebControls.EntityDataSource MemberEntityDataSource;
         
         /// <summary>
-        /// ActivityDetailsView control.
+        /// MemberGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView ActivityDetailsView;
+        protected global::System.Web.UI.WebControls.GridView MemberGridView;
         
         /// <summary>
-        /// A1 control.
+        /// AppRoleEntityDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
+        protected global::System.Web.UI.WebControls.EntityDataSource AppRoleEntityDataSource;
+        
+        /// <summary>
+        /// AppRoleDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList AppRoleDropDownList;
     }
 }

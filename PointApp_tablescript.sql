@@ -85,6 +85,21 @@ create table sessiontype
 go
 alter table sessiontype add constraint sessiontype_pk primary key (sessiontypeid);
 
+-----------------------------
+-- approle table
+-- user role
+go
+create table approle 
+(
+  approleid int not null,
+  rolename nvarchar(50),
+  note nvarchar(250)
+);
+
+-- constraint
+go
+alter table approle add constraint approle_pk primary key (approleid);
+
 -----------------------------------------
 -- member table
 -- member status is parent or student
@@ -95,12 +110,15 @@ create table member
   username nvarchar(30),
   userpass nvarchar(32),
   passphrase nvarchar(50),
-  memberstatus nvarchar(10)
+  memberstatus nvarchar(10),
+  approleid int
 );
 
 -- constraint
 go
 alter table member add constraint member_pk primary key (memberid);
+go
+alter table member add constraint member_approle_fk foreign key (approleid);
 
 ---------------------------
 -- member2student

@@ -29,8 +29,10 @@ namespace DataLayer
         public string username { get; set; }
         public string userpass { get; set; }
         public string passphrase { get; set; }
-        public string memberstatus { get; set; }
+        public string membertype { get; set; }
+        public Nullable<int> approleid { get; set; }
     
+        public virtual approle approle { get; set; }
         public virtual ICollection<feerequest> feerequests { get; set; }
         public virtual ICollection<signup> signups { get; set; }
         public virtual ICollection<activity> activities { get; set; }

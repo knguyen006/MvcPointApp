@@ -26,6 +26,7 @@ namespace DataLayer
         }
     
         public DbSet<activity> activities { get; set; }
+        public DbSet<approle> approles { get; set; }
         public DbSet<contact> contacts { get; set; }
         public DbSet<contactemail> contactemails { get; set; }
         public DbSet<feerequest> feerequests { get; set; }

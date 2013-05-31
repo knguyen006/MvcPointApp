@@ -6,32 +6,21 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <h3>Student List</h3>
     <p><a href="AddStudent.aspx">Add new Student</a></p>
-    <asp:EntityDataSource ID="EntityDataSource" runat="server" ConnectionString="name=PointAppDBContainer" DefaultContainerName="PointAppDBContainer" EnableDelete="True" EnableFlattening="False" EnableInsert="True" EnableUpdate="True" EntitySetName="students">
+    
+    <asp:EntityDataSource ID="StudentEntityDataSource" runat="server" ConnectionString="name=PointAppDBContainer" DefaultContainerName="PointAppDBContainer" EnableFlattening="False" EntitySetName="students" EnableDelete="True" EnableInsert="True" EnableUpdate="True">
     </asp:EntityDataSource>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>First</th>
-            <th>Last</th>
-            <th>Middle</th>
-            <th>Grade</th>
-            <th>Active</th>
-            <td></td>
-       </tr>
-        <asp:Repeater ID="Repeater1" runat="server" DataSourceID="EntityDataSource">
-        <ItemTemplate> 
-       <tr>
-           <td><%# Eval("studentid") %> </td>
-           <td><%# Eval("firstname") %> </td>
-           <td><%# Eval("lastname") %> </td>
-           <td><%# Eval("middlename") %> </td>
-           <td><%# Eval("grade") %> </td>
-           <td><%# Eval("active") %> </td> 
-           <td>Update</td>         
-       </tr>
-       </ItemTemplate>
-    </asp:Repeater>
-    </table>
+    
+    <asp:GridView ID="StudentGridView" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="studentid" DataSourceID="StudentEntityDataSource">
+        <Columns>
+            <asp:BoundField DataField="firstname" HeaderText="First" SortExpression="firstname" />
+            <asp:BoundField DataField="lastname" HeaderText="Last" SortExpression="lastname" />
+            <asp:BoundField DataField="middlename" HeaderText="Middle" SortExpression="middlename" />
+            <asp:BoundField DataField="grade" HeaderText="Grade" SortExpression="grade" />
+            <asp:BoundField DataField="active" HeaderText="Active" SortExpression="active" />
+            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+        </Columns>
+    </asp:GridView>
+    
     <br />
 
 </asp:Content>

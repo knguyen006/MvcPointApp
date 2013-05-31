@@ -22,8 +22,8 @@
                     <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul>
-                                <li>Register</li>
-                                <li>Log in</li>
+                                <li><a href="Register.aspx">Register</a></li>
+                                <li><a href="Login.aspx">Log In</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>

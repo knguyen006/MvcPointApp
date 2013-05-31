@@ -131,6 +131,20 @@
     <Compile Include="AddActivity.aspx.designer.cs">
       <DependentUpon>AddActivity.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddAppRole.aspx.cs">
+      <DependentUpon>AddAppRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddAppRole.aspx.designer.cs">
+      <DependentUpon>AddAppRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddMember.aspx.cs">
+      <DependentUpon>AddMember.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMember.aspx.designer.cs">
+      <DependentUpon>AddMember.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddSessionType.aspx.cs">
       <DependentUpon>AddSessionType.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -144,6 +158,13 @@
     </Compile>
     <Compile Include="AddStudent.aspx.designer.cs">
       <DependentUpon>AddStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AppRole.aspx.cs">
+      <DependentUpon>AppRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppRole.aspx.designer.cs">
+      <DependentUpon>AppRole.aspx</DependentUpon>
     </Compile>
     <Compile Include="ContactUs.aspx.cs">
       <DependentUpon>ContactUs.aspx</DependentUpon>
@@ -161,6 +182,27 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginTest.aspx.cs">
+      <DependentUpon>LoginTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginTest.aspx.designer.cs">
+      <DependentUpon>LoginTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member.aspx.cs">
+      <DependentUpon>Member.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member.aspx.designer.cs">
+      <DependentUpon>Member.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionType.aspx.cs">
@@ -184,12 +226,12 @@
     <Compile Include="Student.aspx.designer.cs">
       <DependentUpon>Student.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UpdateStudent.aspx.cs">
-      <DependentUpon>UpdateStudent.aspx</DependentUpon>
+    <Compile Include="StudentValidation.aspx.cs">
+      <DependentUpon>StudentValidation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UpdateStudent.aspx.designer.cs">
-      <DependentUpon>UpdateStudent.aspx</DependentUpon>
+    <Compile Include="StudentValidation.aspx.designer.cs">
+      <DependentUpon>StudentValidation.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -199,15 +241,21 @@
     <Content Include="About.aspx" />
     <Content Include="Activity.aspx" />
     <Content Include="AddActivity.aspx" />
+    <Content Include="AddAppRole.aspx" />
+    <Content Include="AddMember.aspx" />
     <Content Include="AddSessionType.aspx" />
     <Content Include="AddStudent.aspx" />
+    <Content Include="AppRole.aspx" />
     <Content Include="ContactUs.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Login.aspx" />
+    <Content Include="LoginTest.aspx" />
+    <Content Include="Member.aspx" />
     <Content Include="SessionType.aspx" />
     <Content Include="Student.aspx" />
+    <Content Include="StudentValidation.aspx" />
     <Content Include="Style\Site.css" />
-    <Content Include="UpdateStudent.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

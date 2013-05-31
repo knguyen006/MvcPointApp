@@ -8,6 +8,8 @@
     <ol>
         <li><a id="A1" runat="server" href="~/Student.aspx">Student List</a></li>
         <li><a id="A2" runat="server" href="~/Activity.aspx">Activity List</a></li>
-        <li><a id="A3" runat="server" href="~/Activity.aspx">Session Type List</a></li>
+        <li><a id="A3" runat="server" href="~/SessionType.aspx">Session Type List</a></li>
+        <li><a id="A4" runat="server" href="~/AppRole.aspx">Application Role List</a></li>
+        <li><a id="A5" runat="server" href="~/Member.aspx">Member List</a></li>
     </ol>
 </asp:Content>

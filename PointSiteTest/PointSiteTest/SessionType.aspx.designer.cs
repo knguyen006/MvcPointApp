@@ -13,21 +13,21 @@ namespace PointSiteTest {
     public partial class SessionType {
         
         /// <summary>
-        /// EntityDataSource control.
+        /// SessionTypeEntityDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.EntityDataSource EntityDataSource;
+        protected global::System.Web.UI.WebControls.EntityDataSource SessionTypeEntityDataSource;
         
         /// <summary>
-        /// GridView control.
+        /// SessionTypeGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView;
+        protected global::System.Web.UI.WebControls.GridView SessionTypeGridView;
     }
 }

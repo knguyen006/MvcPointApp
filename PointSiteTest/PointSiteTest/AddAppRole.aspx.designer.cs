@@ -10,24 +10,33 @@
 namespace PointSiteTest {
     
     
-    public partial class Student {
+    public partial class AddAppRole {
         
         /// <summary>
-        /// StudentEntityDataSource control.
+        /// AppRoleEntityDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.EntityDataSource StudentEntityDataSource;
+        protected global::System.Web.UI.WebControls.EntityDataSource AppRoleEntityDataSource;
         
         /// <summary>
-        /// StudentGridView control.
+        /// AppRoleDetailsView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView StudentGridView;
+        protected global::System.Web.UI.WebControls.DetailsView AppRoleDetailsView;
+        
+        /// <summary>
+        /// A1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
     }
 }

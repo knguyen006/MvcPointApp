@@ -7,6 +7,7 @@
     <Schema Namespace="PointAppDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="PointAppDBModelStoreContainer">
           <EntitySet Name="activity" EntityType="PointAppDBModel.Store.activity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="approle" EntityType="PointAppDBModel.Store.approle" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="contact" EntityType="PointAppDBModel.Store.contact" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="contactemail" EntityType="PointAppDBModel.Store.contactemail" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="feerequest" EntityType="PointAppDBModel.Store.feerequest" store:Type="Tables" Schema="dbo" />
@@ -26,6 +27,10 @@
           <AssociationSet Name="feerequest_member_fk" Association="PointAppDBModel.Store.feerequest_member_fk">
             <End Role="member" EntitySet="member" />
             <End Role="feerequest" EntitySet="feerequest" />
+          </AssociationSet>
+          <AssociationSet Name="member_approle_fk" Association="PointAppDBModel.Store.member_approle_fk">
+            <End Role="approle" EntitySet="approle" />
+            <End Role="member" EntitySet="member" />
           </AssociationSet>
           <AssociationSet Name="member2activity_act_fk" Association="PointAppDBModel.Store.member2activity_act_fk">
             <End Role="activity" EntitySet="activity" />
@@ -79,6 +84,14 @@
           <Property Name="activityid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="actname" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="approle">
+          <Key>
+            <PropertyRef Name="approleid" />
+          </Key>
+          <Property Name="approleid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rolename" Type="nvarchar" MaxLength="50" />
+          <Property Name="note" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="contact">
           <Key>
             <PropertyRef Name="contactid" />
@@ -122,7 +135,8 @@
           <Property Name="username" Type="nvarchar" MaxLength="30" />
           <Property Name="userpass" Type="nvarchar" MaxLength="32" />
           <Property Name="passphrase" Type="nvarchar" MaxLength="50" />
-          <Property Name="memberstatus" Type="nvarchar" MaxLength="10" />
+          <Property Name="membertype" Type="nvarchar" MaxLength="10" />
+          <Property Name="approleid" Type="int" />
         </EntityType>
         <EntityType Name="member2activity">
           <Key>
@@ -217,6 +231,18 @@
             </Principal>
             <Dependent Role="feerequest">
               <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="member_approle_fk">
+          <End Role="approle" Type="PointAppDBModel.Store.approle" Multiplicity="0..1" />
+          <End Role="member" Type="PointAppDBModel.Store.member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="approle">
+              <PropertyRef Name="approleid" />
+            </Principal>
+            <Dependent Role="member">
+              <PropertyRef Name="approleid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,6 +384,7 @@
       <Schema Namespace="PointAppDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="PointAppDBContainer" p1:LazyLoadingEnabled="true">
           <EntitySet Name="activities" EntityType="PointAppDBModel.activity" />
+          <EntitySet Name="approles" EntityType="PointAppDBModel.approle" />
           <EntitySet Name="contacts" EntityType="PointAppDBModel.contact" />
           <EntitySet Name="contactemails" EntityType="PointAppDBModel.contactemail" />
           <EntitySet Name="feerequests" EntityType="PointAppDBModel.feerequest" />
@@ -366,6 +393,10 @@
           <EntitySet Name="sessiontypes" EntityType="PointAppDBModel.sessiontype" />
           <EntitySet Name="signups" EntityType="PointAppDBModel.signup" />
           <EntitySet Name="students" EntityType="PointAppDBModel.student" />
+          <AssociationSet Name="member_approle_fk" Association="PointAppDBModel.member_approle_fk">
+            <End Role="approle" EntitySet="approles" />
+            <End Role="member" EntitySet="members" />
+          </AssociationSet>
           <AssociationSet Name="contactemail_contact_fk" Association="PointAppDBModel.contactemail_contact_fk">
             <End Role="contact" EntitySet="contacts" />
             <End Role="contactemail" EntitySet="contactemails" />
@@ -410,6 +441,15 @@
           <Property Type="Int32" Name="activityid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="actname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="members" Relationship="PointAppDBModel.member2activity" FromRole="activity" ToRole="member" />
+        </EntityType>
+        <EntityType Name="approle">
+          <Key>
+            <PropertyRef Name="approleid" />
+          </Key>
+          <Property Type="Int32" Name="approleid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="rolename" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="note" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="members" Relationship="PointAppDBModel.member_approle_fk" FromRole="approle" ToRole="member" />
         </EntityType>
         <EntityType Name="contact">
           <Key>
@@ -458,7 +498,9 @@
           <Property Type="String" Name="username" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="userpass" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="passphrase" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="memberstatus" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="membertype" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="approleid" />
+          <NavigationProperty Name="approle" Relationship="PointAppDBModel.member_approle_fk" FromRole="member" ToRole="approle" />
           <NavigationProperty Name="feerequests" Relationship="PointAppDBModel.feerequest_member_fk" FromRole="member" ToRole="feerequest" />
           <NavigationProperty Name="signups" Relationship="PointAppDBModel.signup_member_fk" FromRole="member" ToRole="signup" />
           <NavigationProperty Name="activities" Relationship="PointAppDBModel.member2activity" FromRole="member" ToRole="activity" />
@@ -513,6 +555,18 @@
           <Property Type="String" Name="active" MaxLength="1" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="members" Relationship="PointAppDBModel.member2student" FromRole="student" ToRole="member" />
         </EntityType>
+        <Association Name="member_approle_fk">
+          <End Type="PointAppDBModel.approle" Role="approle" Multiplicity="0..1" />
+          <End Type="PointAppDBModel.member" Role="member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="approle">
+              <PropertyRef Name="approleid" />
+            </Principal>
+            <Dependent Role="member">
+              <PropertyRef Name="approleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="contactemail_contact_fk">
           <End Type="PointAppDBModel.contact" Role="contact" Multiplicity="0..1" />
           <End Type="PointAppDBModel.contactemail" Role="contactemail" Multiplicity="*" />
@@ -603,6 +657,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="approles">
+            <EntityTypeMapping TypeName="PointAppDBModel.approle">
+              <MappingFragment StoreEntitySet="approle">
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+                <ScalarProperty Name="approleid" ColumnName="approleid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="contacts">
             <EntityTypeMapping TypeName="PointAppDBModel.contact">
               <MappingFragment StoreEntitySet="contact">
@@ -644,7 +707,8 @@
           <EntitySetMapping Name="members">
             <EntityTypeMapping TypeName="PointAppDBModel.member">
               <MappingFragment StoreEntitySet="member">
-                <ScalarProperty Name="memberstatus" ColumnName="memberstatus" />
+                <ScalarProperty Name="approleid" ColumnName="approleid" />
+                <ScalarProperty Name="membertype" ColumnName="membertype" />
                 <ScalarProperty Name="passphrase" ColumnName="passphrase" />
                 <ScalarProperty Name="userpass" ColumnName="userpass" />
                 <ScalarProperty Name="username" ColumnName="username" />

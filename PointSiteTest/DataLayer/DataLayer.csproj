@@ -49,7 +49,10 @@
     <Compile Include="activity.cs">
       <DependentUpon>PointAppModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="approle.cs">
+      <DependentUpon>PointAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApproleHelp.cs" />
     <Compile Include="contact.cs">
       <DependentUpon>PointAppModel.tt</DependentUpon>
     </Compile>
@@ -59,9 +62,11 @@
     <Compile Include="feerequest.cs">
       <DependentUpon>PointAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FormService.cs" />
     <Compile Include="member.cs">
       <DependentUpon>PointAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MemberService.cs" />
     <Compile Include="PointAppModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
