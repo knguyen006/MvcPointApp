@@ -11,17 +11,6 @@ namespace DataLayerTest
     [TestClass]
     public class ApproleTest
     {
-        /// <summary>
-        /// Create database if the database is not existed.
-        /// </summary>
-        [ClassInitialize]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<PointAppDBContainer>());
-
-            var context = new PointAppDBContainer();
-            context.Database.Create();
-        }
 
         /// <summary>
         /// Test Method to Connect to the repository and see if there are any records.

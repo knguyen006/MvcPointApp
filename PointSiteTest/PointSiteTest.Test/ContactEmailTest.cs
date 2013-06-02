@@ -11,17 +11,6 @@ namespace DataLayerTest
     [TestClass]
     public class ContactEmailTest
     {
-        /// <summary>
-        /// Create database if the database is not existed.
-        /// </summary>
-        [ClassInitialize]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<PointAppDBContainer>());
-
-            var context = new PointAppDBContainer();
-            context.Database.Create();
-        }
 
         /// <summary>
         /// Test Method to Connect to the repository and see if there are any records.
@@ -33,10 +22,10 @@ namespace DataLayerTest
             PointAppDBContainer db = new PointAppDBContainer();
 
             contactemail savedObj = (from d in db.contactemails
-                                where d.contactemailid == 1
+                                where d.contactemailid == 2
                                 select d).Single();
 
-            Assert.AreEqual(savedObj.contactemailid, 1);
+            Assert.AreEqual(savedObj.contactemailid, 2);
         }
 
         /// <summary>
@@ -92,7 +81,7 @@ namespace DataLayerTest
                                 where d.contactemailid == obj.contactemailid
                                 select d).Single();
             savedObj.emailaddress = "testabc2@nothing.com";
-            savedObj.contactid = 1;
+            savedObj.contactid = c.contactid;
             db.SaveChanges();
 
             //check to see if there is existing record

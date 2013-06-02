@@ -11,17 +11,6 @@ namespace DataLayerTest
     [TestClass]
     public class FeeRequestTest
     {
-        /// <summary>
-        /// Create database if the database is not existed.
-        /// </summary>
-        [ClassInitialize]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<PointAppDBContainer>());
-
-            var context = new PointAppDBContainer();
-            context.Database.Create();
-        }
 
         /// <summary>
         /// Test Method to Connect to the repository and see if there are any records.
@@ -33,10 +22,10 @@ namespace DataLayerTest
             PointAppDBContainer db = new PointAppDBContainer();
 
             feerequest savedObj = (from d in db.feerequests
-                                where d.feerequestid == 1
+                                where d.feerequestid == 4
                                 select d).Single();
 
-            Assert.AreEqual(savedObj.feerequestid, 1);
+            Assert.AreEqual(savedObj.feerequestid, 4);
         }
 
         /// <summary>

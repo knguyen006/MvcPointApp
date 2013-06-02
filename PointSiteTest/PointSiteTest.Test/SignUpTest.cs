@@ -11,17 +11,6 @@ namespace DataLayerTest
     [TestClass]
     public class SignUpTest
     {
-        /// <summary>
-        /// Create database if the database is not existed.
-        /// </summary>
-        [ClassInitialize]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<PointAppDBContainer>());
-
-            var context = new PointAppDBContainer();
-            context.Database.Create();
-        }
 
         /// <summary>
         /// Test Method to Connect to the repository and see if there are any records.
@@ -52,8 +41,8 @@ namespace DataLayerTest
             signup obj = new signup();
             
             //set data
-            obj.memberid = m.memberid;
-            obj.sessioncalid = c.sessioncalid;
+            obj.memberid = 3;
+            obj.sessioncalid = 4;
             obj.pointearn = 10;
             obj.isshow = "Y";
 
@@ -91,8 +80,8 @@ namespace DataLayerTest
             signup obj = new signup();
 
             //set data
-            obj.memberid = m.memberid;
-            obj.sessioncalid = c.sessioncalid;
+            obj.memberid = 3;
+            obj.sessioncalid = 4;
             obj.pointearn = 10;
             obj.isshow = "Y";
 
@@ -103,8 +92,8 @@ namespace DataLayerTest
             signup savedObj = (from d in db.signups
                                 where d.signupid == obj.signupid
                                 select d).Single();
-            savedObj.memberid = m.memberid;
-            savedObj.sessioncalid = c.sessioncalid;
+            savedObj.memberid = 3;
+            savedObj.sessioncalid = 4;
             savedObj.pointearn = 20;
             savedObj.isshow = "Y";
             db.SaveChanges();
@@ -136,8 +125,8 @@ namespace DataLayerTest
             signup obj = new signup();
 
             //set data
-            obj.memberid = m.memberid;
-            obj.sessioncalid = c.sessioncalid;
+            obj.memberid = 4;
+            obj.sessioncalid = 4;
             obj.pointearn = 10;
             obj.isshow = "Y";
 

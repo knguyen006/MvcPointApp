@@ -12,18 +12,6 @@ namespace DataLayerTest
     public class ActivityTest
     {
         /// <summary>
-        /// Create database if the database is not existed.
-        /// </summary>
-        [ClassInitialize]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<PointAppDBContainer>());
-
-            var context = new PointAppDBContainer();
-            context.Database.Create();
-        }
-
-        /// <summary>
         /// Test Method to Connect to the repository and see if there are any records.
         /// This should fail if you have an empty table
         /// </summary>
@@ -33,10 +21,10 @@ namespace DataLayerTest
             PointAppDBContainer db = new PointAppDBContainer();
 
             activity savedObj = (from d in db.activities
-                                where d.activityid == 1
-                                select d).Single();
+                                 where d.activityid == 3
+                                 select d).Single();
 
-            Assert.AreEqual(savedObj.activityid, 1);
+            Assert.AreEqual(savedObj.activityid, 3);
         }
 
         /// <summary>
@@ -48,7 +36,7 @@ namespace DataLayerTest
             // call database object
             PointAppDBContainer db = new PointAppDBContainer();
             activity obj = new activity();
-            
+
             //set data
             obj.actname = "Marching Band";
             db.activities.Add(obj);
@@ -57,9 +45,9 @@ namespace DataLayerTest
             db.SaveChanges();
 
             //Check to see if the record is existed in database
-            activity savedObj = (from d in db.activities 
-                                where d.activityid == obj.activityid 
-                                select d).Single();
+            activity savedObj = (from d in db.activities
+                                 where d.activityid == obj.activityid
+                                 select d).Single();
 
             // Assert statement
             Assert.AreEqual(savedObj.actname, obj.actname);
@@ -84,15 +72,15 @@ namespace DataLayerTest
 
             //retrieve and update the record
             activity savedObj = (from d in db.activities
-                                where d.activityid == obj.activityid
-                                select d).Single();
+                                 where d.activityid == obj.activityid
+                                 select d).Single();
             savedObj.actname = "Updated Marching Band 2";
             db.SaveChanges();
 
             //check to see if there is existing record
             activity updatedObj = (from d in db.activities
-                                  where d.activityid == obj.activityid
-                                  select d).Single();
+                                   where d.activityid == obj.activityid
+                                   select d).Single();
 
             Assert.AreEqual(updatedObj.actname, savedObj.actname);
 
@@ -115,15 +103,15 @@ namespace DataLayerTest
 
             //retrieved the recrod and remove it
             activity savedObj = (from d in db.activities
-                                where d.activityid == obj.activityid
-                                select d).Single();
+                                 where d.activityid == obj.activityid
+                                 select d).Single();
             db.activities.Remove(savedObj);
             db.SaveChanges();
 
             //ensure the record is deleted from database
             activity removedObj = (from d in db.activities
-                                  where d.activityid == savedObj.activityid
-                                  select d).FirstOrDefault();
+                                   where d.activityid == savedObj.activityid
+                                   select d).FirstOrDefault();
             Assert.IsNull(removedObj);
         }
 
@@ -141,8 +129,8 @@ namespace DataLayerTest
             db.SaveChanges();
 
             //retrieved data
-            List<activity> savedObjs = (from d in db.activities 
-                                       select d).ToList();
+            List<activity> savedObjs = (from d in db.activities
+                                        select d).ToList();
 
             //ensure record number is greater than 0
             Assert.IsTrue(savedObjs.Count > 0);

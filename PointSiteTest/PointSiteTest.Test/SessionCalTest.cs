@@ -11,17 +11,6 @@ namespace DataLayerTest
     [TestClass]
     public class SessionCalTest
     {
-        /// <summary>
-        /// Create database if the database is not existed.
-        /// </summary>
-        [ClassInitialize]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<PointAppDBContainer>());
-
-            var context = new PointAppDBContainer();
-            context.Database.Create();
-        }
 
         /// <summary>
         /// Test Method to Connect to the repository and see if there are any records.
@@ -33,10 +22,10 @@ namespace DataLayerTest
             PointAppDBContainer db = new PointAppDBContainer();
 
             sessioncal savedObj = (from d in db.sessioncals
-                                where d.sessioncalid == 1
+                                where d.sessioncalid == 4
                                 select d).Single();
 
-            Assert.AreEqual(savedObj.sessioncalid, 1);
+            Assert.AreEqual(savedObj.sessioncalid, 4);
         }
 
         /// <summary>
@@ -139,7 +128,7 @@ namespace DataLayerTest
             sessioncal obj = new sessioncal();
 
             //set data
-            obj.sessiondate = new DateTime(2013, 5, 1);
+            obj.sessiondate = new DateTime(2013, 5, 2);
             obj.sessionnum = 1;
             obj.sessionamt = 5000;
             obj.sessionpoint = 2500;

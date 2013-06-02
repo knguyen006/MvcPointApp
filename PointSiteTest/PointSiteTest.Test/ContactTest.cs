@@ -11,17 +11,6 @@ namespace DataLayerTest
     [TestClass]
     public class ContactTest
     {
-        /// <summary>
-        /// Create database if the database is not existed.
-        /// </summary>
-        [ClassInitialize]
-        public static void DataLayerSetup(TestContext testContext)
-        {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<PointAppDBContainer>());
-
-            var context = new PointAppDBContainer();
-            context.Database.Create();
-        }
 
         /// <summary>
         /// Test Method to Connect to the repository and see if there are any records.
@@ -33,10 +22,10 @@ namespace DataLayerTest
             PointAppDBContainer db = new PointAppDBContainer();
 
             contact savedObj = (from d in db.contacts
-                                where d.contactid == 1
+                                where d.contactid == 4
                                 select d).Single();
 
-            Assert.AreEqual(savedObj.contactid, 1);
+            Assert.AreEqual(savedObj.contactid, 4);
         }
 
         /// <summary>
