@@ -9,7 +9,7 @@ using System.Data.Entity;
 namespace DataLayerTest
 {
     [TestClass]
-    public class ApproleTest
+    public class SessionTypeTest
     {
         /// <summary>
         /// Create database if the database is not existed.
@@ -32,11 +32,11 @@ namespace DataLayerTest
         {
             PointAppDBContainer db = new PointAppDBContainer();
 
-            approle savedObj = (from d in db.approles
-                                where d.approleid == 1
+            sessiontype savedObj = (from d in db.sessiontypes
+                                where d.sessiontypeid == 1
                                 select d).Single();
 
-            Assert.AreEqual(savedObj.approleid, 1);
+            Assert.AreEqual(savedObj.sessiontypeid, 1);
         }
 
         /// <summary>
@@ -47,27 +47,27 @@ namespace DataLayerTest
         {
             // call database object
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
+            sessiontype obj = new sessiontype();
             
             //set data
-            obj.rolename = "app_admin_data";
-            obj.note = "This role can only maintenance database including insert/update/delete member or event.";
-            db.approles.Add(obj);
+            obj.typename = "Testing Type";
+            obj.note = "This is for testing purpose.";
+            db.sessiontypes.Add(obj);
 
             //save changes
             db.SaveChanges();
 
             //Check to see if the record is existed in database
-            approle savedObj = (from d in db.approles 
-                                where d.approleid == obj.approleid 
+            sessiontype savedObj = (from d in db.sessiontypes 
+                                where d.sessiontypeid == obj.sessiontypeid 
                                 select d).Single();
 
             // Assert statement
-            Assert.AreEqual(savedObj.rolename, obj.rolename);
+            Assert.AreEqual(savedObj.typename, obj.typename);
             Assert.AreEqual(savedObj.note, obj.note);
 
             //cleanup
-            db.approles.Remove(savedObj);
+            db.sessiontypes.Remove(savedObj);
             db.SaveChanges();
 
         }
@@ -79,30 +79,30 @@ namespace DataLayerTest
         public void UpdateRecord()
         {
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_test";
-            obj.note = "Test role for testing purpose.";
-            db.approles.Add(obj);
+            sessiontype obj = new sessiontype();
+            obj.typename = "test_test";
+            obj.note = "Test role is for testing purpose.";
+            db.sessiontypes.Add(obj);
             db.SaveChanges();
 
             //retrieve and update the record
-            approle savedObj = (from d in db.approles
-                                where d.approleid == obj.approleid
+            sessiontype savedObj = (from d in db.sessiontypes
+                                where d.sessiontypeid == obj.sessiontypeid
                                 select d).Single();
-            savedObj.rolename = "app_test";
-            savedObj.note = "This is update statement for testing app_test role.";
+            savedObj.typename = "test_test";
+            savedObj.note = "This is update statement for testing test_test testing.";
             db.SaveChanges();
 
             //check to see if there is existing record
-            approle updatedObj = (from d in db.approles
-                                  where d.approleid == obj.approleid
+            sessiontype updatedObj = (from d in db.sessiontypes
+                                  where d.sessiontypeid == obj.sessiontypeid
                                   select d).Single();
 
-            Assert.AreEqual(updatedObj.rolename, savedObj.rolename);
+            Assert.AreEqual(updatedObj.typename, savedObj.typename);
             Assert.AreEqual(updatedObj.note, savedObj.note);
 
             //cleanup
-            db.approles.Remove(updatedObj);
+            db.sessiontypes.Remove(updatedObj);
             db.SaveChanges();
         }
 
@@ -113,22 +113,22 @@ namespace DataLayerTest
         public void DeleteRecord()
         {
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_delete";
+            sessiontype obj = new sessiontype();
+            obj.typename = "test_delete";
             obj.note = "This is test for delete.";
-            db.approles.Add(obj);
+            db.sessiontypes.Add(obj);
             db.SaveChanges();
 
             //retrieved the recrod and remove it
-            approle savedObj = (from d in db.approles
-                                where d.approleid == obj.approleid
+            sessiontype savedObj = (from d in db.sessiontypes
+                                where d.sessiontypeid == obj.sessiontypeid
                                 select d).Single();
-            db.approles.Remove(savedObj);
+            db.sessiontypes.Remove(savedObj);
             db.SaveChanges();
 
             //ensure the record is deleted from database
-            approle removedObj = (from d in db.approles
-                                  where d.approleid == savedObj.approleid
+            sessiontype removedObj = (from d in db.sessiontypes
+                                  where d.sessiontypeid == savedObj.sessiontypeid
                                   select d).FirstOrDefault();
             Assert.IsNull(removedObj);
         }
@@ -141,14 +141,14 @@ namespace DataLayerTest
         {
             //add record to the list
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_test";
+            sessiontype obj = new sessiontype();
+            obj.typename = "test_test";
             obj.note = "This is test role.";
-            db.approles.Add(obj);
+            db.sessiontypes.Add(obj);
             db.SaveChanges();
 
             //retrieved data
-            List<approle> savedObjs = (from d in db.approles 
+            List<sessiontype> savedObjs = (from d in db.sessiontypes 
                                        select d).ToList();
 
             //ensure record number is greater than 0

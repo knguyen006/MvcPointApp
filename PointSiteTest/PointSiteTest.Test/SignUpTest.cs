@@ -9,7 +9,7 @@ using System.Data.Entity;
 namespace DataLayerTest
 {
     [TestClass]
-    public class ApproleTest
+    public class SignUpTest
     {
         /// <summary>
         /// Create database if the database is not existed.
@@ -32,11 +32,11 @@ namespace DataLayerTest
         {
             PointAppDBContainer db = new PointAppDBContainer();
 
-            approle savedObj = (from d in db.approles
-                                where d.approleid == 1
+            signup savedObj = (from d in db.signups
+                                where d.signupid == 1
                                 select d).Single();
 
-            Assert.AreEqual(savedObj.approleid, 1);
+            Assert.AreEqual(savedObj.signupid, 1);
         }
 
         /// <summary>
@@ -47,27 +47,34 @@ namespace DataLayerTest
         {
             // call database object
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
+            member m = (from d in db.members select d).First();
+            sessioncal c = (from d in db.sessioncals select d).First();
+            signup obj = new signup();
             
             //set data
-            obj.rolename = "app_admin_data";
-            obj.note = "This role can only maintenance database including insert/update/delete member or event.";
-            db.approles.Add(obj);
+            obj.memberid = m.memberid;
+            obj.sessioncalid = c.sessioncalid;
+            obj.pointearn = 10;
+            obj.isshow = "Y";
+
+            db.signups.Add(obj);
 
             //save changes
             db.SaveChanges();
 
             //Check to see if the record is existed in database
-            approle savedObj = (from d in db.approles 
-                                where d.approleid == obj.approleid 
+            signup savedObj = (from d in db.signups 
+                                where d.signupid == obj.signupid 
                                 select d).Single();
 
             // Assert statement
-            Assert.AreEqual(savedObj.rolename, obj.rolename);
-            Assert.AreEqual(savedObj.note, obj.note);
+            Assert.AreEqual(savedObj.memberid, obj.memberid);
+            Assert.AreEqual(savedObj.sessioncalid, obj.sessioncalid);
+            Assert.AreEqual(savedObj.pointearn, obj.pointearn);
+            Assert.AreEqual(savedObj.isshow, obj.isshow);
 
             //cleanup
-            db.approles.Remove(savedObj);
+            db.signups.Remove(savedObj);
             db.SaveChanges();
 
         }
@@ -79,30 +86,41 @@ namespace DataLayerTest
         public void UpdateRecord()
         {
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_test";
-            obj.note = "Test role for testing purpose.";
-            db.approles.Add(obj);
+            member m = (from d in db.members select d).First();
+            sessioncal c = (from d in db.sessioncals select d).First();
+            signup obj = new signup();
+
+            //set data
+            obj.memberid = m.memberid;
+            obj.sessioncalid = c.sessioncalid;
+            obj.pointearn = 10;
+            obj.isshow = "Y";
+
+            db.signups.Add(obj);
             db.SaveChanges();
 
             //retrieve and update the record
-            approle savedObj = (from d in db.approles
-                                where d.approleid == obj.approleid
+            signup savedObj = (from d in db.signups
+                                where d.signupid == obj.signupid
                                 select d).Single();
-            savedObj.rolename = "app_test";
-            savedObj.note = "This is update statement for testing app_test role.";
+            savedObj.memberid = m.memberid;
+            savedObj.sessioncalid = c.sessioncalid;
+            savedObj.pointearn = 20;
+            savedObj.isshow = "Y";
             db.SaveChanges();
 
             //check to see if there is existing record
-            approle updatedObj = (from d in db.approles
-                                  where d.approleid == obj.approleid
+            signup updatedObj = (from d in db.signups
+                                  where d.signupid == obj.signupid
                                   select d).Single();
 
-            Assert.AreEqual(updatedObj.rolename, savedObj.rolename);
-            Assert.AreEqual(updatedObj.note, savedObj.note);
+            Assert.AreEqual(updatedObj.memberid, savedObj.memberid);
+            Assert.AreEqual(updatedObj.sessioncalid, savedObj.sessioncalid);
+            Assert.AreEqual(updatedObj.pointearn, savedObj.pointearn);
+            Assert.AreEqual(updatedObj.isshow, savedObj.isshow);
 
             //cleanup
-            db.approles.Remove(updatedObj);
+            db.signups.Remove(updatedObj);
             db.SaveChanges();
         }
 
@@ -113,22 +131,29 @@ namespace DataLayerTest
         public void DeleteRecord()
         {
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_delete";
-            obj.note = "This is test for delete.";
-            db.approles.Add(obj);
+            member m = (from d in db.members select d).First();
+            sessioncal c = (from d in db.sessioncals select d).First();
+            signup obj = new signup();
+
+            //set data
+            obj.memberid = m.memberid;
+            obj.sessioncalid = c.sessioncalid;
+            obj.pointearn = 10;
+            obj.isshow = "Y";
+
+            db.signups.Add(obj);
             db.SaveChanges();
 
             //retrieved the recrod and remove it
-            approle savedObj = (from d in db.approles
-                                where d.approleid == obj.approleid
+            signup savedObj = (from d in db.signups
+                                where d.signupid == obj.signupid
                                 select d).Single();
-            db.approles.Remove(savedObj);
+            db.signups.Remove(savedObj);
             db.SaveChanges();
 
             //ensure the record is deleted from database
-            approle removedObj = (from d in db.approles
-                                  where d.approleid == savedObj.approleid
+            signup removedObj = (from d in db.signups
+                                  where d.signupid == savedObj.signupid
                                   select d).FirstOrDefault();
             Assert.IsNull(removedObj);
         }
@@ -141,14 +166,21 @@ namespace DataLayerTest
         {
             //add record to the list
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_test";
-            obj.note = "This is test role.";
-            db.approles.Add(obj);
+            member m = (from d in db.members select d).First();
+            sessioncal c = (from d in db.sessioncals select d).First();
+            signup obj = new signup();
+
+            //set data
+            obj.memberid = m.memberid;
+            obj.sessioncalid = c.sessioncalid;
+            obj.pointearn = 10;
+            obj.isshow = "Y";
+
+            db.signups.Add(obj);
             db.SaveChanges();
 
             //retrieved data
-            List<approle> savedObjs = (from d in db.approles 
+            List<signup> savedObjs = (from d in db.signups 
                                        select d).ToList();
 
             //ensure record number is greater than 0

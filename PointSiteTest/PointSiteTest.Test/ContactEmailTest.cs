@@ -9,7 +9,7 @@ using System.Data.Entity;
 namespace DataLayerTest
 {
     [TestClass]
-    public class ApproleTest
+    public class ContactEmailTest
     {
         /// <summary>
         /// Create database if the database is not existed.
@@ -32,11 +32,11 @@ namespace DataLayerTest
         {
             PointAppDBContainer db = new PointAppDBContainer();
 
-            approle savedObj = (from d in db.approles
-                                where d.approleid == 1
+            contactemail savedObj = (from d in db.contactemails
+                                where d.contactemailid == 1
                                 select d).Single();
 
-            Assert.AreEqual(savedObj.approleid, 1);
+            Assert.AreEqual(savedObj.contactemailid, 1);
         }
 
         /// <summary>
@@ -47,27 +47,28 @@ namespace DataLayerTest
         {
             // call database object
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
+            contact c = (from d in db.contacts select d).First();
+            contactemail obj = new contactemail();
             
             //set data
-            obj.rolename = "app_admin_data";
-            obj.note = "This role can only maintenance database including insert/update/delete member or event.";
-            db.approles.Add(obj);
+            obj.emailaddress = "testabc@nothing.com";
+            obj.contactid = c.contactid;
+            db.contactemails.Add(obj);
 
             //save changes
             db.SaveChanges();
 
             //Check to see if the record is existed in database
-            approle savedObj = (from d in db.approles 
-                                where d.approleid == obj.approleid 
+            contactemail savedObj = (from d in db.contactemails 
+                                where d.contactemailid == obj.contactemailid 
                                 select d).Single();
 
             // Assert statement
-            Assert.AreEqual(savedObj.rolename, obj.rolename);
-            Assert.AreEqual(savedObj.note, obj.note);
+            Assert.AreEqual(savedObj.emailaddress, obj.emailaddress);
+            Assert.AreEqual(savedObj.contactid, obj.contactid);
 
             //cleanup
-            db.approles.Remove(savedObj);
+            db.contactemails.Remove(savedObj);
             db.SaveChanges();
 
         }
@@ -79,30 +80,31 @@ namespace DataLayerTest
         public void UpdateRecord()
         {
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_test";
-            obj.note = "Test role for testing purpose.";
-            db.approles.Add(obj);
+            contact c = (from d in db.contacts select d).First();
+            contactemail obj = new contactemail();
+            obj.emailaddress = "testabc2@nothing.com";
+            obj.contactid = c.contactid;
+            db.contactemails.Add(obj);
             db.SaveChanges();
 
             //retrieve and update the record
-            approle savedObj = (from d in db.approles
-                                where d.approleid == obj.approleid
+            contactemail savedObj = (from d in db.contactemails
+                                where d.contactemailid == obj.contactemailid
                                 select d).Single();
-            savedObj.rolename = "app_test";
-            savedObj.note = "This is update statement for testing app_test role.";
+            savedObj.emailaddress = "testabc2@nothing.com";
+            savedObj.contactid = 1;
             db.SaveChanges();
 
             //check to see if there is existing record
-            approle updatedObj = (from d in db.approles
-                                  where d.approleid == obj.approleid
+            contactemail updatedObj = (from d in db.contactemails
+                                  where d.contactemailid == obj.contactemailid
                                   select d).Single();
 
-            Assert.AreEqual(updatedObj.rolename, savedObj.rolename);
-            Assert.AreEqual(updatedObj.note, savedObj.note);
+            Assert.AreEqual(updatedObj.emailaddress, savedObj.emailaddress);
+            Assert.AreEqual(updatedObj.contactid, savedObj.contactid);
 
             //cleanup
-            db.approles.Remove(updatedObj);
+            db.contactemails.Remove(updatedObj);
             db.SaveChanges();
         }
 
@@ -113,22 +115,23 @@ namespace DataLayerTest
         public void DeleteRecord()
         {
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_delete";
-            obj.note = "This is test for delete.";
-            db.approles.Add(obj);
+            contact c = (from d in db.contacts select d).First();
+            contactemail obj = new contactemail();
+            obj.emailaddress = "testdelete@nothing.com";
+            obj.contactid = c.contactid;
+            db.contactemails.Add(obj);
             db.SaveChanges();
 
             //retrieved the recrod and remove it
-            approle savedObj = (from d in db.approles
-                                where d.approleid == obj.approleid
+            contactemail savedObj = (from d in db.contactemails
+                                where d.contactemailid == obj.contactemailid
                                 select d).Single();
-            db.approles.Remove(savedObj);
+            db.contactemails.Remove(savedObj);
             db.SaveChanges();
 
             //ensure the record is deleted from database
-            approle removedObj = (from d in db.approles
-                                  where d.approleid == savedObj.approleid
+            contactemail removedObj = (from d in db.contactemails
+                                  where d.contactemailid == savedObj.contactemailid
                                   select d).FirstOrDefault();
             Assert.IsNull(removedObj);
         }
@@ -141,14 +144,15 @@ namespace DataLayerTest
         {
             //add record to the list
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_test";
-            obj.note = "This is test role.";
-            db.approles.Add(obj);
+            contact c = (from d in db.contacts select d).First();
+            contactemail obj = new contactemail();
+            obj.emailaddress = "testlist@nothing.com";
+            obj.contactid = c.contactid;
+            db.contactemails.Add(obj);
             db.SaveChanges();
 
             //retrieved data
-            List<approle> savedObjs = (from d in db.approles 
+            List<contactemail> savedObjs = (from d in db.contactemails 
                                        select d).ToList();
 
             //ensure record number is greater than 0

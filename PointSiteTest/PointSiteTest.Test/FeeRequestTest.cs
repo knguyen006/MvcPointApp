@@ -9,7 +9,7 @@ using System.Data.Entity;
 namespace DataLayerTest
 {
     [TestClass]
-    public class ApproleTest
+    public class FeeRequestTest
     {
         /// <summary>
         /// Create database if the database is not existed.
@@ -32,11 +32,11 @@ namespace DataLayerTest
         {
             PointAppDBContainer db = new PointAppDBContainer();
 
-            approle savedObj = (from d in db.approles
-                                where d.approleid == 1
+            feerequest savedObj = (from d in db.feerequests
+                                where d.feerequestid == 1
                                 select d).Single();
 
-            Assert.AreEqual(savedObj.approleid, 1);
+            Assert.AreEqual(savedObj.feerequestid, 1);
         }
 
         /// <summary>
@@ -47,27 +47,32 @@ namespace DataLayerTest
         {
             // call database object
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
+            member m = (from d in db.members select d).First();
+            feerequest obj = new feerequest();
             
             //set data
-            obj.rolename = "app_admin_data";
-            obj.note = "This role can only maintenance database including insert/update/delete member or event.";
-            db.approles.Add(obj);
+            obj.requestdate = new DateTime(2013, 5, 1);
+            obj.requestamt = 50;
+            obj.pointbal = 100;
+            obj.memberid = m.memberid;
+            db.feerequests.Add(obj);
 
             //save changes
             db.SaveChanges();
 
             //Check to see if the record is existed in database
-            approle savedObj = (from d in db.approles 
-                                where d.approleid == obj.approleid 
+            feerequest savedObj = (from d in db.feerequests 
+                                where d.feerequestid == obj.feerequestid 
                                 select d).Single();
 
             // Assert statement
-            Assert.AreEqual(savedObj.rolename, obj.rolename);
-            Assert.AreEqual(savedObj.note, obj.note);
+            Assert.AreEqual(savedObj.requestdate, obj.requestdate);
+            Assert.AreEqual(savedObj.requestamt, obj.requestamt);
+            Assert.AreEqual(savedObj.pointbal, obj.pointbal);
+            Assert.AreEqual(savedObj.memberid, obj.memberid);
 
             //cleanup
-            db.approles.Remove(savedObj);
+            db.feerequests.Remove(savedObj);
             db.SaveChanges();
 
         }
@@ -79,30 +84,41 @@ namespace DataLayerTest
         public void UpdateRecord()
         {
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_test";
-            obj.note = "Test role for testing purpose.";
-            db.approles.Add(obj);
+            member m = (from d in db.members select d).First();
+            feerequest obj = new feerequest();
+
+            //set data
+            obj.requestdate = new DateTime(2013, 5, 1);
+            obj.requestamt = 50;
+            obj.pointbal = 100;
+            obj.memberid = m.memberid;
+
+            db.feerequests.Add(obj);
             db.SaveChanges();
 
             //retrieve and update the record
-            approle savedObj = (from d in db.approles
-                                where d.approleid == obj.approleid
+            feerequest savedObj = (from d in db.feerequests
+                                where d.feerequestid == obj.feerequestid
                                 select d).Single();
-            savedObj.rolename = "app_test";
-            savedObj.note = "This is update statement for testing app_test role.";
+            savedObj.requestdate = new DateTime(2013, 5, 2);
+            savedObj.requestamt = 50;
+            savedObj.pointbal = 100;
+            savedObj.memberid = m.memberid;
+
             db.SaveChanges();
 
             //check to see if there is existing record
-            approle updatedObj = (from d in db.approles
-                                  where d.approleid == obj.approleid
+            feerequest updatedObj = (from d in db.feerequests
+                                  where d.feerequestid == obj.feerequestid
                                   select d).Single();
 
-            Assert.AreEqual(updatedObj.rolename, savedObj.rolename);
-            Assert.AreEqual(updatedObj.note, savedObj.note);
+            Assert.AreEqual(updatedObj.requestdate, savedObj.requestdate);
+            Assert.AreEqual(updatedObj.requestamt, savedObj.requestamt);
+            Assert.AreEqual(updatedObj.pointbal, savedObj.pointbal);
+            Assert.AreEqual(updatedObj.memberid, savedObj.memberid);
 
             //cleanup
-            db.approles.Remove(updatedObj);
+            db.feerequests.Remove(updatedObj);
             db.SaveChanges();
         }
 
@@ -113,22 +129,28 @@ namespace DataLayerTest
         public void DeleteRecord()
         {
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_delete";
-            obj.note = "This is test for delete.";
-            db.approles.Add(obj);
+            member m = (from d in db.members select d).First();
+            feerequest obj = new feerequest();
+
+            //set data
+            obj.requestdate = new DateTime(2013, 5, 1);
+            obj.requestamt = 50;
+            obj.pointbal = 100;
+            obj.memberid = m.memberid;
+
+            db.feerequests.Add(obj);
             db.SaveChanges();
 
             //retrieved the recrod and remove it
-            approle savedObj = (from d in db.approles
-                                where d.approleid == obj.approleid
+            feerequest savedObj = (from d in db.feerequests
+                                where d.feerequestid == obj.feerequestid
                                 select d).Single();
-            db.approles.Remove(savedObj);
+            db.feerequests.Remove(savedObj);
             db.SaveChanges();
 
             //ensure the record is deleted from database
-            approle removedObj = (from d in db.approles
-                                  where d.approleid == savedObj.approleid
+            feerequest removedObj = (from d in db.feerequests
+                                  where d.feerequestid == savedObj.feerequestid
                                   select d).FirstOrDefault();
             Assert.IsNull(removedObj);
         }
@@ -141,14 +163,20 @@ namespace DataLayerTest
         {
             //add record to the list
             PointAppDBContainer db = new PointAppDBContainer();
-            approle obj = new approle();
-            obj.rolename = "app_test";
-            obj.note = "This is test role.";
-            db.approles.Add(obj);
+            member m = (from d in db.members select d).First();
+            feerequest obj = new feerequest();
+
+            //set data
+            obj.requestdate = new DateTime(2013, 5, 1);
+            obj.requestamt = 50;
+            obj.pointbal = 100;
+            obj.memberid = m.memberid;
+
+            db.feerequests.Add(obj);
             db.SaveChanges();
 
             //retrieved data
-            List<approle> savedObjs = (from d in db.approles 
+            List<feerequest> savedObjs = (from d in db.feerequests 
                                        select d).ToList();
 
             //ensure record number is greater than 0
