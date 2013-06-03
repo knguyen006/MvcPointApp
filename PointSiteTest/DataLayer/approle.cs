@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class approle
+    public partial class approle : DataLayer.IApprole
     {
         public approle()
         {

@@ -201,6 +201,13 @@
     <Compile Include="LoginTest.aspx.designer.cs">
       <DependentUpon>LoginTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logon.aspx.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logon.aspx.designer.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Member.aspx.cs">
       <DependentUpon>Member.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -255,6 +262,7 @@
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="LoginTest.aspx" />
+    <Content Include="Logon.aspx" />
     <Content Include="Member.aspx" />
     <Content Include="SessionType.aspx" />
     <Content Include="Student.aspx" />

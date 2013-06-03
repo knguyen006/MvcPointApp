@@ -39,6 +39,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +64,16 @@
       <DependentUpon>PointAppModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FormService.cs" />
+    <Compile Include="IActivity.cs" />
+    <Compile Include="IApprole.cs" />
+    <Compile Include="IContact.cs" />
+    <Compile Include="IContactemail.cs" />
+    <Compile Include="IFeerequest.cs" />
+    <Compile Include="IMember.cs" />
+    <Compile Include="ISessioncal.cs" />
+    <Compile Include="ISessiontype.cs" />
+    <Compile Include="ISignup.cs" />
+    <Compile Include="IStudent.cs" />
     <Compile Include="member.cs">
       <DependentUpon>PointAppModel.tt</DependentUpon>
     </Compile>
@@ -124,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PointAppModel.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

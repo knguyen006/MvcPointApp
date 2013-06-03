@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class member
+    public partial class member : IMember
     {
         public member()
         {
@@ -40,5 +40,6 @@ namespace DataLayer
         public virtual ICollection<member> member1 { get; set; }
         public virtual ICollection<member> members { get; set; }
         public virtual ICollection<student> students { get; set; }
+
     }
 }

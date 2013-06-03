@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class activity
+    public partial class activity : DataLayer.IActivity
     {
         public activity()
         {
