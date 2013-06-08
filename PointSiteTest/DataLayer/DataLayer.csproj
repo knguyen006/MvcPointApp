@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{91A76773-BA8C-44FF-85AF-C931E27A193D}</ProjectGuid>
+    <ProjectGuid>{B70E5E13-A444-4746-9FC8-E5BDCB6C0F85}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataLayer</RootNamespace>
@@ -37,9 +37,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,96 +48,82 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="activity.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="approle.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="ApproleHelp.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="contact.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="contactemail.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="feerequest.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="FormService.cs" />
-    <Compile Include="IActivity.cs" />
-    <Compile Include="IApprole.cs" />
-    <Compile Include="IContact.cs" />
-    <Compile Include="IContactemail.cs" />
-    <Compile Include="IFeerequest.cs" />
-    <Compile Include="IMember.cs" />
-    <Compile Include="ISessioncal.cs" />
-    <Compile Include="ISessiontype.cs" />
-    <Compile Include="ISignup.cs" />
-    <Compile Include="IStudent.cs" />
     <Compile Include="member.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="MemberService.cs" />
-    <Compile Include="PointAppModel.Context.cs">
+    <Compile Include="PointAppDBContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PointAppModel.Context.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="PointAppModel.cs">
+    <Compile Include="PointAppDBContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="PointAppModel.Designer.cs">
+    <Compile Include="PointAppDBContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PointAppModel.edmx</DependentUpon>
+      <DependentUpon>PointAppDBContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sessioncal.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="sessiontype.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="signup.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="student.cs">
-      <DependentUpon>PointAppModel.tt</DependentUpon>
+      <DependentUpon>PointAppDBContext.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="PointAppModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PointAppModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <ProjectReference Include="..\PointSiteTest\PointSiteTest.csproj">
+      <Project>{0313914a-6837-4030-999d-74bfc3d1e23e}</Project>
+      <Name>PointSiteTest</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <None Include="PointAppModel.Context.tt">
+    <EntityDeploy Include="PointAppDBContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PointAppDBContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PointAppDBContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PointAppModel.edmx</DependentUpon>
-      <LastGenOutput>PointAppModel.Context.cs</LastGenOutput>
+      <DependentUpon>PointAppDBContext.edmx</DependentUpon>
+      <LastGenOutput>PointAppDBContext.Context.cs</LastGenOutput>
     </None>
-    <None Include="PointAppModel.edmx.diagram">
-      <DependentUpon>PointAppModel.edmx</DependentUpon>
+    <None Include="PointAppDBContext.edmx.diagram">
+      <DependentUpon>PointAppDBContext.edmx</DependentUpon>
     </None>
-    <None Include="PointAppModel.tt">
+    <None Include="PointAppDBContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PointAppModel.edmx</DependentUpon>
-      <LastGenOutput>PointAppModel.cs</LastGenOutput>
+      <DependentUpon>PointAppDBContext.edmx</DependentUpon>
+      <LastGenOutput>PointAppDBContext.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="PointAppModel.edmx.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

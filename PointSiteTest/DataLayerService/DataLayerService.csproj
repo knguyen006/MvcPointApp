@@ -4,8 +4,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A3A5BD43-3B56-4F08-891B-7DE5BD9068E5}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{E12E8AA3-69EE-460E-A229-059A43B4B1BB}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataLayerService</RootNamespace>
     <AssemblyName>DataLayerService</AssemblyName>
@@ -13,7 +13,6 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,27 +30,60 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service1.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Service1.Designer.cs">
-      <DependentUpon>Service1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="ActivitySvcImpl.cs" />
+    <Compile Include="ContactSvcImpl.cs" />
+    <Compile Include="Contact2EmailSvcImpl.cs" />
+    <Compile Include="SessionTypeSvcImpl.cs" />
+    <Compile Include="SessionCalSvcImpl.cs" />
+    <Compile Include="AppRoleSvcImpl.cs" />
+    <Compile Include="SignUpSvcImpl.cs" />
+    <Compile Include="StudentSvcImpl.cs" />
+    <Compile Include="MemberSvcImpl.cs" />
+    <Compile Include="FeeRequestSvcImpl.cs" />
+    <Compile Include="IContactEmailSvc.cs" />
+    <Compile Include="IFeeRequestSvc.cs" />
+    <Compile Include="IStudentSvc.cs" />
+    <Compile Include="IApproleSvc.cs" />
+    <Compile Include="IContactSvc.cs" />
+    <Compile Include="ISessionTypeSvc.cs" />
+    <Compile Include="ISessionCalSvc.cs" />
+    <Compile Include="ISignUpSvc.cs" />
+    <Compile Include="IActivitySvc.cs" />
+    <Compile Include="IMemberSvc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{b70e5e13-a444-4746-9fc8-e5bdcb6c0f85}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PointSiteTest\PointSiteTest.csproj">
+      <Project>{0313914a-6837-4030-999d-74bfc3d1e23e}</Project>
+      <Name>PointSiteTest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

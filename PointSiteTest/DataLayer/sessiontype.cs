@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class sessiontype : DataLayer.ISessiontype
+    public partial class sessiontype
     {
         public sessiontype()
         {

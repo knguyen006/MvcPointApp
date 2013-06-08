@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class feerequest : DataLayer.IFeerequest
+    public partial class feerequest
     {
         public int feerequestid { get; set; }
         public Nullable<int> memberid { get; set; }

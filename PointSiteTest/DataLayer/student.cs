@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class student : DataLayer.IStudent
+    public partial class student
     {
         public student()
         {

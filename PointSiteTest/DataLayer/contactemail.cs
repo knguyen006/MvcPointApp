@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class contactemail : DataLayer.IContactemail
+    public partial class contactemail
     {
         public int contactemailid { get; set; }
         public Nullable<int> contactid { get; set; }

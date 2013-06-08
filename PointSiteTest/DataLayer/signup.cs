@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class signup : DataLayer.ISignup
+    public partial class signup
     {
         public int signupid { get; set; }
         public Nullable<int> memberid { get; set; }

@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class contact : DataLayer.IContact
+    public partial class contact
     {
         public contact()
         {
