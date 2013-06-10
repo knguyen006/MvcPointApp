@@ -11,12 +11,15 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class feerequest
     {
+        [Required]
         public int feerequestid { get; set; }
-        public Nullable<int> memberid { get; set; }
-        public Nullable<System.DateTime> requestdate { get; set; }
+
+        public int memberid { get; set; }
+        public System.DateTime requestdate { get; set; }
         public Nullable<decimal> requestamt { get; set; }
         public Nullable<int> pointbal { get; set; }
     

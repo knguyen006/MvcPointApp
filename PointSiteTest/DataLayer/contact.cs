@@ -11,6 +11,7 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class contact
     {
@@ -19,13 +20,26 @@ namespace DataLayer
             this.contactemails = new HashSet<contactemail>();
             this.members = new HashSet<member>();
         }
-    
+        
+        [Required]
         public int contactid { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength=1)]
         public string firstname { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength=1)]
         public string lastname { get; set; }
         public string middlename { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength=1)]
         public string address { get; set; }
         public string altaddress { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
         public string city { get; set; }
         public string state { get; set; }
         public string zip { get; set; }

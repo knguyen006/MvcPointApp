@@ -11,9 +11,10 @@ namespace DataLayerService
     public interface ISessionCalSvc
     {
         sessioncal Find(int sessioncalid);
-        List<sessioncal> GetAll();
+        IEnumerable<sessioncal> GetAll();
         void AddSessionCal(sessioncal newsessioncal);
         void UpdateSessionCal(sessioncal newsessioncal);
         void DeleteSessionCal(sessioncal newsessioncal);
+        void Dispose();
     }
 }

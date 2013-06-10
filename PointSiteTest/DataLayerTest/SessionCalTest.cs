@@ -171,7 +171,7 @@ namespace DataLayerTest
             obj.sessiontypeid = t.sessiontypeid;
 
             //retrieved data
-            List<sessioncal> savedObjs = (from d in db.sessioncals
+            IEnumerable<sessioncal> savedObjs = (from d in db.sessioncals
                                           select d).ToList();
 
             //ensure record number is greater than 0

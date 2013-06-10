@@ -143,7 +143,7 @@ namespace DataLayerTest
             db.SaveChanges();
 
             //retrieved data
-            List<contactemail> savedObjs = (from d in db.contactemails
+            IEnumerable<contactemail> savedObjs = (from d in db.contactemails
                                             select d).ToList();
 
             //ensure record number is greater than 0

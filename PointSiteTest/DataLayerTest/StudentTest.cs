@@ -158,7 +158,7 @@ namespace DataLayerTest
             db.SaveChanges();
             
             //retrieved data
-            List<student> savedObjs = (from d in db.students
+            IEnumerable<student> savedObjs = (from d in db.students
                                        select d).ToList();
 
             //ensure record number is greater than 0

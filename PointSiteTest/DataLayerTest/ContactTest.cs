@@ -186,7 +186,7 @@ namespace DataLayerTest
             contact obj = new contact();
 
             //retrieved data
-            List<contact> savedObjs = (from d in db.contacts
+            IEnumerable<contact> savedObjs = (from d in db.contacts
                                        select d).ToList();
 
             //ensure record number is greater than 0

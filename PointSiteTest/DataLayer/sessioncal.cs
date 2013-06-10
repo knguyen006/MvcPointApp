@@ -11,6 +11,7 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class sessioncal
     {
@@ -19,9 +20,10 @@ namespace DataLayer
             this.signups = new HashSet<signup>();
         }
     
+        [Required]
         public int sessioncalid { get; set; }
-        public Nullable<System.DateTime> sessiondate { get; set; }
-        public Nullable<int> sessiontypeid { get; set; }
+        public System.DateTime sessiondate { get; set; }
+        public int sessiontypeid { get; set; }
         public Nullable<int> sessionnum { get; set; }
         public Nullable<decimal> sessionamt { get; set; }
         public Nullable<int> sessionpoint { get; set; }

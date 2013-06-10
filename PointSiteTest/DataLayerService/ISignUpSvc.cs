@@ -11,9 +11,10 @@ namespace DataLayerService
     public interface ISignUpSvc
     {
         signup Find(int signupid);
-        List<signup> GetAll();
+        IEnumerable<signup> GetAll();
         void AddSignUp(signup newsignup);
         void UpdateSignUp(signup newsignup);
         void DeleteSignUp(signup newsignup);
+        void Dispose();
     }
 }

@@ -7,20 +7,25 @@ using System.Data.Entity;
 using System.Linq;
 
 /// <summary>
-/// Summary description for ActivityRepositoryImpl
+/// Summary description
 /// </summary>
 namespace DataLayerService
 {
     public class ContactEmailSvcImpl : IContactEmailSvc
     {
-        private PointAppDBContainer db = new PointAppDBContainer();
+        private PointAppDBContainer db;
+
+        public ContactEmailSvcImpl(PointAppDBContainer db)
+        {
+            this.db = db;
+        }
 
         public contactemail Find(int contactemailid)
         {
             return db.contactemails.Find(contactemailid);
         }
 
-        public List<contactemail> GetAll()
+        public IEnumerable<contactemail> GetAll()
         {
             return db.contactemails.ToList();
         }
@@ -41,6 +46,26 @@ namespace DataLayerService
         {
             db.contactemails.Remove(newemail);
             db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

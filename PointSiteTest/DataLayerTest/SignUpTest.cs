@@ -160,7 +160,7 @@ namespace DataLayerTest
             signup obj = new signup();
 
             //retrieved data
-            List<signup> savedObjs = (from d in db.signups
+            IEnumerable<signup> savedObjs = (from d in db.signups
                                       select d).ToList();
 
             //ensure record number is greater than 0

@@ -36,9 +36,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,9 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountSvcImpl.cs" />
     <Compile Include="ActivitySvcImpl.cs" />
     <Compile Include="ContactSvcImpl.cs" />
     <Compile Include="Contact2EmailSvcImpl.cs" />
+    <Compile Include="IActivitySvc_OLD.cs" />
+    <Compile Include="IAccountSvc.cs" />
+    <Compile Include="PointAppFactory.cs" />
+    <Compile Include="PointAppFactoryImpl.cs" />
+    <Compile Include="PointAppSvcFactory_OLD.cs" />
     <Compile Include="SessionTypeSvcImpl.cs" />
     <Compile Include="SessionCalSvcImpl.cs" />
     <Compile Include="AppRoleSvcImpl.cs" />
@@ -73,16 +81,14 @@
       <Project>{b70e5e13-a444-4746-9fc8-e5bdcb6c0f85}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PointSiteTest\PointSiteTest.csproj">
-      <Project>{0313914a-6837-4030-999d-74bfc3d1e23e}</Project>
-      <Name>PointSiteTest</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

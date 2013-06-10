@@ -13,14 +13,19 @@ namespace DataLayerService
 {
     public class AppRoleSvcImpl : IAppRoleSvc
     {
-        private PointAppDBContainer db = new PointAppDBContainer();
+        private PointAppDBContainer db;
+
+        public AppRoleSvcImpl(PointAppDBContainer db)
+        {
+            this.db = db;
+        }
 
         public approle Find(int approleid)
         {
             return db.approles.Find(approleid);
         }
 
-        public List<approle> GetAll()
+        public IEnumerable<approle> GetAll()
         {
             return db.approles.ToList();
         }
@@ -41,6 +46,26 @@ namespace DataLayerService
         {
             db.approles.Remove(newrole);
             db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

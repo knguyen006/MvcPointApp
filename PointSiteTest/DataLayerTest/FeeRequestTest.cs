@@ -157,7 +157,7 @@ namespace DataLayerTest
 
 
             //retrieved data
-            List<feerequest> savedObjs = (from d in db.feerequests
+            IEnumerable<feerequest> savedObjs = (from d in db.feerequests
                                           select d).ToList();
 
             //ensure record number is greater than 0

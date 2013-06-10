@@ -737,7 +737,7 @@ public class EdmMetadataLoader
         {
             using (var reader = schemaElement.CreateReader())
             {
-                IList<EdmSchemaError> errors;
+                IIEnumerable<EdmSchemaError> errors;
                 var itemCollection = MetadataItemCollectionFactory.CreateEdmItemCollection(new[] { reader }, out errors);
 
                 ProcessErrors(errors, sourcePath);

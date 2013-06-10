@@ -13,14 +13,19 @@ namespace DataLayerService
 {
     public class SessionCalSvcImpl : ISessionCalSvc
     {
-        private PointAppDBContainer db = new PointAppDBContainer();
+        private PointAppDBContainer db;
+
+        public SessionCalSvcImpl(PointAppDBContainer db)
+        {
+            this.db = db;
+        }
 
         public sessioncal Find(int sessioncalid)
         {
             return db.sessioncals.Find(sessioncalid);
         }
 
-        public List<sessioncal> GetAll()
+        public IEnumerable<sessioncal> GetAll()
         {
             return db.sessioncals.ToList();
         }
@@ -41,6 +46,26 @@ namespace DataLayerService
         {
             db.sessioncals.Remove(newsessioncal);
             db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

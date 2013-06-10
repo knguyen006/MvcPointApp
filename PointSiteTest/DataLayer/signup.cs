@@ -11,12 +11,15 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class signup
     {
+        [Required]
         public int signupid { get; set; }
-        public Nullable<int> memberid { get; set; }
-        public Nullable<int> sessioncalid { get; set; }
+
+        public int memberid { get; set; }
+        public int sessioncalid { get; set; }
         public Nullable<int> pointearn { get; set; }
         public string isshow { get; set; }
     

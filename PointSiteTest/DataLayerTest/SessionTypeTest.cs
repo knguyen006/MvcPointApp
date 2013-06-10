@@ -133,7 +133,7 @@ namespace DataLayerTest
             sessiontype obj = new sessiontype();
 
             //retrieved data
-            List<sessiontype> savedObjs = (from d in db.sessiontypes
+            IEnumerable<sessiontype> savedObjs = (from d in db.sessiontypes
                                            select d).ToList();
 
             //ensure record number is greater than 0

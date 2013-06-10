@@ -180,7 +180,7 @@ namespace DataLayerTest
             obj.approleid = r.approleid;
 
             //retrieved data
-            List<member> savedObjs = (from d in db.members
+            IEnumerable<member> savedObjs = (from d in db.members
                                       select d).ToList();
 
             //ensure record number is greater than 0

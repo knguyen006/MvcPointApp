@@ -11,9 +11,10 @@ namespace DataLayerService
     public interface IFeeRequestSvc
     {
         feerequest Find(int feerequestid);
-        List<feerequest> GetAll();
+        IEnumerable<feerequest> GetAll();
         void AddRequest(feerequest newrequest);
         void UpdateRequest(feerequest newrequest);
         void DeleteRequest(feerequest newrequest);
+        void Dispose();
     }
 }

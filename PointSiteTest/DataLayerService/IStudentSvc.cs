@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using DataLayer;
+using System.Configuration;
 
 /// <summary>
 /// Summary description for IStudent
@@ -11,9 +12,10 @@ namespace DataLayerService
     public interface IStudentSvc
     {
         student Find(int studentid);
-        List<student> GetAll();
+        IEnumerable<student> GetAll();
         void AddStudent(student newstudent);
         void UpdateStudent(student newstudent);
         void DeleteStudent(student newstudent);
+        void Dispose();
     }
 }

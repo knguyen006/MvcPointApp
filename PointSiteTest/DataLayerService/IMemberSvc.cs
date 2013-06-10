@@ -11,9 +11,10 @@ namespace DataLayerService
     public interface IMemberSvc
     {
         member Find(int memberid);
-        List<member> GetAll();
+        IEnumerable<member> GetAll();
         void AddMember(member newmember);
         void UpdateMember(member newmember);
         void DeleteMember(member newmember);
+        void Dispose();
     }
 }

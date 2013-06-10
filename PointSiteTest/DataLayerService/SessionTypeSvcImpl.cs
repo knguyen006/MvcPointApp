@@ -13,14 +13,19 @@ namespace DataLayerService
 {
     public class SessionTypeSvcImpl : ISessionTypeSvc
     {
-        private PointAppDBContainer db = new PointAppDBContainer();
+        private PointAppDBContainer db;
+
+        public SessionTypeSvcImpl(PointAppDBContainer db)
+        {
+            this.db = db;
+        }
 
         public sessiontype Find(int sessiontypeid)
         {
             return db.sessiontypes.Find(sessiontypeid);
         }
 
-        public List<sessiontype> GetAll()
+        public IEnumerable<sessiontype> GetAll()
         {
             return db.sessiontypes.ToList();
         }
@@ -41,6 +46,26 @@ namespace DataLayerService
         {
             db.sessiontypes.Remove(newsessiontype);
             db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

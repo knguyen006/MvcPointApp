@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 
 /// <summary>
-/// Summary description for ActivityRepositoryImpl
+/// Summary description
 /// </summary>
 namespace DataLayerService
 {
@@ -15,12 +15,17 @@ namespace DataLayerService
     {
         private PointAppDBContainer db = new PointAppDBContainer();
 
+        public ActivitySvcImpl(PointAppDBContainer newdb)
+        {
+            this.db = newdb;
+        }
+
         public activity Find(int activityid)
         {
             return db.activities.Find(activityid);
         }
 
-        public List<activity> GetAll()
+        public IEnumerable<activity> GetAll()
         {
             return db.activities.ToList();
         }
@@ -41,6 +46,26 @@ namespace DataLayerService
         {
             db.activities.Remove(newact);
             db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

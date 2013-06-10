@@ -96,12 +96,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PointSiteTest\PointSiteTest.csproj">
-      <Project>{0313914a-6837-4030-999d-74bfc3d1e23e}</Project>
-      <Name>PointSiteTest</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
     <EntityDeploy Include="PointAppDBContext.edmx">

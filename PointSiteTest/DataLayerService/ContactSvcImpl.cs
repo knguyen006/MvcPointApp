@@ -7,20 +7,25 @@ using System.Data.Entity;
 using System.Data;
 
 /// <summary>
-/// Summary description for ContactivityRepositoryImpl
+/// Summary description
 /// </summary>
 namespace DataLayerService
 {
     public class ContactSvcImpl : IContactSvc
     {
-        private PointAppDBContainer db = new PointAppDBContainer();
+        private PointAppDBContainer db;
+
+        public ContactSvcImpl(PointAppDBContainer db)
+        {
+            this.db = db;
+        }
 
         public contact Find(int contactid)
         {
             return db.contacts.Find(contactid);
         }
 
-        public List<contact> GetAll()
+        public IEnumerable<contact> GetAll()
         {
             return db.contacts.ToList();
         }
@@ -41,6 +46,26 @@ namespace DataLayerService
         {
             db.contacts.Remove(newcontact);
             db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

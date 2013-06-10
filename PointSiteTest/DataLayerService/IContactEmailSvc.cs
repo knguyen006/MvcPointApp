@@ -11,9 +11,10 @@ namespace DataLayerService
     public interface IContactEmailSvc
     {
         contactemail Find(int contactemailid);
-        List<contactemail> GetAll();
+        IEnumerable<contactemail> GetAll();
         void AddEmail(contactemail newemail);
         void UpdateEmail(contactemail newemail);
         void DeleteEmail(contactemail newemail);
+        void Dispose();
     }
 }

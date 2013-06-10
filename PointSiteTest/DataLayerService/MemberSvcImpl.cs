@@ -13,14 +13,19 @@ namespace DataLayerService
 {
     public class MemberSvcImpl : IMemberSvc
     {
-        private PointAppDBContainer db = new PointAppDBContainer();
+        private PointAppDBContainer db;
+
+        public MemberSvcImpl(PointAppDBContainer db)
+        {
+            this.db = db;
+        }
 
         public member Find(int memberid)
         {
             return db.members.Find(memberid);
         }
 
-        public List<member> GetAll()
+        public IEnumerable<member> GetAll()
         {
             return db.members.ToList();
         }
@@ -41,6 +46,26 @@ namespace DataLayerService
         {
             db.members.Remove(newmember);
             db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

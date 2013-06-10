@@ -11,6 +11,7 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class student
     {
@@ -18,9 +19,16 @@ namespace DataLayer
         {
             this.members = new HashSet<member>();
         }
-    
+        
+        [Required]
         public int studentid { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage="The {0} must be at least {2} characters long.", MinimumLength=1)]
         public string firstname { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength=1)]
         public string lastname { get; set; }
         public string middlename { get; set; }
         public Nullable<int> grade { get; set; }

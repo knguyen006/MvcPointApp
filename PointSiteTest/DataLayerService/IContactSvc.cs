@@ -11,9 +11,10 @@ namespace DataLayerService
     public interface IContactSvc
     {
         contact Find(int contactid);
-        List<contact> GetAll();
+        IEnumerable<contact> GetAll();
         void AddContact(contact newcontact);
         void UpdateContact(contact newcontact);
         void DeleteContact(contact newcontact);
+        void Dispose();
     }
 }

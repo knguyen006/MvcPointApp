@@ -7,20 +7,25 @@ using System.Data;
 using System.Linq;
 
 /// <summary>
-/// Summary description for RequestivityRepositoryImpl
+/// Summary description
 /// </summary>
 namespace DataLayerService
 {
     public class FeeRequestSvcImpl : IFeeRequestSvc
     {
-        private PointAppDBContainer db = new PointAppDBContainer();
+        private PointAppDBContainer db;
+
+        public FeeRequestSvcImpl(PointAppDBContainer db)
+        {
+            this.db = db;
+        }
 
         public feerequest Find(int feerequestid)
         {
             return db.feerequests.Find(feerequestid);
         }
 
-        public List<feerequest> GetAll()
+        public IEnumerable<feerequest> GetAll()
         {
             return db.feerequests.ToList();
         }
@@ -41,6 +46,26 @@ namespace DataLayerService
         {
             db.feerequests.Remove(newrequest);
             db.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -11,9 +11,10 @@ namespace DataLayerService
     public interface IAppRoleSvc
     {
         approle Find(int approleid);
-        List<approle> GetAll();
+        IEnumerable<approle> GetAll();
         void AddRole(approle newrole);
         void UpdateRole(approle newrole);
         void DeleteRole(approle newrole);
+        void Dispose();
     }
 }
