@@ -5,19 +5,19 @@ using System.Web;
 using DataLayerService;
 using DataLayer;
 
-namespace PointSiteTest.Controllers
+namespace DaLayerBusiness
 {
-    public class SignUpMgr
+    public class SessionCalMgr
     {
         PointAppFactory factory = PointAppFactory.GetInstance();
 
-        public void Create(signup signup)
+        public void Create(sessioncal sessioncal)
         {
 
             try
             {
-                ISignUpSvc signupSvc = (ISignUpSvc)factory.GetSignUp("ISignUpSvc");
-                signupSvc.AddSignUp(signup);
+                ISessionCalSvc sessioncalSvc = (ISessionCalSvc)factory.GetSessionCal("ISessionCalSvc");
+                sessioncalSvc.AddSessionCal(sessioncal);
             }
             catch
             {
@@ -26,18 +26,18 @@ namespace PointSiteTest.Controllers
         }
 
         /*
-        public signup Find(int newid)
+        public sessioncal Find(int newid)
         {
 
         }
          */
 
-        public void Update(signup signup)
+        public void Update(sessioncal sessioncal)
         {
             try
             {
-                ISignUpSvc signupSvc = (ISignUpSvc)factory.GetSignUp("ISignUpSvc");
-                signupSvc.UpdateSignUp(signup);
+                ISessionCalSvc sessioncalSvc = (ISessionCalSvc)factory.GetSessionCal("ISessionCalSvc");
+                sessioncalSvc.UpdateSessionCal(sessioncal);
             }
             catch
             {
@@ -45,12 +45,12 @@ namespace PointSiteTest.Controllers
             }
         }
 
-        public void Delete(signup signup)
+        public void Delete(sessioncal sessioncal)
         {
             try
             {
-                ISignUpSvc signupSvc = (ISignUpSvc)factory.GetSignUp("ISignUpSvc");
-                signupSvc.DeleteSignUp(signup);
+                ISessionCalSvc sessioncalSvc = (ISessionCalSvc)factory.GetSessionCal("ISessionCalSvc");
+                sessioncalSvc.DeleteSessionCal(sessioncal);
             }
             catch
             {

@@ -5,19 +5,19 @@ using System.Web;
 using DataLayerService;
 using DataLayer;
 
-namespace PointSiteTest.Controllers
+namespace DaLayerBusiness
 {
-    public class SessionCalMgr
+    public class ContactEmailMgr
     {
         PointAppFactory factory = PointAppFactory.GetInstance();
 
-        public void Create(sessioncal sessioncal)
+        public void Create(contactemail email)
         {
 
             try
             {
-                ISessionCalSvc sessioncalSvc = (ISessionCalSvc)factory.GetSessionCal("ISessionCalSvc");
-                sessioncalSvc.AddSessionCal(sessioncal);
+                IContactEmailSvc emailSvc = (IContactEmailSvc)factory.GetContactEmail("IContactEmailSvc");
+                emailSvc.AddEmail(email);
             }
             catch
             {
@@ -26,18 +26,18 @@ namespace PointSiteTest.Controllers
         }
 
         /*
-        public sessioncal Find(int newid)
+        public ContactEmail Find(int newid)
         {
-
+            I don't know how to write this code.
         }
          */
 
-        public void Update(sessioncal sessioncal)
+        public void Update(contactemail email)
         {
             try
             {
-                ISessionCalSvc sessioncalSvc = (ISessionCalSvc)factory.GetSessionCal("ISessionCalSvc");
-                sessioncalSvc.UpdateSessionCal(sessioncal);
+                IContactEmailSvc emailSvc = (IContactEmailSvc)factory.GetContactEmail("IContactEmailSvc");
+                emailSvc.UpdateEmail(email);
             }
             catch
             {
@@ -45,12 +45,12 @@ namespace PointSiteTest.Controllers
             }
         }
 
-        public void Delete(sessioncal sessioncal)
+        public void Delete(contactemail email)
         {
             try
             {
-                ISessionCalSvc sessioncalSvc = (ISessionCalSvc)factory.GetSessionCal("ISessionCalSvc");
-                sessioncalSvc.DeleteSessionCal(sessioncal);
+                IContactEmailSvc emailSvc = (IContactEmailSvc)factory.GetContactEmail("IContactEmailSvc");
+                emailSvc.DeleteEmail(email);
             }
             catch
             {

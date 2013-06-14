@@ -5,19 +5,19 @@ using System.Web;
 using DataLayerService;
 using DataLayer;
 
-namespace PointSiteTest.Controllers
+namespace DaLayerBusiness
 {
-    public class ContactEmailMgr
+    public class FeeRequestMgr
     {
         PointAppFactory factory = PointAppFactory.GetInstance();
 
-        public void Create(contactemail email)
+        public void Create(feerequest request)
         {
 
             try
             {
-                IContactEmailSvc emailSvc = (IContactEmailSvc)factory.GetContactEmail("IContactEmailSvc");
-                emailSvc.AddEmail(email);
+                IFeeRequestSvc requestSvc = (IFeeRequestSvc)factory.GetFeeRequest("IFeeRequestSvc");
+                requestSvc.AddRequest(request);
             }
             catch
             {
@@ -26,18 +26,18 @@ namespace PointSiteTest.Controllers
         }
 
         /*
-        public ContactEmail Find(int newid)
+        public feerequest Find(int newid)
         {
-            I don't know how to write this code.
+
         }
          */
 
-        public void Update(contactemail email)
+        public void Update(feerequest request)
         {
             try
             {
-                IContactEmailSvc emailSvc = (IContactEmailSvc)factory.GetContactEmail("IContactEmailSvc");
-                emailSvc.UpdateEmail(email);
+                IFeeRequestSvc requestSvc = (IFeeRequestSvc)factory.GetFeeRequest("IFeeRequestSvc");
+                requestSvc.UpdateRequest(request);
             }
             catch
             {
@@ -45,12 +45,12 @@ namespace PointSiteTest.Controllers
             }
         }
 
-        public void Delete(contactemail email)
+        public void Delete(feerequest request)
         {
             try
             {
-                IContactEmailSvc emailSvc = (IContactEmailSvc)factory.GetContactEmail("IContactEmailSvc");
-                emailSvc.DeleteEmail(email);
+                IFeeRequestSvc requestSvc = (IFeeRequestSvc)factory.GetFeeRequest("IFeeRequestSvc");
+                requestSvc.DeleteRequest(request);
             }
             catch
             {

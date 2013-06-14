@@ -5,19 +5,19 @@ using System.Web;
 using DataLayerService;
 using DataLayer;
 
-namespace PointSiteTest.Controllers
+namespace DaLayerBusiness
 {
-    public class FeeRequestMgr
+    public class StudentMgr
     {
         PointAppFactory factory = PointAppFactory.GetInstance();
 
-        public void Create(feerequest request)
+        public void Create(student student)
         {
 
             try
             {
-                IFeeRequestSvc requestSvc = (IFeeRequestSvc)factory.GetFeeRequest("IFeeRequestSvc");
-                requestSvc.AddRequest(request);
+                IStudentSvc studentSvc = (IStudentSvc)factory.GetStudent("IStudentSvc");
+                studentSvc.AddStudent(student);
             }
             catch
             {
@@ -26,18 +26,18 @@ namespace PointSiteTest.Controllers
         }
 
         /*
-        public feerequest Find(int newid)
+        public student Find(int newid)
         {
 
         }
          */
 
-        public void Update(feerequest request)
+        public void Update(student student)
         {
             try
             {
-                IFeeRequestSvc requestSvc = (IFeeRequestSvc)factory.GetFeeRequest("IFeeRequestSvc");
-                requestSvc.UpdateRequest(request);
+                IStudentSvc studentSvc = (IStudentSvc)factory.GetStudent("IStudentSvc");
+                studentSvc.UpdateStudent(student);
             }
             catch
             {
@@ -45,12 +45,12 @@ namespace PointSiteTest.Controllers
             }
         }
 
-        public void Delete(feerequest request)
+        public void Delete(student student)
         {
             try
             {
-                IFeeRequestSvc requestSvc = (IFeeRequestSvc)factory.GetFeeRequest("IFeeRequestSvc");
-                requestSvc.DeleteRequest(request);
+                IStudentSvc studentSvc = (IStudentSvc)factory.GetStudent("IStudentSvc");
+                studentSvc.DeleteStudent(student);
             }
             catch
             {

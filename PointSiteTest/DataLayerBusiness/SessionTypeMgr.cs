@@ -5,7 +5,7 @@ using System.Web;
 using DataLayerService;
 using DataLayer;
 
-namespace PointSiteTest.Controllers
+namespace DaLayerBusiness
 {
     public class SessionTypeMgr
     {

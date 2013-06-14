@@ -5,19 +5,19 @@ using System.Web;
 using DataLayerService;
 using DataLayer;
 
-namespace PointSiteTest.Controllers
+namespace DaLayerBusiness
 {
-    public class ContactMgr
+    public class MemberMgr
     {
         PointAppFactory factory = PointAppFactory.GetInstance();
 
-        public void Create(contact contact)
+        public void Create(member act)
         {
 
             try
             {
-                IContactSvc contactSvc = (IContactSvc)factory.GetContact("IContactSvc");
-                contactSvc.AddContact(contact);
+                IMemberSvc memberSvc = (IMemberSvc)factory.GetMember("IMemberSvc");
+                memberSvc.AddMember(act);
             }
             catch
             {
@@ -26,18 +26,18 @@ namespace PointSiteTest.Controllers
         }
 
         /*
-        public contact Find(int newid)
+        public member Find(int newid)
         {
-          
+
         }
          */
 
-        public void Update(contact contact)
+        public void Update(member act)
         {
             try
             {
-                IContactSvc contactSvc = (IContactSvc)factory.GetContact("IContactSvc");
-                contactSvc.UpdateContact(contact);
+                IMemberSvc memberSvc = (IMemberSvc)factory.GetMember("IMemberSvc");
+                memberSvc.UpdateMember(act);
             }
             catch
             {
@@ -45,12 +45,12 @@ namespace PointSiteTest.Controllers
             }
         }
 
-        public void Delete(contact contact)
+        public void Delete(member act)
         {
             try
             {
-                IContactSvc contactSvc = (IContactSvc)factory.GetContact("IContactSvc");
-                contactSvc.DeleteContact(contact);
+                IMemberSvc memberSvc = (IMemberSvc)factory.GetMember("IMemberSvc");
+                memberSvc.DeleteMember(act);
             }
             catch
             {

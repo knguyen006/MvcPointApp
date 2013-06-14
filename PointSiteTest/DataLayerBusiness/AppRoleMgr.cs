@@ -5,19 +5,19 @@ using System.Web;
 using DataLayerService;
 using DataLayer;
 
-namespace PointSiteTest.Controllers
+namespace DaLayerBusiness
 {
-    public class StudentMgr
+    public class AppRoleMgr
     {
         PointAppFactory factory = PointAppFactory.GetInstance();
 
-        public void Create(student student)
+        public void Create(approle role)
         {
 
             try
             {
-                IStudentSvc studentSvc = (IStudentSvc)factory.GetStudent("IStudentSvc");
-                studentSvc.AddStudent(student);
+                IAppRoleSvc roleSvc = (IAppRoleSvc)factory.GetAppRole("IAppRoleSvc");
+                roleSvc.AddRole(role);
             }
             catch
             {
@@ -26,18 +26,18 @@ namespace PointSiteTest.Controllers
         }
 
         /*
-        public student Find(int newid)
+        public approle Find(int newid)
         {
 
         }
          */
 
-        public void Update(student student)
+        public void Update(approle role)
         {
             try
             {
-                IStudentSvc studentSvc = (IStudentSvc)factory.GetStudent("IStudentSvc");
-                studentSvc.UpdateStudent(student);
+                IAppRoleSvc roleSvc = (IAppRoleSvc)factory.GetAppRole("IAppRoleSvc");
+                roleSvc.UpdateRole(role);
             }
             catch
             {
@@ -45,12 +45,12 @@ namespace PointSiteTest.Controllers
             }
         }
 
-        public void Delete(student student)
+        public void Delete(approle role)
         {
             try
             {
-                IStudentSvc studentSvc = (IStudentSvc)factory.GetStudent("IStudentSvc");
-                studentSvc.DeleteStudent(student);
+                IAppRoleSvc roleSvc = (IAppRoleSvc)factory.GetAppRole("IAppRoleSvc");
+                roleSvc.DeleteRole(role);
             }
             catch
             {

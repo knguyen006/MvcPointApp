@@ -5,19 +5,19 @@ using System.Web;
 using DataLayerService;
 using DataLayer;
 
-namespace PointSiteTest.Controllers
+namespace DaLayerBusiness
 {
-    public class ActivityMgr
+    public class SignUpMgr
     {
         PointAppFactory factory = PointAppFactory.GetInstance();
 
-        public void Create(activity act)
+        public void Create(signup signup)
         {
 
             try
             {
-                IActivitySvc actSvc = (IActivitySvc)factory.GetActivity("IActivitySvc");
-                actSvc.AddAct(act);
+                ISignUpSvc signupSvc = (ISignUpSvc)factory.GetSignUp("ISignUpSvc");
+                signupSvc.AddSignUp(signup);
             }
             catch
             {
@@ -26,18 +26,18 @@ namespace PointSiteTest.Controllers
         }
 
         /*
-        public activity Find(int newid)
+        public signup Find(int newid)
         {
 
         }
          */
 
-        public void Update(activity act)
+        public void Update(signup signup)
         {
             try
             {
-                IActivitySvc actSvc = (IActivitySvc)factory.GetActivity("IActivitySvc");
-                actSvc.UpdateAct(act);
+                ISignUpSvc signupSvc = (ISignUpSvc)factory.GetSignUp("ISignUpSvc");
+                signupSvc.UpdateSignUp(signup);
             }
             catch
             {
@@ -45,12 +45,12 @@ namespace PointSiteTest.Controllers
             }
         }
 
-        public void Delete(activity act)
+        public void Delete(signup signup)
         {
             try
             {
-                IActivitySvc actSvc = (IActivitySvc)factory.GetActivity("IActivitySvc");
-                actSvc.DeleteAct(act);
+                ISignUpSvc signupSvc = (ISignUpSvc)factory.GetSignUp("ISignUpSvc");
+                signupSvc.DeleteSignUp(signup);
             }
             catch
             {
