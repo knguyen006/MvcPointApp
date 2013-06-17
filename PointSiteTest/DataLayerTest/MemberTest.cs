@@ -1,53 +1,46 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataLayer;
+using System.Data.Entity;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace DataLayerTest
 {
     [TestClass]
     public class MemberTest
     {
+        PointAppDBContext db = new PointAppDBContext();
+        member obj = new member();
 
-        /// <summary>
-        /// Test Method to Connect to the repository and see if there are any records.
-        /// This should fail if you have an empty table
-        /// </summary>
         [TestMethod]
         public void DisplayData()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
             member t = (from d in db.members select d).First();
-            member savedObj = (from d in db.members
-                               where d.memberid == t.memberid
-                               select d).Single();
+            member saveObj = (from d in db.members
+                              where d.memberid == t.memberid
+                              select d).Single();
 
-            Assert.AreEqual(savedObj.memberid, t.memberid);
+            Assert.AreEqual(saveObj.memberid, t.memberid);
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and add a record
-        /// </summary>
         [TestMethod]
         public void AddNewRecord()
         {
-            // call database object
-            PointAppDBContainer db = new PointAppDBContainer();
-            //thinking to take the member fk out
-            //but later
-            //member m = (from d in db.members select d).First();
-            approle r = (from d in db.approles select d).First();
-            member obj = new member();
+            //call fk object
+            contact c = (from d in db.contacts
+                         select d).First();
+            student s = (from d in db.students
+                         select d).First();
 
             //set data
-            obj.username = "admin1";
-            obj.userpass = "newpass";
-            obj.passphrase = "what's your name?";
-            obj.memberstatus = "Admin";
-            obj.approleid = r.approleid;
+            obj.username = "Addnewmember";
+            obj.userpass = "Addnewpass";
+            obj.passphrase = "Add phrase";
+            obj.memberstatus = "Student";
+            //obj.contactid = c.contactid;
+            //obj.studentid = s.studentid;
             db.members.Add(obj);
 
             //save changes
@@ -58,39 +51,35 @@ namespace DataLayerTest
                                where d.memberid == obj.memberid
                                select d).Single();
 
-            // Assert statement
+            //Assert statement
             Assert.AreEqual(savedObj.username, obj.username);
             Assert.AreEqual(savedObj.userpass, obj.userpass);
             Assert.AreEqual(savedObj.passphrase, obj.passphrase);
             Assert.AreEqual(savedObj.memberstatus, obj.memberstatus);
-            Assert.AreEqual(savedObj.approleid, obj.approleid);
+            //Assert.AreEqual(savedObj.contactid, obj.contactid);
+            //Assert.AreEqual(savedObj.studentid, obj.studentid);
 
             //cleanup
             db.members.Remove(savedObj);
             db.SaveChanges();
-
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and update a record
-        /// </summary>
         [TestMethod]
         public void UpdateRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            //thinking to take the member fk out
-            //but later
-            //member m = (from d in db.members select d).First();
-            approle r = (from d in db.approles select d).First();
-            member obj = new member();
+            //call fk object
+            contact c = (from d in db.contacts
+                         select d).First();
+            student s = (from d in db.students
+                         select d).First();
 
             //set data
-            obj.username = "parent2";
-            obj.userpass = "newpass";
-            obj.passphrase = "what's your name?";
-            obj.memberstatus = "Parent";
-            obj.approleid = r.approleid;
-
+            obj.username = "Updatemember";
+            obj.userpass = "Updatepass";
+            obj.passphrase = "Update phrase";
+            obj.memberstatus = "Student";
+            //obj.contactid = c.contactid;
+            //obj.studentid = s.studentid;
             db.members.Add(obj);
             db.SaveChanges();
 
@@ -98,11 +87,14 @@ namespace DataLayerTest
             member savedObj = (from d in db.members
                                where d.memberid == obj.memberid
                                select d).Single();
-            savedObj.username = "parent2a";
-            savedObj.userpass = "newpass1";
-            savedObj.passphrase = "this is updated test.";
-            savedObj.memberstatus = "Parent";
-            savedObj.approleid = r.approleid;
+
+            //set data
+            savedObj.username = "Updatemember";
+            savedObj.userpass = "Updatepass";
+            savedObj.passphrase = "Update update phrase";
+            savedObj.memberstatus = "Student";
+            //savedObj.contactid = c.contactid;
+            //savedObj.studentid = s.studentid;
             db.SaveChanges();
 
             //check to see if there is existing record
@@ -110,82 +102,85 @@ namespace DataLayerTest
                                  where d.memberid == obj.memberid
                                  select d).Single();
 
+            //Assert statement
             Assert.AreEqual(updatedObj.username, savedObj.username);
             Assert.AreEqual(updatedObj.userpass, savedObj.userpass);
             Assert.AreEqual(updatedObj.passphrase, savedObj.passphrase);
             Assert.AreEqual(updatedObj.memberstatus, savedObj.memberstatus);
-            Assert.AreEqual(updatedObj.approleid, savedObj.approleid);
+            //Assert.AreEqual(updatedObj.contactid, savedObj.contactid);
+            //Assert.AreEqual(updatedObj.studentid, savedObj.studentid);
 
             //cleanup
             db.members.Remove(updatedObj);
             db.SaveChanges();
+
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and delete a record
-        /// </summary>
         [TestMethod]
         public void DeleteRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            //thinking to take the member fk out
-            //but later
-            //member m = (from d in db.members select d).First();
-            approle r = (from d in db.approles select d).First();
-            member obj = new member();
+            //call fk object
+            contact c = (from d in db.contacts
+                         select d).First();
+            student s = (from d in db.students
+                         select d).First();
 
             //set data
-            obj.username = "deleteparent";
-            obj.userpass = "newpass";
-            obj.passphrase = "what's your name?";
-            obj.memberstatus = "Parent";
-            obj.approleid = r.approleid;
+            obj.username = "Deletemember";
+            obj.userpass = "Deletepass";
+            obj.passphrase = "Delete phrase";
+            obj.memberstatus = "Student";
+            //obj.contactid = c.contactid;
+            //obj.studentid = s.studentid;
+            db.members.Add(obj);
 
             db.members.Add(obj);
             db.SaveChanges();
 
-            //retrieved the recrod and remove it
-            member savedObj = (from d in db.members
-                               where d.memberid == obj.memberid
-                               select d).Single();
-            db.members.Remove(savedObj);
+            //retrieve and update the record
+            member saveObj = (from d in db.members
+                              where d.memberid == obj.memberid
+                              select d).Single();
+            db.members.Remove(saveObj);
             db.SaveChanges();
 
-            //ensure the record is deleted from database
+            //Check to see if the record is existed in database
             member removedObj = (from d in db.members
-                                 where d.memberid == savedObj.memberid
+                                 where d.memberid == saveObj.memberid
                                  select d).FirstOrDefault();
+
+            //Assert statement
             Assert.IsNull(removedObj);
         }
 
-        /// <summary>
-        /// Test Method to List the records in the repository.
-        /// </summary>
         [TestMethod]
         public void GetListData()
         {
-            //add record to the list
-            PointAppDBContainer db = new PointAppDBContainer();
-            //thinking to take the member fk out
-            //but later
-            //member m = (from d in db.members select d).First();
-            approle r = (from d in db.approles select d).First();
-            member obj = new member();
+            //call fk object
+            contact c = (from d in db.contacts
+                         select d).First();
+            student s = (from d in db.students
+                         select d).First();
 
             //set data
-            obj.username = "listuser";
-            obj.userpass = "newpass";
-            obj.passphrase = "what's your name?";
-            obj.memberstatus = "Parent";
-            obj.approleid = r.approleid;
+            obj.username = "Listmember";
+            obj.userpass = "Listpass";
+            obj.passphrase = "Listphrase";
+            obj.memberstatus = "Student";
+            obj.approleid = 2;
+            //obj.contactid = c.contactid;
+            //obj.studentid = s.studentid;
+            db.members.Add(obj);
+
+            db.members.Add(obj);
+            db.SaveChanges();
 
             //retrieved data
-            IEnumerable<member> savedObjs = (from d in db.members
-                                      select d).ToList();
+            List<member> saveObjs = (from d in db.members
+                                     select d).ToList();
 
-            //ensure record number is greater than 0
-            Assert.IsTrue(savedObjs.Count > 0);
+            //ensure records number is greater than 0
+            Assert.IsTrue(saveObjs.Count > 0);
         }
-
     }
 }

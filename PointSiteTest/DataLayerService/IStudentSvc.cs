@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayer;
-using System.Configuration;
 
-/// <summary>
-/// Summary description for IStudent
-/// </summary>
 namespace DataLayerService
 {
-    public interface IStudentSvc
+    public interface IStudentSvc : IRepository<student>, IService
     {
-        student Find(int studentid);
-        IEnumerable<student> GetAll();
-        void AddStudent(student newstudent);
-        void UpdateStudent(student newstudent);
-        void DeleteStudent(student newstudent);
-        void Dispose();
     }
 }

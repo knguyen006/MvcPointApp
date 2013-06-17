@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayer;
 
-/// <summary>
-/// Summary description for ISignUp
-/// </summary>
 namespace DataLayerService
 {
-    public interface ISignUpSvc
+    public interface ISignupSvc : IRepository<signup>, IService
     {
-        signup Find(int signupid);
-        IEnumerable<signup> GetAll();
-        void AddSignUp(signup newsignup);
-        void UpdateSignUp(signup newsignup);
-        void DeleteSignUp(signup newsignup);
-        void Dispose();
     }
 }

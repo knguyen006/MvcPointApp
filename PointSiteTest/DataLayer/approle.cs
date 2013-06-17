@@ -11,7 +11,6 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class approle
     {
@@ -20,11 +19,7 @@ namespace DataLayer
             this.members = new HashSet<member>();
         }
     
-        [Required]
         public int approleid { get; set; }
-
-        [Required]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
         public string rolename { get; set; }
         public string note { get; set; }
     

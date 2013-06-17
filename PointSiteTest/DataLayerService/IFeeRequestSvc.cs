@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayer;
 
-/// <summary>
-/// Summary description
-/// </summary>
 namespace DataLayerService
 {
-    public interface IFeeRequestSvc
+    public interface IFeerequestSvc : IRepository<feerequest>, IService
     {
-        feerequest Find(int feerequestid);
-        IEnumerable<feerequest> GetAll();
-        void AddRequest(feerequest newrequest);
-        void UpdateRequest(feerequest newrequest);
-        void DeleteRequest(feerequest newrequest);
-        void Dispose();
     }
 }

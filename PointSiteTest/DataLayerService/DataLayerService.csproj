@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E12E8AA3-69EE-460E-A229-059A43B4B1BB}</ProjectGuid>
+    <ProjectGuid>{C3808F39-323A-4933-BC17-AC0549A35873}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataLayerService</RootNamespace>
@@ -30,8 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -39,8 +38,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,48 +45,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountSvcImpl.cs" />
     <Compile Include="ActivitySvcImpl.cs" />
+    <Compile Include="ContactemailSvcImpl.cs" />
+    <Compile Include="SessioncalSvcImpl.cs" />
+    <Compile Include="FeerequestSvcImpl.cs" />
+    <Compile Include="SessiontypeSvcImpl.cs" />
+    <Compile Include="ApproleSvcImpl.cs" />
     <Compile Include="ContactSvcImpl.cs" />
-    <Compile Include="Contact2EmailSvcImpl.cs" />
-    <Compile Include="IActivitySvc_OLD.cs" />
-    <Compile Include="IAccountSvc.cs" />
-    <Compile Include="PointAppFactory.cs" />
-    <Compile Include="PointAppFactoryImpl.cs" />
-    <Compile Include="PointAppSvcFactory_OLD.cs" />
-    <Compile Include="SessionTypeSvcImpl.cs" />
-    <Compile Include="SessionCalSvcImpl.cs" />
-    <Compile Include="AppRoleSvcImpl.cs" />
-    <Compile Include="SignUpSvcImpl.cs" />
+    <Compile Include="SignupSvcImpl.cs" />
     <Compile Include="StudentSvcImpl.cs" />
     <Compile Include="MemberSvcImpl.cs" />
-    <Compile Include="FeeRequestSvcImpl.cs" />
-    <Compile Include="IContactEmailSvc.cs" />
-    <Compile Include="IFeeRequestSvc.cs" />
     <Compile Include="IStudentSvc.cs" />
-    <Compile Include="IApproleSvc.cs" />
+    <Compile Include="ISessioncalSvc.cs" />
+    <Compile Include="ISessiontypeSvc.cs" />
+    <Compile Include="IContactemailSvc.cs" />
     <Compile Include="IContactSvc.cs" />
-    <Compile Include="ISessionTypeSvc.cs" />
-    <Compile Include="ISessionCalSvc.cs" />
-    <Compile Include="ISignUpSvc.cs" />
-    <Compile Include="IActivitySvc.cs" />
+    <Compile Include="IFeerequestSvc.cs" />
+    <Compile Include="ISignupSvc.cs" />
+    <Compile Include="IApproleSvc.cs" />
     <Compile Include="IMemberSvc.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="IActivitySvc.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
-      <Project>{b70e5e13-a444-4746-9fc8-e5bdcb6c0f85}</Project>
+      <Project>{e1314440-cfa9-42c8-b5f6-cc22a7c1bb18}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

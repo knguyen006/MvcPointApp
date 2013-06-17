@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayer;
 
-/// <summary>
-/// Summary description for IActivity
-/// </summary>
 namespace DataLayerService
 {
-    public interface ISessionTypeSvc
+    public interface ISessiontypeSvc : IRepository<sessiontype>, IService
     {
-        sessiontype Find(int sessiontypeid);
-        IEnumerable<sessiontype> GetAll();
-        void AddSessionType(sessiontype newsessiontype);
-        void UpdateSessionType(sessiontype newsessiontype);
-        void DeleteSessionType(sessiontype newsessiontype);
-        void Dispose();
     }
 }

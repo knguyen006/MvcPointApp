@@ -4,13 +4,28 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B70E5E13-A444-4746-9FC8-E5BDCB6C0F85}</ProjectGuid>
+    <ProjectGuid>{E1314440-CFA9-42C8-B5F6-CC22A7C1BB18}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataLayer</RootNamespace>
     <AssemblyName>DataLayer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +52,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -48,76 +62,93 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="activity.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
     <Compile Include="approle.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="contact.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
     <Compile Include="contactemail.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
     <Compile Include="feerequest.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
     <Compile Include="member.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
-    <Compile Include="PointAppDBContext.Context.cs">
+    <Compile Include="PointAppDBContainer.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PointAppDBContext.Context.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="PointAppDBContext.cs">
+    <Compile Include="PointAppDBContainer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
-    <Compile Include="PointAppDBContext.Designer.cs">
+    <Compile Include="PointAppDBContainer.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PointAppDBContext.edmx</DependentUpon>
+      <DependentUpon>PointAppDBContainer.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sessioncal.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
     <Compile Include="sessiontype.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
     <Compile Include="signup.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
     <Compile Include="student.cs">
-      <DependentUpon>PointAppDBContext.tt</DependentUpon>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="PointAppDBContext.edmx">
+    <EntityDeploy Include="PointAppDBContainer.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PointAppDBContext.Designer.cs</LastGenOutput>
+      <LastGenOutput>PointAppDBContainer.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="PointAppDBContext.Context.tt">
+    <None Include="PointAppDBContainer.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PointAppDBContext.edmx</DependentUpon>
-      <LastGenOutput>PointAppDBContext.Context.cs</LastGenOutput>
+      <DependentUpon>PointAppDBContainer.edmx</DependentUpon>
+      <LastGenOutput>PointAppDBContainer.Context.cs</LastGenOutput>
     </None>
-    <None Include="PointAppDBContext.edmx.diagram">
-      <DependentUpon>PointAppDBContext.edmx</DependentUpon>
+    <None Include="PointAppDBContainer.edmx.diagram">
+      <DependentUpon>PointAppDBContainer.edmx</DependentUpon>
     </None>
-    <None Include="PointAppDBContext.tt">
+    <None Include="PointAppDBContainer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PointAppDBContext.edmx</DependentUpon>
-      <LastGenOutput>PointAppDBContext.cs</LastGenOutput>
+      <DependentUpon>PointAppDBContainer.edmx</DependentUpon>
+      <LastGenOutput>PointAppDBContainer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

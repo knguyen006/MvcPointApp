@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayer;
 
-/// <summary>
-/// Summary description for ISessionCal
-/// </summary>
 namespace DataLayerService
 {
-    public interface ISessionCalSvc
+    public interface ISessioncalSvc : IRepository<sessioncal>, IService
     {
-        sessioncal Find(int sessioncalid);
-        IEnumerable<sessioncal> GetAll();
-        void AddSessionCal(sessioncal newsessioncal);
-        void UpdateSessionCal(sessioncal newsessioncal);
-        void DeleteSessionCal(sessioncal newsessioncal);
-        void Dispose();
     }
 }

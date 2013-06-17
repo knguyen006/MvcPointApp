@@ -1,46 +1,39 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataLayer;
+using System.Data.Entity;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace DataLayerTest
 {
     [TestClass]
     public class ContactEmailTest
     {
+        PointAppDBContext db = new PointAppDBContext();
+        contactemail obj = new contactemail();
 
-        /// <summary>
-        /// Test Method to Connect to the repository and see if there are any records.
-        /// This should fail if you have an empty table
-        /// </summary>
         [TestMethod]
         public void DisplayData()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
             contactemail t = (from d in db.contactemails select d).First();
-            contactemail savedObj = (from d in db.contactemails
-                                     where d.contactemailid == t.contactemailid
-                                     select d).Single();
+            contactemail saveObj = (from d in db.contactemails
+                                    where d.contactemailid == t.contactemailid
+                                    select d).Single();
 
-            Assert.AreEqual(savedObj.contactemailid, t.contactemailid);
+            Assert.AreEqual(saveObj.contactemailid, t.contactemailid);
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and add a record
-        /// </summary>
         [TestMethod]
         public void AddNewRecord()
         {
-            // call database object
-            PointAppDBContainer db = new PointAppDBContainer();
-            contact c = (from d in db.contacts select d).First();
-            contactemail obj = new contactemail();
+            //call fk object
+            contact c = (from d in db.contacts
+                         select d).First();
 
             //set data
-            obj.emailaddress = "test@nothing.com";
+            obj.emailaddress = "Add new contactemail";
             obj.contactid = c.contactid;
             db.contactemails.Add(obj);
 
@@ -52,26 +45,24 @@ namespace DataLayerTest
                                      where d.contactemailid == obj.contactemailid
                                      select d).Single();
 
-            // Assert statement
-            Assert.AreEqual(savedObj.contactid, obj.contactid);
+            //Assert statement
             Assert.AreEqual(savedObj.emailaddress, obj.emailaddress);
+            Assert.AreEqual(savedObj.contactid, obj.contactid);
 
             //cleanup
             db.contactemails.Remove(savedObj);
             db.SaveChanges();
-
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and update a record
-        /// </summary>
         [TestMethod]
         public void UpdateRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            contact c = (from d in db.contacts select d).First();
-            contactemail obj = new contactemail();
-            obj.emailaddress = "testabc2@nothing.com";
+            //call fk object
+            contact c = (from d in db.contacts
+                         select d).First();
+
+            //set data
+            obj.emailaddress = "Update contactemail";
             obj.contactid = c.contactid;
             db.contactemails.Add(obj);
             db.SaveChanges();
@@ -80,7 +71,7 @@ namespace DataLayerTest
             contactemail savedObj = (from d in db.contactemails
                                      where d.contactemailid == obj.contactemailid
                                      select d).Single();
-            savedObj.emailaddress = "testabc2@nothing.com";
+            savedObj.emailaddress = "Test updated contactemail";
             savedObj.contactid = c.contactid;
             db.SaveChanges();
 
@@ -95,60 +86,57 @@ namespace DataLayerTest
             //cleanup
             db.contactemails.Remove(updatedObj);
             db.SaveChanges();
+
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and delete a record
-        /// </summary>
         [TestMethod]
         public void DeleteRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            contact c = (from d in db.contacts select d).First();
-            contactemail obj = new contactemail();
+            //call fk object
+            contact c = (from d in db.contacts
+                         select d).First();
 
-            obj.emailaddress = "testdelete@nothing.com";
+            obj.emailaddress = "Delete contactemail";
             obj.contactid = c.contactid;
+
             db.contactemails.Add(obj);
             db.SaveChanges();
 
-            //retrieved the recrod and remove it
-            contactemail savedObj = (from d in db.contactemails
-                                     where d.contactemailid == obj.contactemailid
-                                     select d).Single();
-            db.contactemails.Remove(savedObj);
+            //retrieve and update the record
+            contactemail saveObj = (from d in db.contactemails
+                                    where d.contactemailid == obj.contactemailid
+                                    select d).Single();
+            db.contactemails.Remove(saveObj);
             db.SaveChanges();
 
-            //ensure the record is deleted from database
+            //Check to see if the record is existed in database
             contactemail removedObj = (from d in db.contactemails
-                                       where d.contactemailid == savedObj.contactemailid
+                                       where d.contactemailid == saveObj.contactemailid
                                        select d).FirstOrDefault();
+
+            //Assert statement
             Assert.IsNull(removedObj);
         }
 
-        /// <summary>
-        /// Test Method to List the records in the repository.
-        /// </summary>
         [TestMethod]
         public void GetListData()
         {
-            //add record to the list
-            PointAppDBContainer db = new PointAppDBContainer();
-            contact c = (from d in db.contacts select d).First();
-            contactemail obj = new contactemail();
+            //call fk object
+            contact c = (from d in db.contacts
+                         select d).First();
 
-            obj.emailaddress = "testlist@nothing.com";
+            obj.emailaddress = "Get contactemail List";
             obj.contactid = c.contactid;
+
             db.contactemails.Add(obj);
             db.SaveChanges();
 
             //retrieved data
-            IEnumerable<contactemail> savedObjs = (from d in db.contactemails
-                                            select d).ToList();
+            List<contactemail> saveObjs = (from d in db.contactemails
+                                           select d).ToList();
 
-            //ensure record number is greater than 0
-            Assert.IsTrue(savedObjs.Count > 0);
+            //ensure records number is greater than 0
+            Assert.IsTrue(saveObjs.Count > 0);
         }
-
     }
 }

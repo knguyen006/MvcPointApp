@@ -1,61 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayerService;
 using DataLayer;
 
-namespace DaLayerBusiness
+namespace DataLayerBusiness
 {
-    public class SessionCalMgr
+    public class SessioncalMgr
     {
-        PointAppFactory factory = PointAppFactory.GetInstance();
+        public PointAppDBContext context;
 
-        public void Create(sessioncal sessioncal)
+        Factory factory = Factory.GetInstance();
+
+        public SessioncalMgr()
         {
-
-            try
-            {
-                ISessionCalSvc sessioncalSvc = (ISessionCalSvc)factory.GetSessionCal("ISessionCalSvc");
-                sessioncalSvc.AddSessionCal(sessioncal);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot add record!");
-            }
+            this.context = new PointAppDBContext();
         }
 
-        /*
-        public sessioncal Find(int newid)
+        public SessioncalMgr(PointAppDBContext dbContext)
         {
-
-        }
-         */
-
-        public void Update(sessioncal sessioncal)
-        {
-            try
-            {
-                ISessionCalSvc sessioncalSvc = (ISessionCalSvc)factory.GetSessionCal("ISessionCalSvc");
-                sessioncalSvc.UpdateSessionCal(sessioncal);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot update record");
-            }
+            this.context = dbContext;
         }
 
-        public void Delete(sessioncal sessioncal)
+        public void Create(sessioncal newcal)
         {
-            try
-            {
-                ISessionCalSvc sessioncalSvc = (ISessionCalSvc)factory.GetSessionCal("ISessionCalSvc");
-                sessioncalSvc.DeleteSessionCal(sessioncal);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot delete record");
-            }
+            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
+
+            calSvc.Insert(newcal);
+            calSvc.Save();
         }
+
+        public void Update(sessioncal newcal)
+        {
+            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
+
+            calSvc.Update(newcal);
+            calSvc.Save();
+        }
+
+        public void Delete(sessioncal newcal)
+        {
+            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
+
+            calSvc.Delete(newcal);
+            calSvc.Save();
+        }
+
+        public sessioncal Find(int id)
+        {
+            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
+
+            return calSvc.GetById(id);
+        }
+
+        public IEnumerable<sessioncal> GetSessioncal()
+        {
+            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
+
+            return calSvc.GetAll();
+        }
+
+
     }
 }

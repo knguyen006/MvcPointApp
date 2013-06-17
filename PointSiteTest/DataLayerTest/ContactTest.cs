@@ -1,52 +1,42 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataLayer;
+using System.Data.Entity;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace DataLayerTest
 {
     [TestClass]
     public class ContactTest
     {
+        PointAppDBContext db = new PointAppDBContext();
+        contact obj = new contact();
 
-        /// <summary>
-        /// Test Method to Connect to the repository and see if there are any records.
-        /// This should fail if you have an empty table
-        /// </summary>
         [TestMethod]
         public void DisplayData()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
             contact t = (from d in db.contacts select d).First();
-            contact savedObj = (from d in db.contacts
-                                where d.contactid == t.contactid
-                                select d).Single();
+            contact saveObj = (from d in db.contacts
+                               where d.contactid == t.contactid
+                               select d).Single();
 
-            Assert.AreEqual(savedObj.contactid, t.contactid);
+            Assert.AreEqual(saveObj.contactid, t.contactid);
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and add a record
-        /// </summary>
         [TestMethod]
         public void AddNewRecord()
         {
-            // call database object
-            PointAppDBContainer db = new PointAppDBContainer();
-            contact obj = new contact();
-
             //set data
-            obj.firstname = "Jon";
-            obj.lastname = "Doe";
-            obj.middlename = "T.";
-            obj.address = "123 Testing";
-            obj.altaddress = "Nothing";
-            obj.city = "Denver";
+            obj.firstname = "Add first";
+            obj.lastname = "Add last";
+            obj.middlename = "Add middle";
+            obj.address = "Add Address";
+            obj.altaddress = "Add Alt address";
+            obj.city = "Add city";
             obj.state = "CO";
-            obj.zip = "800001";
+            obj.zip = "00000";
             obj.homephone = "123-456-7890";
             obj.workphone = "098-765-4321";
             obj.mobilephone = "111-222-3333";
@@ -60,7 +50,7 @@ namespace DataLayerTest
                                 where d.contactid == obj.contactid
                                 select d).Single();
 
-            // Assert statement
+            //Assert statement
             Assert.AreEqual(savedObj.firstname, obj.firstname);
             Assert.AreEqual(savedObj.lastname, obj.lastname);
             Assert.AreEqual(savedObj.middlename, obj.middlename);
@@ -68,6 +58,7 @@ namespace DataLayerTest
             Assert.AreEqual(savedObj.altaddress, obj.altaddress);
             Assert.AreEqual(savedObj.city, obj.city);
             Assert.AreEqual(savedObj.state, obj.state);
+            Assert.AreEqual(savedObj.zip, obj.zip);
             Assert.AreEqual(savedObj.homephone, obj.homephone);
             Assert.AreEqual(savedObj.workphone, obj.workphone);
             Assert.AreEqual(savedObj.mobilephone, obj.mobilephone);
@@ -75,28 +66,23 @@ namespace DataLayerTest
             //cleanup
             db.contacts.Remove(savedObj);
             db.SaveChanges();
-
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and update a record
-        /// </summary>
         [TestMethod]
         public void UpdateRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            contact obj = new contact();
-            obj.firstname = "Jon";
-            obj.lastname = "Doe";
-            obj.middlename = "T.";
-            obj.address = "123 Testing";
-            obj.altaddress = "Nothing";
-            obj.city = "Denver";
+            obj.firstname = "Update first";
+            obj.lastname = "Update last";
+            obj.middlename = "Update middle";
+            obj.address = "Update Address";
+            obj.altaddress = "Update Alt address";
+            obj.city = "Update city";
             obj.state = "CO";
-            obj.zip = "800001";
+            obj.zip = "00000";
             obj.homephone = "123-456-7890";
             obj.workphone = "098-765-4321";
             obj.mobilephone = "111-222-3333";
+
             db.contacts.Add(obj);
             db.SaveChanges();
 
@@ -104,14 +90,15 @@ namespace DataLayerTest
             contact savedObj = (from d in db.contacts
                                 where d.contactid == obj.contactid
                                 select d).Single();
-            savedObj.firstname = "Jon Update";
-            savedObj.lastname = "Doe";
-            savedObj.middlename = "T.";
-            savedObj.address = "123 Testing";
-            savedObj.altaddress = "Nothing";
-            savedObj.city = "Denver";
+
+            savedObj.firstname = "Update update first";
+            savedObj.lastname = "Update update last";
+            savedObj.middlename = "Update middle";
+            savedObj.address = "Update Address";
+            savedObj.altaddress = "Update Alt address";
+            savedObj.city = "Update city";
             savedObj.state = "CO";
-            savedObj.zip = "800001";
+            savedObj.zip = "00000";
             savedObj.homephone = "123-456-7890";
             savedObj.workphone = "098-765-4321";
             savedObj.mobilephone = "111-222-3333";
@@ -123,6 +110,7 @@ namespace DataLayerTest
                                   where d.contactid == obj.contactid
                                   select d).Single();
 
+            //Assert statement
             Assert.AreEqual(updatedObj.firstname, savedObj.firstname);
             Assert.AreEqual(updatedObj.lastname, savedObj.lastname);
             Assert.AreEqual(updatedObj.middlename, savedObj.middlename);
@@ -130,6 +118,7 @@ namespace DataLayerTest
             Assert.AreEqual(updatedObj.altaddress, savedObj.altaddress);
             Assert.AreEqual(updatedObj.city, savedObj.city);
             Assert.AreEqual(updatedObj.state, savedObj.state);
+            Assert.AreEqual(updatedObj.zip, savedObj.zip);
             Assert.AreEqual(updatedObj.homephone, savedObj.homephone);
             Assert.AreEqual(updatedObj.workphone, savedObj.workphone);
             Assert.AreEqual(updatedObj.mobilephone, savedObj.mobilephone);
@@ -137,61 +126,67 @@ namespace DataLayerTest
             //cleanup
             db.contacts.Remove(updatedObj);
             db.SaveChanges();
+
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and delete a record
-        /// </summary>
         [TestMethod]
         public void DeleteRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            contact obj = new contact();
-            obj.firstname = "Jon Delete";
-            obj.lastname = "Doe";
-            obj.middlename = "T.";
-            obj.address = "123 Testing";
-            obj.altaddress = "Nothing";
-            obj.city = "Denver";
+            obj.firstname = "Delete first";
+            obj.lastname = "Delete last";
+            obj.middlename = "Delete middle";
+            obj.address = "Delete Address";
+            obj.altaddress = "Delete Alt address";
+            obj.city = "Delete city";
             obj.state = "CO";
-            obj.zip = "800001";
+            obj.zip = "00000";
             obj.homephone = "123-456-7890";
             obj.workphone = "098-765-4321";
             obj.mobilephone = "111-222-3333";
+
             db.contacts.Add(obj);
             db.SaveChanges();
 
-            //retrieved the recrod and remove it
-            contact savedObj = (from d in db.contacts
-                                where d.contactid == obj.contactid
-                                select d).Single();
-            db.contacts.Remove(savedObj);
+            //retrieve and update the record
+            contact saveObj = (from d in db.contacts
+                               where d.contactid == obj.contactid
+                               select d).Single();
+            db.contacts.Remove(saveObj);
             db.SaveChanges();
 
-            //ensure the record is deleted from database
+            //Check to see if the record is existed in database
             contact removedObj = (from d in db.contacts
-                                  where d.contactid == savedObj.contactid
+                                  where d.contactid == saveObj.contactid
                                   select d).FirstOrDefault();
+
+            //Assert statement
             Assert.IsNull(removedObj);
         }
 
-        /// <summary>
-        /// Test Method to List the records in the repository.
-        /// </summary>
         [TestMethod]
         public void GetListData()
         {
-            //add record to the list
-            PointAppDBContainer db = new PointAppDBContainer();
-            contact obj = new contact();
+            obj.firstname = "List first";
+            obj.lastname = "List last";
+            obj.middlename = "List middle";
+            obj.address = "List Address";
+            obj.altaddress = "List Alt address";
+            obj.city = "List city";
+            obj.state = "CO";
+            obj.zip = "00000";
+            obj.homephone = "123-456-7890";
+            obj.workphone = "098-765-4321";
+            obj.mobilephone = "111-222-3333";
+
+            db.contacts.Add(obj);
+            db.SaveChanges();
 
             //retrieved data
-            IEnumerable<contact> savedObjs = (from d in db.contacts
-                                       select d).ToList();
+           List<contact> saveObjs = (from d in db.contacts
+                                      select d).ToList();
 
-            //ensure record number is greater than 0
-            Assert.IsTrue(savedObjs.Count > 0);
+            //ensure records number is greater than 0
+            Assert.IsTrue(saveObjs.Count > 0);
         }
-
     }
 }

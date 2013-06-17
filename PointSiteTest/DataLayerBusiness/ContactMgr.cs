@@ -1,61 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayerService;
 using DataLayer;
 
-namespace DaLayerBusiness
+namespace DataLayerBusiness
 {
     public class ContactMgr
     {
-        PointAppFactory factory = PointAppFactory.GetInstance();
+        public PointAppDBContext context;
 
-        public void Create(contact contact)
+        Factory factory = Factory.GetInstance();
+
+        public ContactMgr()
         {
-
-            try
-            {
-                IContactSvc contactSvc = (IContactSvc)factory.GetContact("IContactSvc");
-                contactSvc.AddContact(contact);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot add record!");
-            }
+            this.context = new PointAppDBContext();
         }
 
-        /*
-        public contact Find(int newid)
+        public ContactMgr(PointAppDBContext dbContext)
         {
-          
-        }
-         */
-
-        public void Update(contact contact)
-        {
-            try
-            {
-                IContactSvc contactSvc = (IContactSvc)factory.GetContact("IContactSvc");
-                contactSvc.UpdateContact(contact);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot update record");
-            }
+            this.context = dbContext;
         }
 
-        public void Delete(contact contact)
+        public void Create(contact newcontact)
         {
-            try
-            {
-                IContactSvc contactSvc = (IContactSvc)factory.GetContact("IContactSvc");
-                contactSvc.DeleteContact(contact);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot delete record");
-            }
+            IContactSvc contactSvc = (IContactSvc)factory.GetService("IContactSvc", context);
+
+            contactSvc.Insert(newcontact);
+            contactSvc.Save();
         }
+
+        public void Update(contact newcontact)
+        {
+            IContactSvc contactSvc = (IContactSvc)factory.GetService("IContactSvc", context);
+
+            contactSvc.Update(newcontact);
+            contactSvc.Save();
+        }
+
+        public void Delete(contact newcontact)
+        {
+            IContactSvc contactSvc = (IContactSvc)factory.GetService("IContactSvc", context);
+
+            contactSvc.Delete(newcontact);
+            contactSvc.Save();
+        }
+
+        public contact Find(int id)
+        {
+            IContactSvc contactSvc = (IContactSvc)factory.GetService("IContactSvc", context);
+
+            return contactSvc.GetById(id);
+        }
+
+        public IEnumerable<contact> GetContact()
+        {
+            IContactSvc contactSvc = (IContactSvc)factory.GetService("IContactSvc", context);
+
+            return contactSvc.GetAll();
+        }
+
+
     }
 }

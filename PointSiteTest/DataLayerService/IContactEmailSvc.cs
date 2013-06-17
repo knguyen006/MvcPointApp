@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayer;
 
-/// <summary>
-/// Summary description for IContactEmail
-/// </summary>
 namespace DataLayerService
 {
-    public interface IContactEmailSvc
+    public interface IContactemailSvc : IRepository<contactemail>, IService
     {
-        contactemail Find(int contactemailid);
-        IEnumerable<contactemail> GetAll();
-        void AddEmail(contactemail newemail);
-        void UpdateEmail(contactemail newemail);
-        void DeleteEmail(contactemail newemail);
-        void Dispose();
     }
 }

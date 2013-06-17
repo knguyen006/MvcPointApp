@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84BB1834-6C9F-4353-8DA2-543CC78A2AAF}</ProjectGuid>
+    <ProjectGuid>{EA512ADD-7BC8-4748-9C7B-4FECCC7E9F12}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataLayerBusiness</RootNamespace>
@@ -37,7 +37,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,30 +45,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityMgr.cs" />
-    <Compile Include="AppRoleMgr.cs" />
-    <Compile Include="ContactEmailMgr.cs" />
-    <Compile Include="ContactMgr.cs" />
-    <Compile Include="FeeRequestMgr.cs" />
+    <Compile Include="ApproleMgr.cs" />
+    <Compile Include="ContactemailMgr.cs" />
     <Compile Include="MemberMgr.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionCalMgr.cs" />
-    <Compile Include="SessionTypeMgr.cs" />
-    <Compile Include="SignUpMgr.cs" />
+    <Compile Include="ContactMgr.cs" />
+    <Compile Include="SessiontypeMgr.cs" />
+    <Compile Include="SessioncalMgr.cs" />
+    <Compile Include="FeerequestMgr.cs" />
+    <Compile Include="SignupMgr.cs" />
     <Compile Include="StudentMgr.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataLayerService\DataLayerService.csproj">
-      <Project>{e12e8aa3-69ee-460e-a229-059a43b4b1bb}</Project>
-      <Name>DataLayerService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
-      <Project>{b70e5e13-a444-4746-9fc8-e5bdcb6c0f85}</Project>
-      <Name>DataLayer</Name>
-    </ProjectReference>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayerService\DataLayerService.csproj">
+      <Project>{c3808f39-323a-4933-bc17-ac0549a35873}</Project>
+      <Name>DataLayerService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{e1314440-cfa9-42c8-b5f6-cc22a7c1bb18}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,16 +11,11 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class contactemail
     {
-        [Required]
         public int contactemailid { get; set; }
-        public int contactid { get; set; }
-
-        [Required]
-        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        public Nullable<int> contactid { get; set; }
         public string emailaddress { get; set; }
     
         public virtual contact contact { get; set; }

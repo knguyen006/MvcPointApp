@@ -1,44 +1,39 @@
 ﻿using System;
+using System.Text;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataLayer;
+using System.Data.Entity;
 using System.Data;
 using System.Linq;
-using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace DataLayerTest
 {
+    /// <summary>
+    /// Summary description for ActivityTest
+    /// </summary>
     [TestClass]
     public class ActivityTest
     {
-        /// <summary>
-        /// Test Method to Connect to the repository and see if there are any records.
-        /// This should fail if you have an empty table
-        /// </summary>
+        PointAppDBContext db = new PointAppDBContext();
+        activity obj = new activity();
+
         [TestMethod]
         public void DisplayData()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
             activity t = (from d in db.activities select d).First();
-            activity savedObj = (from d in db.activities
-                                 where d.activityid == t.activityid
-                                 select d).Single();
+            activity saveObj = (from d in db.activities
+                                where d.activityid == t.activityid
+                                select d).Single();
 
-            Assert.AreEqual(savedObj.activityid, t.activityid);
+            Assert.AreEqual(saveObj.activityid, t.activityid);
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and add a record
-        /// </summary>
         [TestMethod]
         public void AddNewRecord()
-        {
-            // call database object
-            PointAppDBContainer db = new PointAppDBContainer();
-            activity obj = new activity();
-
+        { 
             //set data
-            obj.actname = "Marching Band";
+            obj.actname = "Add new activity";
             db.activities.Add(obj);
 
             //save changes
@@ -49,24 +44,18 @@ namespace DataLayerTest
                                  where d.activityid == obj.activityid
                                  select d).Single();
 
-            // Assert statement
+            //Assert statement
             Assert.AreEqual(savedObj.actname, obj.actname);
 
             //cleanup
             db.activities.Remove(savedObj);
             db.SaveChanges();
-
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and update a record
-        /// </summary>
         [TestMethod]
         public void UpdateRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            activity obj = new activity();
-            obj.actname = "Marching Band 2";
+            obj.actname = "Update Activity";
             db.activities.Add(obj);
             db.SaveChanges();
 
@@ -74,11 +63,8 @@ namespace DataLayerTest
             activity savedObj = (from d in db.activities
                                  where d.activityid == obj.activityid
                                  select d).Single();
-            savedObj.actname = "Updated Marching Band 2";
+            savedObj.actname = "Test updated activity";
             db.SaveChanges();
-            // Assert statement
-            Assert.AreEqual(savedObj.actname, obj.actname);
-
 
             //check to see if there is existing record
             activity updatedObj = (from d in db.activities
@@ -90,54 +76,45 @@ namespace DataLayerTest
             //cleanup
             db.activities.Remove(updatedObj);
             db.SaveChanges();
+
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and delete a record
-        /// </summary>
         [TestMethod]
         public void DeleteRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            activity obj = new activity();
-            obj.actname = "Test Delete Activity";
+            obj.actname = "Delete activity";
             db.activities.Add(obj);
             db.SaveChanges();
 
-            //retrieved the recrod and remove it
-            activity savedObj = (from d in db.activities
-                                 where d.activityid == obj.activityid
-                                 select d).Single();
-            db.activities.Remove(savedObj);
+            //retrieve and update the record
+            activity saveObj = (from d in db.activities
+                                where d.activityid == obj.activityid
+                                select d).Single();
+            db.activities.Remove(saveObj);
             db.SaveChanges();
 
-            //ensure the record is deleted from database
+            //Check to see if the record is existed in database
             activity removedObj = (from d in db.activities
-                                   where d.activityid == savedObj.activityid
+                                   where d.activityid == saveObj.activityid
                                    select d).FirstOrDefault();
+
+            //Assert statement
             Assert.IsNull(removedObj);
         }
 
-        /// <summary>
-        /// Test Method to List the records in the repository.
-        /// </summary>
         [TestMethod]
         public void GetListData()
         {
-            //add record to the list
-            PointAppDBContainer db = new PointAppDBContainer();
-            activity obj = new activity();
-            obj.actname = "Test get activity list";
+            obj.actname = "Get Activity List";
             db.activities.Add(obj);
             db.SaveChanges();
 
             //retrieved data
-            List<activity> savedObjs = (from d in db.activities
-                                        select d).ToList();
+            List<activity> saveObjs = (from d in db.activities
+                                       select d).ToList();
 
-            //ensure record number is greater than 0
-            Assert.IsTrue(savedObjs.Count > 0);
+            //ensure records number is greater than 0
+            Assert.IsTrue(saveObjs.Count > 0);
         }
-
     }
 }

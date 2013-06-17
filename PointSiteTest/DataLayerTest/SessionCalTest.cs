@@ -1,51 +1,43 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataLayer;
+using System.Data.Entity;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace DataLayerTest
 {
     [TestClass]
     public class SessionCalTest
     {
+        PointAppDBContext db = new PointAppDBContext();
+        sessioncal obj = new sessioncal();
 
-        /// <summary>
-        /// Test Method to Connect to the repository and see if there are any records.
-        /// This should fail if you have an empty table
-        /// </summary>
         [TestMethod]
         public void DisplayData()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
             sessioncal t = (from d in db.sessioncals select d).First();
-            sessioncal savedObj = (from d in db.sessioncals
-                                   where d.sessioncalid == t.sessioncalid
-                                   select d).Single();
+            sessioncal saveObj = (from d in db.sessioncals
+                                  where d.sessioncalid == t.sessioncalid
+                                  select d).Single();
 
-            Assert.AreEqual(savedObj.sessioncalid, t.sessioncalid);
+            Assert.AreEqual(saveObj.sessioncalid, t.sessioncalid);
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and add a record
-        /// </summary>
         [TestMethod]
         public void AddNewRecord()
         {
-            // call database object
-            PointAppDBContainer db = new PointAppDBContainer();
-            sessiontype t = (from d in db.sessiontypes select d).First();
-            sessioncal obj = new sessioncal();
+            //call fk object
+            sessiontype s = (from d in db.sessiontypes
+                             select d).First();
 
             //set data
             obj.sessiondate = new DateTime(2013, 5, 1);
             obj.sessionnum = 1;
             obj.sessionamt = 5000;
             obj.sessionpoint = 2500;
-            obj.sessiontypeid = 7;
-            //obj.sessiontypeid = t.sessiontypeid;
+            obj.sessiontypeid = s.sessiontypeid;
             db.sessioncals.Add(obj);
 
             //save changes
@@ -56,7 +48,7 @@ namespace DataLayerTest
                                    where d.sessioncalid == obj.sessioncalid
                                    select d).Single();
 
-            // Assert statement
+            //Assert statement
             Assert.AreEqual(savedObj.sessiondate, obj.sessiondate);
             Assert.AreEqual(savedObj.sessionnum, obj.sessionnum);
             Assert.AreEqual(savedObj.sessionamt, obj.sessionamt);
@@ -66,25 +58,21 @@ namespace DataLayerTest
             //cleanup
             db.sessioncals.Remove(savedObj);
             db.SaveChanges();
-
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and update a record
-        /// </summary>
         [TestMethod]
         public void UpdateRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            sessiontype t = (from d in db.sessiontypes select d).First();
-            sessioncal obj = new sessioncal();
+            //call fk object
+            sessiontype s = (from d in db.sessiontypes
+                             select d).First();
 
             //set data
-            obj.sessiondate = new DateTime(2013, 5, 1);
+            obj.sessiondate = new DateTime(2013, 5, 2);
             obj.sessionnum = 1;
             obj.sessionamt = 5000;
             obj.sessionpoint = 2500;
-            obj.sessiontypeid = t.sessiontypeid;
+            obj.sessiontypeid = s.sessiontypeid;
 
             db.sessioncals.Add(obj);
             db.SaveChanges();
@@ -93,12 +81,13 @@ namespace DataLayerTest
             sessioncal savedObj = (from d in db.sessioncals
                                    where d.sessioncalid == obj.sessioncalid
                                    select d).Single();
+
             //set data
             savedObj.sessiondate = new DateTime(2013, 5, 2);
             savedObj.sessionnum = 1;
             savedObj.sessionamt = 5000;
             savedObj.sessionpoint = 2500;
-            savedObj.sessiontypeid = t.sessiontypeid;
+            savedObj.sessiontypeid = s.sessiontypeid;
             db.SaveChanges();
 
             //check to see if there is existing record
@@ -106,7 +95,6 @@ namespace DataLayerTest
                                      where d.sessioncalid == obj.sessioncalid
                                      select d).Single();
 
-            // Assert statement
             Assert.AreEqual(updatedObj.sessiondate, savedObj.sessiondate);
             Assert.AreEqual(updatedObj.sessionnum, savedObj.sessionnum);
             Assert.AreEqual(updatedObj.sessionamt, savedObj.sessionamt);
@@ -116,67 +104,65 @@ namespace DataLayerTest
             //cleanup
             db.sessioncals.Remove(updatedObj);
             db.SaveChanges();
+
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and delete a record
-        /// </summary>
         [TestMethod]
         public void DeleteRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            sessiontype t = (from d in db.sessiontypes select d).First();
-            sessioncal obj = new sessioncal();
+            //call fk object
+            sessiontype s = (from d in db.sessiontypes
+                             select d).First();
 
             //set data
-            obj.sessiondate = new DateTime(2013, 5, 2);
+            obj.sessiondate = new DateTime(2013, 5, 3);
             obj.sessionnum = 1;
             obj.sessionamt = 5000;
             obj.sessionpoint = 2500;
-            obj.sessiontypeid = t.sessiontypeid;
+            obj.sessiontypeid = s.sessiontypeid;
 
             db.sessioncals.Add(obj);
             db.SaveChanges();
 
-            //retrieved the recrod and remove it
-            sessioncal savedObj = (from d in db.sessioncals
-                                   where d.sessioncalid == obj.sessioncalid
-                                   select d).Single();
-            db.sessioncals.Remove(savedObj);
+            //retrieve and update the record
+            sessioncal saveObj = (from d in db.sessioncals
+                                  where d.sessioncalid == obj.sessioncalid
+                                  select d).Single();
+            db.sessioncals.Remove(saveObj);
             db.SaveChanges();
 
-            //ensure the record is deleted from database
+            //Check to see if the record is existed in database
             sessioncal removedObj = (from d in db.sessioncals
-                                     where d.sessioncalid == savedObj.sessioncalid
+                                     where d.sessioncalid == saveObj.sessioncalid
                                      select d).FirstOrDefault();
+
+            //Assert statement
             Assert.IsNull(removedObj);
         }
 
-        /// <summary>
-        /// Test Method to List the records in the repository.
-        /// </summary>
         [TestMethod]
         public void GetListData()
         {
-            //add record to the list
-            PointAppDBContainer db = new PointAppDBContainer();
-            sessiontype t = (from d in db.sessiontypes select d).First();
-            sessioncal obj = new sessioncal();
+            //call fk object
+            sessiontype s = (from d in db.sessiontypes
+                             select d).First();
 
             //set data
-            obj.sessiondate = new DateTime(2013, 5, 1);
+            obj.sessiondate = new DateTime(2013, 5, 4);
             obj.sessionnum = 1;
             obj.sessionamt = 5000;
             obj.sessionpoint = 2500;
-            obj.sessiontypeid = t.sessiontypeid;
+            obj.sessiontypeid = s.sessiontypeid;
+
+            db.sessioncals.Add(obj);
+            db.SaveChanges();
 
             //retrieved data
-            IEnumerable<sessioncal> savedObjs = (from d in db.sessioncals
-                                          select d).ToList();
+            List<sessioncal> saveObjs = (from d in db.sessioncals
+                                         select d).ToList();
 
-            //ensure record number is greater than 0
-            Assert.IsTrue(savedObjs.Count > 0);
+            //ensure records number is greater than 0
+            Assert.IsTrue(saveObjs.Count > 0);
         }
-
     }
 }

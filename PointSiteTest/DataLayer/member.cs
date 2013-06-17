@@ -11,7 +11,6 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class member
     {
@@ -20,37 +19,26 @@ namespace DataLayer
             this.feerequests = new HashSet<feerequest>();
             this.signups = new HashSet<signup>();
             this.activities = new HashSet<activity>();
-            this.contacts = new HashSet<contact>();
             this.member1 = new HashSet<member>();
             this.members = new HashSet<member>();
-            this.students = new HashSet<student>();
         }
     
-        [Required]
         public int memberid { get; set; }
-
-        [Required]
-        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength=1)]
         public string username { get; set; }
-
-        [Required]
-        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength=1)]
         public string userpass { get; set; }
-
-        [Required]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength=1)]
         public string passphrase { get; set; }
-
         public string memberstatus { get; set; }
-        public int approleid { get; set; }
+        public Nullable<int> approleid { get; set; }
+        public Nullable<int> studentid { get; set; }
+        public Nullable<int> contactid { get; set; }
     
         public virtual approle approle { get; set; }
+        public virtual contact contact { get; set; }
         public virtual ICollection<feerequest> feerequests { get; set; }
+        public virtual student student { get; set; }
         public virtual ICollection<signup> signups { get; set; }
         public virtual ICollection<activity> activities { get; set; }
-        public virtual ICollection<contact> contacts { get; set; }
         public virtual ICollection<member> member1 { get; set; }
         public virtual ICollection<member> members { get; set; }
-        public virtual ICollection<student> students { get; set; }
     }
 }

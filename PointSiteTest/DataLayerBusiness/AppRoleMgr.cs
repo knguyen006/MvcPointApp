@@ -1,61 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayerService;
 using DataLayer;
 
-namespace DaLayerBusiness
+namespace DataLayerBusiness
 {
-    public class AppRoleMgr
+    public class ApproleMgr
     {
-        PointAppFactory factory = PointAppFactory.GetInstance();
+        public PointAppDBContext context;
+
+        Factory factory = Factory.GetInstance();
+
+        public ApproleMgr()
+        {
+            this.context = new PointAppDBContext();
+        }
+
+        public ApproleMgr(PointAppDBContext dbContext)
+        {
+            this.context = dbContext;
+        }
 
         public void Create(approle role)
         {
+            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
 
-            try
-            {
-                IAppRoleSvc roleSvc = (IAppRoleSvc)factory.GetAppRole("IAppRoleSvc");
-                roleSvc.AddRole(role);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot add record!");
-            }
+            roleSvc.Insert(role);
+            roleSvc.Save();
         }
-
-        /*
-        public approle Find(int newid)
-        {
-
-        }
-         */
 
         public void Update(approle role)
         {
-            try
-            {
-                IAppRoleSvc roleSvc = (IAppRoleSvc)factory.GetAppRole("IAppRoleSvc");
-                roleSvc.UpdateRole(role);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot update record");
-            }
+            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
+
+            roleSvc.Update(role);
+            roleSvc.Save();
         }
 
         public void Delete(approle role)
         {
-            try
-            {
-                IAppRoleSvc roleSvc = (IAppRoleSvc)factory.GetAppRole("IAppRoleSvc");
-                roleSvc.DeleteRole(role);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot delete record");
-            }
+            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
+
+            roleSvc.Delete(role);
+            roleSvc.Save();
         }
+
+        public approle Find(int id)
+        {
+            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
+
+            return roleSvc.GetById(id);
+        }
+
+        public IEnumerable<approle> GetApprole()
+        {
+            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
+
+            return roleSvc.GetAll();
+        }
+
+
     }
 }

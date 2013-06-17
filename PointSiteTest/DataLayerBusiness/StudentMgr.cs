@@ -1,61 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayerService;
 using DataLayer;
 
-namespace DaLayerBusiness
+namespace DataLayerBusiness
 {
     public class StudentMgr
     {
-        PointAppFactory factory = PointAppFactory.GetInstance();
+        public PointAppDBContext context;
 
-        public void Create(student student)
+        Factory factory = Factory.GetInstance();
+
+        public StudentMgr()
         {
-
-            try
-            {
-                IStudentSvc studentSvc = (IStudentSvc)factory.GetStudent("IStudentSvc");
-                studentSvc.AddStudent(student);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot add record!");
-            }
+            this.context = new PointAppDBContext();
         }
 
-        /*
-        public student Find(int newid)
+        public StudentMgr(PointAppDBContext dbContext)
         {
-
-        }
-         */
-
-        public void Update(student student)
-        {
-            try
-            {
-                IStudentSvc studentSvc = (IStudentSvc)factory.GetStudent("IStudentSvc");
-                studentSvc.UpdateStudent(student);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot update record");
-            }
+            this.context = dbContext;
         }
 
-        public void Delete(student student)
+        public void Create(student newstudent)
         {
-            try
-            {
-                IStudentSvc studentSvc = (IStudentSvc)factory.GetStudent("IStudentSvc");
-                studentSvc.DeleteStudent(student);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot delete record");
-            }
+            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
+
+            studentSvc.Insert(newstudent);
+            studentSvc.Save();
         }
+
+        public void Update(student newstudent)
+        {
+            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
+
+            studentSvc.Update(newstudent);
+            studentSvc.Save();
+        }
+
+        public void Delete(student newstudent)
+        {
+            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
+
+            studentSvc.Delete(newstudent);
+            studentSvc.Save();
+        }
+
+        public student Find(int id)
+        {
+            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
+
+            return studentSvc.GetById(id);
+        }
+
+        public IEnumerable<student> GetStudent()
+        {
+            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
+
+            return studentSvc.GetAll();
+        }
+
+
     }
 }

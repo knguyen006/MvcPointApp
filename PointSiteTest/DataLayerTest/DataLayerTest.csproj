@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F362161A-B638-462E-B965-77F9E76EC307}</ProjectGuid>
+    <ProjectGuid>{8A4287C4-18EA-400A-9245-3E4A08567433}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataLayerTest</RootNamespace>
@@ -44,7 +44,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
@@ -103,16 +102,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityTest.cs" />
-    <Compile Include="ApproleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ContactEmailTest.cs" />
-    <Compile Include="ContactTest.cs" />
-    <Compile Include="FeeRequestTest.cs" />
-    <Compile Include="MemberTest.cs" />
+    <Compile Include="ApproleTest.cs" />
     <Compile Include="SessionCalTest.cs" />
-    <Compile Include="SessionTypeTest.cs" />
-    <Compile Include="SignUpTest.cs" />
+    <Compile Include="FeeRequestTest.cs" />
+    <Compile Include="ContactTest.cs" />
     <Compile Include="StudentTest.cs" />
+    <Compile Include="SignUpTest.cs" />
+    <Compile Include="SessionTypeTest.cs" />
+    <Compile Include="MemberTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -122,11 +121,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
-      <Project>{b70e5e13-a444-4746-9fc8-e5bdcb6c0f85}</Project>
+      <Project>{e1314440-cfa9-42c8-b5f6-cc22a7c1bb18}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\PointSiteTest\PointSiteTest.csproj">
-      <Project>{0313914A-6837-4030-999D-74BFC3D1E23E}</Project>
+      <Project>{BC4C11F8-B0CC-4495-B340-B1C5BD61369C}</Project>
       <Name>PointSiteTest</Name>
     </ProjectReference>
   </ItemGroup>

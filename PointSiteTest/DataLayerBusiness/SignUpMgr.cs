@@ -1,61 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayerService;
 using DataLayer;
 
-namespace DaLayerBusiness
+namespace DataLayerBusiness
 {
-    public class SignUpMgr
+    public class SignupMgr
     {
-        PointAppFactory factory = PointAppFactory.GetInstance();
+        public PointAppDBContext context;
 
-        public void Create(signup signup)
+        Factory factory = Factory.GetInstance();
+
+        public SignupMgr()
         {
-
-            try
-            {
-                ISignUpSvc signupSvc = (ISignUpSvc)factory.GetSignUp("ISignUpSvc");
-                signupSvc.AddSignUp(signup);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot add record!");
-            }
+            this.context = new PointAppDBContext();
         }
 
-        /*
-        public signup Find(int newid)
+        public SignupMgr(PointAppDBContext dbContext)
         {
-
-        }
-         */
-
-        public void Update(signup signup)
-        {
-            try
-            {
-                ISignUpSvc signupSvc = (ISignUpSvc)factory.GetSignUp("ISignUpSvc");
-                signupSvc.UpdateSignUp(signup);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot update record");
-            }
+            this.context = dbContext;
         }
 
-        public void Delete(signup signup)
+        public void Create(signup newsign)
         {
-            try
-            {
-                ISignUpSvc signupSvc = (ISignUpSvc)factory.GetSignUp("ISignUpSvc");
-                signupSvc.DeleteSignUp(signup);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot delete record");
-            }
+            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
+
+            newsignSvc.Insert(newsign);
+            newsignSvc.Save();
         }
+
+        public void Update(signup newsign)
+        {
+            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
+
+            newsignSvc.Update(newsign);
+            newsignSvc.Save();
+        }
+
+        public void Delete(signup newsign)
+        {
+            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
+
+            newsignSvc.Delete(newsign);
+            newsignSvc.Save();
+        }
+
+        public signup Find(int id)
+        {
+            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
+
+            return newsignSvc.GetById(id);
+        }
+
+        public IEnumerable<signup> GetSignup()
+        {
+            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
+
+            return newsignSvc.GetAll();
+        }
+
+
     }
 }

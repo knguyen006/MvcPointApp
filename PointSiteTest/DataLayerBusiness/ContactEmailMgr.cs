@@ -1,61 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayerService;
 using DataLayer;
 
-namespace DaLayerBusiness
+namespace DataLayerBusiness
 {
-    public class ContactEmailMgr
+    public class ContactemailMgr
     {
-        PointAppFactory factory = PointAppFactory.GetInstance();
+        public PointAppDBContext context;
 
-        public void Create(contactemail email)
+        Factory factory = Factory.GetInstance();
+
+        public ContactemailMgr()
         {
-
-            try
-            {
-                IContactEmailSvc emailSvc = (IContactEmailSvc)factory.GetContactEmail("IContactEmailSvc");
-                emailSvc.AddEmail(email);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot add record!");
-            }
+            this.context = new PointAppDBContext();
         }
 
-        /*
-        public ContactEmail Find(int newid)
+        public ContactemailMgr(PointAppDBContext dbContext)
         {
-            I don't know how to write this code.
-        }
-         */
-
-        public void Update(contactemail email)
-        {
-            try
-            {
-                IContactEmailSvc emailSvc = (IContactEmailSvc)factory.GetContactEmail("IContactEmailSvc");
-                emailSvc.UpdateEmail(email);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot update record");
-            }
+            this.context = dbContext;
         }
 
-        public void Delete(contactemail email)
+        public void Create(contactemail act)
         {
-            try
-            {
-                IContactEmailSvc emailSvc = (IContactEmailSvc)factory.GetContactEmail("IContactEmailSvc");
-                emailSvc.DeleteEmail(email);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot delete record");
-            }
+            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
+
+            emailSvc.Insert(act);
+            emailSvc.Save();
         }
+
+        public void Update(contactemail act)
+        {
+            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
+
+            emailSvc.Update(act);
+            emailSvc.Save();
+        }
+
+        public void Delete(contactemail act)
+        {
+            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
+
+            emailSvc.Delete(act);
+            emailSvc.Save();
+        }
+
+        public contactemail Find(int id)
+        {
+            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
+
+            return emailSvc.GetById(id);
+        }
+
+        public IEnumerable<contactemail> GetContactemail()
+        {
+            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
+
+            return emailSvc.GetAll();
+        }
+
+
     }
 }

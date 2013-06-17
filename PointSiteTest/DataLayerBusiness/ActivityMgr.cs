@@ -1,61 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayerService;
 using DataLayer;
 
-namespace DaLayerBusiness
+namespace DataLayerBusiness
 {
     public class ActivityMgr
     {
-        PointAppFactory factory = PointAppFactory.GetInstance();
+        public PointAppDBContext context;
+
+        Factory factory = Factory.GetInstance();
+
+        public ActivityMgr()
+        {
+            this.context = new PointAppDBContext();
+        }
+
+        public ActivityMgr(PointAppDBContext dbContext)
+        {
+            this.context = dbContext;
+        }
 
         public void Create(activity act)
         {
+            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
 
-            try
-            {
-                IActivitySvc actSvc = (IActivitySvc)factory.GetActivity("IActivitySvc");
-                actSvc.AddAct(act);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot add record!");
-            }
+            actSvc.Insert(act);
+            actSvc.Save();
         }
-
-        /*
-        public activity Find(int newid)
-        {
-
-        }
-         */
 
         public void Update(activity act)
         {
-            try
-            {
-                IActivitySvc actSvc = (IActivitySvc)factory.GetActivity("IActivitySvc");
-                actSvc.UpdateAct(act);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot update record");
-            }
+            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
+
+            actSvc.Update(act);
+            actSvc.Save();
         }
 
         public void Delete(activity act)
         {
-            try
-            {
-                IActivitySvc actSvc = (IActivitySvc)factory.GetActivity("IActivitySvc");
-                actSvc.DeleteAct(act);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot delete record");
-            }
+            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
+
+            actSvc.Delete(act);
+            actSvc.Save();
         }
+
+        public activity Find(int id)
+        {
+            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
+
+            return actSvc.GetById(id);
+        }
+
+        public IEnumerable<activity> GetActivity()
+        {
+            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
+
+            return actSvc.GetAll();
+        }
+
+
     }
 }

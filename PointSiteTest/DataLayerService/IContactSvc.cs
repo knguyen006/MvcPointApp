@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayer;
 
-/// <summary>
-/// Summary description for IActivity
-/// </summary>
 namespace DataLayerService
 {
-    public interface IContactSvc
+    public interface IContactSvc : IRepository<contact>, IService
     {
-        contact Find(int contactid);
-        IEnumerable<contact> GetAll();
-        void AddContact(contact newcontact);
-        void UpdateContact(contact newcontact);
-        void DeleteContact(contact newcontact);
-        void Dispose();
     }
 }

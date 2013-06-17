@@ -1,61 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayerService;
 using DataLayer;
 
-namespace DaLayerBusiness
+namespace DataLayerBusiness
 {
-    public class FeeRequestMgr
+    public class FeerequestMgr
     {
-        PointAppFactory factory = PointAppFactory.GetInstance();
+        public PointAppDBContext context;
+
+        Factory factory = Factory.GetInstance();
+
+        public FeerequestMgr()
+        {
+            this.context = new PointAppDBContext();
+        }
+
+        public FeerequestMgr(PointAppDBContext dbContext)
+        {
+            this.context = dbContext;
+        }
 
         public void Create(feerequest request)
         {
+            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
 
-            try
-            {
-                IFeeRequestSvc requestSvc = (IFeeRequestSvc)factory.GetFeeRequest("IFeeRequestSvc");
-                requestSvc.AddRequest(request);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot add record!");
-            }
+            requestSvc.Insert(request);
+            requestSvc.Save();
         }
-
-        /*
-        public feerequest Find(int newid)
-        {
-
-        }
-         */
 
         public void Update(feerequest request)
         {
-            try
-            {
-                IFeeRequestSvc requestSvc = (IFeeRequestSvc)factory.GetFeeRequest("IFeeRequestSvc");
-                requestSvc.UpdateRequest(request);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot update record");
-            }
+            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
+
+            requestSvc.Update(request);
+            requestSvc.Save();
         }
 
         public void Delete(feerequest request)
         {
-            try
-            {
-                IFeeRequestSvc requestSvc = (IFeeRequestSvc)factory.GetFeeRequest("IFeeRequestSvc");
-                requestSvc.DeleteRequest(request);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot delete record");
-            }
+            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
+
+            requestSvc.Delete(request);
+            requestSvc.Save();
         }
+
+        public feerequest Find(int id)
+        {
+            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
+
+            return requestSvc.GetById(id);
+        }
+
+        public IEnumerable<feerequest> GetFeerequest()
+        {
+            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
+
+            return requestSvc.GetAll();
+        }
+
+
     }
 }

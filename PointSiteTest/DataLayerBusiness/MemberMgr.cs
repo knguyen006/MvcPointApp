@@ -1,61 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using DataLayerService;
 using DataLayer;
 
-namespace DaLayerBusiness
+namespace DataLayerBusiness
 {
     public class MemberMgr
     {
-        PointAppFactory factory = PointAppFactory.GetInstance();
+        public PointAppDBContext context;
 
-        public void Create(member act)
+        Factory factory = Factory.GetInstance();
+
+        public MemberMgr()
         {
-
-            try
-            {
-                IMemberSvc memberSvc = (IMemberSvc)factory.GetMember("IMemberSvc");
-                memberSvc.AddMember(act);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot add record!");
-            }
+            this.context = new PointAppDBContext();
         }
 
-        /*
-        public member Find(int newid)
+        public MemberMgr(PointAppDBContext dbContext)
         {
-
-        }
-         */
-
-        public void Update(member act)
-        {
-            try
-            {
-                IMemberSvc memberSvc = (IMemberSvc)factory.GetMember("IMemberSvc");
-                memberSvc.UpdateMember(act);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot update record");
-            }
+            this.context = dbContext;
         }
 
-        public void Delete(member act)
+        public void Create(member member)
         {
-            try
-            {
-                IMemberSvc memberSvc = (IMemberSvc)factory.GetMember("IMemberSvc");
-                memberSvc.DeleteMember(act);
-            }
-            catch
-            {
-                throw new ArgumentException("Cannot delete record");
-            }
+            IMemberSvc memberSvc = (IMemberSvc)factory.GetService("IMemberSvc", context);
+
+            memberSvc.Insert(member);
+            memberSvc.Save();
         }
+
+        public void Update(member member)
+        {
+            IMemberSvc memberSvc = (IMemberSvc)factory.GetService("IMemberSvc", context);
+
+            memberSvc.Update(member);
+            memberSvc.Save();
+        }
+
+        public void Delete(member member)
+        {
+            IMemberSvc memberSvc = (IMemberSvc)factory.GetService("IMemberSvc", context);
+
+            memberSvc.Delete(member);
+            memberSvc.Save();
+        }
+
+        public member Find(int id)
+        {
+            IMemberSvc memberSvc = (IMemberSvc)factory.GetService("IMemberSvc", context);
+
+            return memberSvc.GetById(id);
+        }
+
+        public IEnumerable<member> GetMember()
+        {
+            IMemberSvc memberSvc = (IMemberSvc)factory.GetService("IMemberSvc", context);
+
+            return memberSvc.GetAll();
+        }
+
     }
 }

@@ -1,44 +1,38 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataLayer;
+using System.Data.Entity;
 using System.Data;
 using System.Linq;
 using System.Collections.Generic;
-using System.Data.Entity;
 
 namespace DataLayerTest
 {
     [TestClass]
     public class SignUpTest
     {
+        PointAppDBContext db = new PointAppDBContext();
+        signup obj = new signup();
 
-        /// <summary>
-        /// Test Method to Connect to the repository and see if there are any records.
-        /// This should fail if you have an empty table
-        /// </summary>
         [TestMethod]
         public void DisplayData()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
             signup t = (from d in db.signups select d).First();
-            signup savedObj = (from d in db.signups
-                               where d.signupid == t.signupid
-                               select d).Single();
+            signup saveObj = (from d in db.signups
+                              where d.signupid == t.signupid
+                              select d).Single();
 
-            Assert.AreEqual(savedObj.signupid, t.signupid);
+            Assert.AreEqual(saveObj.signupid, t.signupid);
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and add a record
-        /// </summary>
         [TestMethod]
         public void AddNewRecord()
         {
-            // call database object
-            PointAppDBContainer db = new PointAppDBContainer();
-            member m = (from d in db.members select d).First();
-            sessioncal c = (from d in db.sessioncals select d).First();
-            signup obj = new signup();
+            //call fk object
+            sessioncal c = (from d in db.sessioncals
+                            select d).First();
+            member m = (from d in db.members
+                        select d).First();
 
             //set data
             obj.memberid = m.memberid;
@@ -65,24 +59,21 @@ namespace DataLayerTest
             //cleanup
             db.signups.Remove(savedObj);
             db.SaveChanges();
-
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and update a record
-        /// </summary>
         [TestMethod]
         public void UpdateRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            member m = (from d in db.members select d).First();
-            sessioncal c = (from d in db.sessioncals select d).First();
-            signup obj = new signup();
+            //call fk object
+            sessioncal c = (from d in db.sessioncals
+                            select d).First();
+            member m = (from d in db.members
+                        select d).First();
 
             //set data
             obj.memberid = m.memberid;
             obj.sessioncalid = c.sessioncalid;
-            obj.pointearn = 10;
+            obj.pointearn = 20;
             obj.isshow = "Y";
 
             db.signups.Add(obj);
@@ -92,10 +83,12 @@ namespace DataLayerTest
             signup savedObj = (from d in db.signups
                                where d.signupid == obj.signupid
                                select d).Single();
+
             savedObj.memberid = m.memberid;
             savedObj.sessioncalid = c.sessioncalid;
-            savedObj.pointearn = 20;
+            savedObj.pointearn = 25;
             savedObj.isshow = "Y";
+
             db.SaveChanges();
 
             //check to see if there is existing record
@@ -111,61 +104,67 @@ namespace DataLayerTest
             //cleanup
             db.signups.Remove(updatedObj);
             db.SaveChanges();
+
         }
 
-        /// <summary>
-        /// Test Method to Connect to the repository and delete a record
-        /// </summary>
         [TestMethod]
         public void DeleteRecord()
         {
-            PointAppDBContainer db = new PointAppDBContainer();
-            member m = (from d in db.members select d).First();
-            sessioncal c = (from d in db.sessioncals select d).First();
-            signup obj = new signup();
+            //call fk object
+            sessioncal c = (from d in db.sessioncals
+                            select d).First();
+            member m = (from d in db.members
+                        select d).First();
 
             //set data
             obj.memberid = m.memberid;
             obj.sessioncalid = c.sessioncalid;
-            obj.pointearn = 10;
+            obj.pointearn = 30;
             obj.isshow = "Y";
 
             db.signups.Add(obj);
             db.SaveChanges();
 
-            //retrieved the recrod and remove it
-            signup savedObj = (from d in db.signups
-                               where d.signupid == obj.signupid
-                               select d).Single();
-            db.signups.Remove(savedObj);
+            //retrieve and update the record
+            signup saveObj = (from d in db.signups
+                              where d.signupid == obj.signupid
+                              select d).Single();
+            db.signups.Remove(saveObj);
             db.SaveChanges();
 
-            //ensure the record is deleted from database
+            //Check to see if the record is existed in database
             signup removedObj = (from d in db.signups
-                                 where d.signupid == savedObj.signupid
+                                 where d.signupid == saveObj.signupid
                                  select d).FirstOrDefault();
+
+            //Assert statement
             Assert.IsNull(removedObj);
         }
 
-        /// <summary>
-        /// Test Method to List the records in the repository.
-        /// </summary>
         [TestMethod]
         public void GetListData()
         {
-            //add record to the list
-            PointAppDBContainer db = new PointAppDBContainer();
-            member m = (from d in db.members select d).First();
-            sessioncal c = (from d in db.sessioncals select d).First();
-            signup obj = new signup();
+            //call fk object
+            sessioncal c = (from d in db.sessioncals
+                            select d).First();
+            member m = (from d in db.members
+                        select d).First();
+
+            //set data
+            obj.memberid = m.memberid;
+            obj.sessioncalid = c.sessioncalid;
+            obj.pointearn = 40;
+            obj.isshow = "Y";
+
+            db.signups.Add(obj);
+            db.SaveChanges();
 
             //retrieved data
-            IEnumerable<signup> savedObjs = (from d in db.signups
-                                      select d).ToList();
+            List<signup> saveObjs = (from d in db.signups
+                                     select d).ToList();
 
-            //ensure record number is greater than 0
-            Assert.IsTrue(savedObjs.Count > 0);
+            //ensure records number is greater than 0
+            Assert.IsTrue(saveObjs.Count > 0);
         }
-
     }
 }

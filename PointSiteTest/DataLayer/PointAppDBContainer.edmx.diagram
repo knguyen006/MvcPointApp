@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9a1d210c6ca44904b8d7d1355d4301a4" Name="Diagram1">
+        <EntityTypeShape EntityType="PointAppDBContainer.activity" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointAppDBContainer.approle" Width="1.5" PointX="3.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointAppDBContainer.contact" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointAppDBContainer.contactemail" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointAppDBContainer.feerequest" Width="1.5" PointX="8.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointAppDBContainer.member" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointAppDBContainer.sessioncal" Width="1.5" PointX="6" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointAppDBContainer.sessiontype" Width="1.5" PointX="3.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointAppDBContainer.signup" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointAppDBContainer.student" Width="1.5" PointX="3.75" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="PointAppDBContainer.member_approle_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="PointAppDBContainer.contactemail_contact_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="PointAppDBContainer.member_contact_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="PointAppDBContainer.feerequest_member_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="PointAppDBContainer.member_student_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="PointAppDBContainer.signup_member_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="PointAppDBContainer.sessioncal_type_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="PointAppDBContainer.signup_sessioncal_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="PointAppDBContainer.member2activity" ManuallyRouted="false" />
+        <AssociationConnector Association="PointAppDBContainer.member2dependent" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
