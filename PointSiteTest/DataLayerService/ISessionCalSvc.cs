@@ -7,7 +7,11 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public interface ISessioncalSvc : IRepository<sessioncal>, IService
+    public interface ISessioncalSvc : IService
     {
+        void addSessioncal(sessioncal cal);
+        sessioncal GetAll(int id);
+        void editSessioncal(sessioncal cal);
+        void deleteSessioncal(sessioncal cal);
     }
 }

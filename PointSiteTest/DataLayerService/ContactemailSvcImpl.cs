@@ -7,11 +7,39 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public class ContactemailSvcImpl: Repository<contactemail>, IContactemailSvc
+    public class ContactemailSvcImpl: IContactemailSvc
     {
-        public ContactemailSvcImpl(PointAppDBContext context)
-            : base(context)
+        PointAppDBContext db = new PointAppDBContext();
+
+        public void addEmail(contactemail email)
         {
+            db.contactemails.Add(email);
+            db.SaveChanges();
+        }
+
+        public contactemail GetAll(int id)
+        {
+            contactemail email = (from d in db.contactemails
+                            where d.contactemailid == id
+                            select d).Single();
+
+            return email;
+        }
+
+        public void editEmail(contactemail email)
+        {
+            var dbList = db.contactemails.Single(p => p.contactemailid == email.contactemailid);
+
+            dbList.contactid = email.contactid;
+            dbList.emailaddress = email.emailaddress;
+
+            db.SaveChanges();
+        }
+
+        public void deleteEmail(contactemail email)
+        {
+            db.contactemails.Remove(email);
+            db.SaveChanges();
         }
     }
 }

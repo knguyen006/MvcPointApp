@@ -8,60 +8,39 @@ using DataLayer;
 
 namespace DataLayerBusiness
 {
-    public class ContactemailMgr
+    public class ContactemailMgr : Manager
     {
-        public PointAppDBContext context;
-
-        Factory factory = Factory.GetInstance();
+        public IContactemailSvc svc;
 
         public ContactemailMgr()
         {
-            this.context = new PointAppDBContext();
+            svc = (IContactemailSvc)GetService(typeof(IContactemailSvc).Name);
         }
 
-        public ContactemailMgr(PointAppDBContext dbContext)
+
+        public void Create(contactemail email)
         {
-            this.context = dbContext;
+            svc.addEmail(email);
         }
 
-        public void Create(contactemail act)
+        public void Update(contactemail email)
         {
-            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
-
-            emailSvc.Insert(act);
-            emailSvc.Save();
+            svc.editEmail(email);
         }
 
-        public void Update(contactemail act)
+        public void Delete(contactemail email)
         {
-            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
-
-            emailSvc.Update(act);
-            emailSvc.Save();
+            svc.deleteEmail(email);
         }
 
-        public void Delete(contactemail act)
+
+        public contactemail Retrieved(int id)
         {
-            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
+            contactemail db = svc.GetAll(id);
 
-            emailSvc.Delete(act);
-            emailSvc.Save();
+            return db;
         }
-
-        public contactemail Find(int id)
-        {
-            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
-
-            return emailSvc.GetById(id);
-        }
-
-        public IEnumerable<contactemail> GetContactemail()
-        {
-            IContactemailSvc emailSvc = (IContactemailSvc)factory.GetService("IContactemailSvc", context);
-
-            return emailSvc.GetAll();
-        }
-
+        
 
     }
 }

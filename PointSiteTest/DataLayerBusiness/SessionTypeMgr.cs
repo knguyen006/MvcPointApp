@@ -8,60 +8,37 @@ using DataLayer;
 
 namespace DataLayerBusiness
 {
-    public class SessiontypeMgr
+    public class SessiontypeMgr : Manager
     {
-        public PointAppDBContext context;
-
-        Factory factory = Factory.GetInstance();
+        public ISessiontypeSvc svc;
 
         public SessiontypeMgr()
         {
-            this.context = new PointAppDBContext();
+            svc = (ISessiontypeSvc)GetService(typeof(ISessiontypeSvc).Name);
         }
 
-        public SessiontypeMgr(PointAppDBContext dbContext)
-        {
-            this.context = dbContext;
-        }
 
         public void Create(sessiontype type)
         {
-            ISessiontypeSvc typeSvc = (ISessiontypeSvc)factory.GetService("ISessiontypeSvc", context);
-
-            typeSvc.Insert(type);
-            typeSvc.Save();
+            svc.addSessiontype(type);
         }
 
         public void Update(sessiontype type)
         {
-            ISessiontypeSvc typeSvc = (ISessiontypeSvc)factory.GetService("ISessiontypeSvc", context);
-
-            typeSvc.Update(type);
-            typeSvc.Save();
+            svc.editSessiontype(type);
         }
 
         public void Delete(sessiontype type)
         {
-            ISessiontypeSvc typeSvc = (ISessiontypeSvc)factory.GetService("ISessiontypeSvc", context);
-
-            typeSvc.Delete(type);
-            typeSvc.Save();
+            svc.deleteSessiontype(type);
         }
 
-        public sessiontype Find(int id)
+
+        public sessiontype Retrieved(int id)
         {
-            ISessiontypeSvc typeSvc = (ISessiontypeSvc)factory.GetService("ISessiontypeSvc", context);
+            sessiontype db = svc.GetAll(id);
 
-            return typeSvc.GetById(id);
+            return db;
         }
-
-        public IEnumerable<sessiontype> GetSessiontype()
-        {
-            ISessiontypeSvc typeSvc = (ISessiontypeSvc)factory.GetService("ISessiontypeSvc", context);
-
-            return typeSvc.GetAll();
-        }
-
-
     }
 }

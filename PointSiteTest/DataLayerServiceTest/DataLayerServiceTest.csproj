@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{348B3BC4-EE29-4BA8-8854-D48EDED80871}</ProjectGuid>
+    <ProjectGuid>{7403075A-05BB-42D3-9A93-CE2C59278BE1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataLayerServiceTest</RootNamespace>
@@ -35,14 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -57,26 +50,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ActivitySvcTest.cs" />
+    <Compile Include="FactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataLayerBusiness\DataLayerBusiness.csproj">
-      <Project>{ea512add-7bc8-4748-9c7b-4feccc7e9f12}</Project>
-      <Name>DataLayerBusiness</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataLayerService\DataLayerService.csproj">
-      <Project>{c3808f39-323a-4933-bc17-ac0549a35873}</Project>
+      <Project>{388ea66a-433f-4c8e-a0dd-7e0e7ff0e695}</Project>
       <Name>DataLayerService</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
-      <Project>{e1314440-cfa9-42c8-b5f6-cc22a7c1bb18}</Project>
+      <Project>{68ba2b86-cea1-43ea-937d-a0b434aaaece}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

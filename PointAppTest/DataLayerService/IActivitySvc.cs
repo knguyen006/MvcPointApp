@@ -7,7 +7,11 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public interface IActivitySvc : IRepository<activity>, IService
+    public interface IActivitySvc : IService
     {
+        void addActivity(activity act);
+        void editActivity(activity act);
+        void deleteActivity(activity act);
+        activity GetAll(int id);
     }
 }

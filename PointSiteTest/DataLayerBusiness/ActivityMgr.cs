@@ -8,58 +8,37 @@ using DataLayer;
 
 namespace DataLayerBusiness
 {
-    public class ActivityMgr
+    public class ActivityMgr : Manager
     {
-        public PointAppDBContext context;
-
-        Factory factory = Factory.GetInstance();
+        public IActivitySvc svc;
 
         public ActivityMgr()
         {
-            this.context = new PointAppDBContext();
+            svc = (IActivitySvc)GetService(typeof(IActivitySvc).Name);
         }
 
-        public ActivityMgr(PointAppDBContext dbContext)
-        {
-            this.context = dbContext;
-        }
 
         public void Create(activity act)
         {
-            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
-
-            actSvc.Insert(act);
-            actSvc.Save();
+            svc.addActivity(act);
         }
 
         public void Update(activity act)
         {
-            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
-
-            actSvc.Update(act);
-            actSvc.Save();
+            svc.editActivity(act);
         }
 
         public void Delete(activity act)
         {
-            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
-
-            actSvc.Delete(act);
-            actSvc.Save();
+            svc.deleteActivity(act);
         }
 
-        public activity Find(int id)
+
+        public activity Retrieved(int id)
         {
-            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
+            activity db = svc.GetAll(id);
 
-            return actSvc.GetById(id);
-        }
-
-        public IEnumerable<activity> GetActivity()
-        {
-            IActivitySvc actSvc = (IActivitySvc)factory.GetService("IActivitySvc", context);
-
-            return actSvc.GetAll();
+            return db;
         }
 
 

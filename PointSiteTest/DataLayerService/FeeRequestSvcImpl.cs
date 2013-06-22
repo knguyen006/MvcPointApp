@@ -7,11 +7,40 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public class FeerequestSvcImpl: Repository<feerequest>, IFeerequestSvc
+    public class FeerequestSvcImpl: IFeerequestSvc
     {
-        public FeerequestSvcImpl(PointAppDBContext context)
-            : base(context)
+        PointAppDBContext db = new PointAppDBContext();
+
+        public void addRequest(feerequest request)
         {
+            db.feerequests.Add(request);
+            db.SaveChanges();
         }
+
+        public feerequest GetAll(int id)
+        {
+            feerequest request = (from d in db.feerequests
+                            where d.feerequestid == id
+                            select d).Single();
+
+            return request;
+        }
+
+        public void editRequest(feerequest request)
+        {
+            var dbList = db.feerequests.Single(p => p.feerequestid == request.feerequestid);
+
+            dbList.memberid = request.memberid;
+
+
+            db.SaveChanges();
+        }
+
+        public void deleteRequest(feerequest request)
+        {
+            db.feerequests.Remove(request);
+            db.SaveChanges();
+        }
+
     }
 }

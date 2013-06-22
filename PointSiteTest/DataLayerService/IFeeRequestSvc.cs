@@ -7,7 +7,11 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public interface IFeerequestSvc : IRepository<feerequest>, IService
+    public interface IFeerequestSvc : IService
     {
+        void addRequest(feerequest request);
+        feerequest GetAll(int id);
+        void editRequest(feerequest request);
+        void deleteRequest(feerequest request);
     }
 }

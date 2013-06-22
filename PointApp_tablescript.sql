@@ -125,7 +125,7 @@ go
 alter table member add constraint member_student_fk foreign key (studentid) references student(studentid);
 
 go
-alter table member add constraint member_contact_fk foreign key (contactid) references approle(contactid);
+alter table member add constraint member_contact_fk foreign key (contactid) references contact(contactid);
 
 ---------------------------
 -- member2student

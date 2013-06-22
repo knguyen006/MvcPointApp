@@ -7,7 +7,11 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public interface ISignupSvc : IRepository<signup>, IService
+    public interface ISignupSvc : IService
     {
+        void addSignup(signup sign);
+        signup GetAll(int id);
+        void editSignup(signup sign);
+        void deleteSignup(signup sign);
     }
 }

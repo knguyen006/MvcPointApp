@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8A4287C4-18EA-400A-9245-3E4A08567433}</ProjectGuid>
+    <ProjectGuid>{FCE46957-860A-4C0B-BCC2-06B3B20573E5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataLayerTest</RootNamespace>
@@ -44,6 +44,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
@@ -99,19 +100,36 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.0\lib\net40\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ContactEmailTest.cs" />
     <Compile Include="ApproleTest.cs" />
-    <Compile Include="SessionCalTest.cs" />
-    <Compile Include="FeeRequestTest.cs" />
+    <Compile Include="ContactEmailTest.cs" />
     <Compile Include="ContactTest.cs" />
-    <Compile Include="StudentTest.cs" />
-    <Compile Include="SignUpTest.cs" />
-    <Compile Include="SessionTypeTest.cs" />
+    <Compile Include="FeeRequestTest.cs" />
     <Compile Include="MemberTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="SessionCalTest.cs" />
+    <Compile Include="SessionTypeTest.cs" />
+    <Compile Include="SignUpTest.cs" />
+    <Compile Include="StudentTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -121,11 +139,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
-      <Project>{e1314440-cfa9-42c8-b5f6-cc22a7c1bb18}</Project>
+      <Project>{68ba2b86-cea1-43ea-937d-a0b434aaaece}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\PointSiteTest\PointSiteTest.csproj">
-      <Project>{BC4C11F8-B0CC-4495-B340-B1C5BD61369C}</Project>
+      <Project>{748145d7-f0dd-4bcb-a6e4-4d2b08eaf3b0}</Project>
       <Name>PointSiteTest</Name>
     </ProjectReference>
   </ItemGroup>

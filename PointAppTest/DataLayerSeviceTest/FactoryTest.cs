@@ -1,7 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DataLayer;
 using DataLayerService;
+using DataLayer;
+using System.Data;
+using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace DataLayerSeviceTest
 {
@@ -11,11 +14,11 @@ namespace DataLayerSeviceTest
         [TestMethod]
         public void GetActivitySvcTest()
         {
-            IActivitySvc custSvc;
+            IActivitySvc actSvc;
             Factory factory = Factory.GetInstance();
 
-            custSvc = (IActivitySvc)factory.GetService(typeof(IActivitySvc).Name);
-            Assert.IsTrue(custSvc is IActivitySvc);
+            actSvc = (IActivitySvc)factory.GetService(typeof(IActivitySvc).Name);
+            Assert.IsTrue(actSvc is IActivitySvc);
         }
     }
 }

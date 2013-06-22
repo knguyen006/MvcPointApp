@@ -8,58 +8,37 @@ using DataLayer;
 
 namespace DataLayerBusiness
 {
-    public class SignupMgr
+    public class SignupMgr : Manager
     {
-        public PointAppDBContext context;
-
-        Factory factory = Factory.GetInstance();
+        public ISignupSvc svc;
 
         public SignupMgr()
         {
-            this.context = new PointAppDBContext();
+            svc = (ISignupSvc)GetService(typeof(ISignupSvc).Name);
         }
 
-        public SignupMgr(PointAppDBContext dbContext)
+
+        public void Create(signup sign)
         {
-            this.context = dbContext;
+            svc.addSignup(sign);
         }
 
-        public void Create(signup newsign)
+        public void Update(signup sign)
         {
-            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
-
-            newsignSvc.Insert(newsign);
-            newsignSvc.Save();
+            svc.editSignup(sign);
         }
 
-        public void Update(signup newsign)
+        public void Delete(signup sign)
         {
-            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
-
-            newsignSvc.Update(newsign);
-            newsignSvc.Save();
+            svc.deleteSignup(sign);
         }
 
-        public void Delete(signup newsign)
+
+        public signup Retrieved(int id)
         {
-            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
+            signup db = svc.GetAll(id);
 
-            newsignSvc.Delete(newsign);
-            newsignSvc.Save();
-        }
-
-        public signup Find(int id)
-        {
-            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
-
-            return newsignSvc.GetById(id);
-        }
-
-        public IEnumerable<signup> GetSignup()
-        {
-            ISignupSvc newsignSvc = (ISignupSvc)factory.GetService("ISignupSvc", context);
-
-            return newsignSvc.GetAll();
+            return db;
         }
 
 

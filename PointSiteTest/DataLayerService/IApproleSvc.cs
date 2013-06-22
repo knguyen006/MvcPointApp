@@ -7,7 +7,12 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public interface IApproleSvc : IRepository<approle>, IService
+    public interface IApproleSvc : IService
     {
+        void addRole(approle role);
+        approle GetAll(int id);
+        void editRole(approle role);
+        void deleteRole(approle role);
+
     }
 }

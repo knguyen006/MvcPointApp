@@ -7,7 +7,11 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public interface IStudentSvc : IRepository<student>, IService
+    public interface IStudentSvc : IService
     {
+        void addStudent(student stu);
+        student GetAll(int id);
+        void editStudent(student stu);
+        void deleteStudent(student stu);
     }
 }

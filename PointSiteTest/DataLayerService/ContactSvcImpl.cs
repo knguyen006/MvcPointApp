@@ -7,11 +7,48 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public class ContactSvcImpl: Repository<contact>, IContactSvc
+    public class ContactSvcImpl: IContactSvc
     {
-        public ContactSvcImpl(PointAppDBContext context)
-            : base(context)
+        PointAppDBContext db = new PointAppDBContext();
+
+        public void addContact(contact con)
         {
+            db.contacts.Add(con);
+            db.SaveChanges();
+        }
+
+        public contact GetAll(int id)
+        {
+            contact con = (from d in db.contacts
+                            where d.contactid == id
+                            select d).Single();
+
+            return con;
+        }
+
+        public void editContact(contact con)
+        {
+            var dbList = db.contacts.Single(p => p.contactid == con.contactid);
+
+            dbList.firstname = con.firstname;
+            dbList.lastname = con.firstname;
+            dbList.middlename = con.middlename;
+            dbList.address = con.address;
+            dbList.altaddress = con.altaddress;
+            dbList.city = con.city;
+            dbList.state = con.state;
+            dbList.zip = con.zip;
+            dbList.homephone = con.homephone;
+            dbList.workphone = con.workphone;
+            dbList.mobilephone = con.mobilephone;
+             
+            db.SaveChanges();
+        }
+
+        public void deleteContact(contact con)
+        {
+            db.contacts.Remove(con);
+            db.SaveChanges();
         }
     }
 }

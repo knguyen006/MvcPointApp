@@ -7,11 +7,37 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public class ActivitySvcImpl : Repository<activity>, IActivitySvc
+    public class ActivitySvcImpl : IActivitySvc
     {
-        public ActivitySvcImpl(PointAppDBContext context)
-            : base(context)
-        { }
+        PointAppDBContext db = new PointAppDBContext();
 
-    } 
+        public void addActivity(activity act)
+        {
+            db.activities.Add(act);
+            db.SaveChanges();
+        }
+
+        public activity GetAll(int id)
+        {
+            activity act = (from d in db.activities
+                            where d.activityid == id
+                            select d).Single();
+            return act;
+        }
+
+        public void editActivity(activity act)
+        {
+            var actList = db.activities.Single(d => d.activityid == act.activityid);
+
+            actList.actname = act.actname;
+
+            db.SaveChanges();
+        }
+        public void deleteActivity(activity act)
+        {
+            db.activities.Remove(act);
+            db.SaveChanges();
+        }
+
+    }
 }

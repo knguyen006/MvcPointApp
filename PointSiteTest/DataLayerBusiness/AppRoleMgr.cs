@@ -8,60 +8,37 @@ using DataLayer;
 
 namespace DataLayerBusiness
 {
-    public class ApproleMgr
+    public class ApproleMgr : Manager
     {
-        public PointAppDBContext context;
-
-        Factory factory = Factory.GetInstance();
+        public IApproleSvc svc;
 
         public ApproleMgr()
         {
-            this.context = new PointAppDBContext();
+            svc = (IApproleSvc)GetService(typeof(IApproleSvc).Name);
         }
 
-        public ApproleMgr(PointAppDBContext dbContext)
+
+        public void Create(approle act)
         {
-            this.context = dbContext;
+            svc.addRole(act);
         }
 
-        public void Create(approle role)
+        public void Update(approle act)
         {
-            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
-
-            roleSvc.Insert(role);
-            roleSvc.Save();
+            svc.editRole(act);
         }
 
-        public void Update(approle role)
+        public void Delete(approle act)
         {
-            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
-
-            roleSvc.Update(role);
-            roleSvc.Save();
+            svc.deleteRole(act);
         }
 
-        public void Delete(approle role)
+        public approle Retrieved(int id)
         {
-            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
+            approle db = svc.GetAll(id);
 
-            roleSvc.Delete(role);
-            roleSvc.Save();
+            return db;
         }
-
-        public approle Find(int id)
-        {
-            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
-
-            return roleSvc.GetById(id);
-        }
-
-        public IEnumerable<approle> GetApprole()
-        {
-            IApproleSvc roleSvc = (IApproleSvc)factory.GetService("IApproleSvc", context);
-
-            return roleSvc.GetAll();
-        }
-
 
     }
 }

@@ -7,7 +7,11 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public interface ISessiontypeSvc : IRepository<sessiontype>, IService
+    public interface ISessiontypeSvc : IService
     {
+        void addSessiontype(sessiontype type);
+        sessiontype GetAll(int id);
+        void editSessiontype(sessiontype type);
+        void deleteSessiontype(sessiontype type);
     }
 }

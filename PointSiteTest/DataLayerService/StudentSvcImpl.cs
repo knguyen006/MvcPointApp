@@ -7,11 +7,42 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public class StudentSvcImpl: Repository<student>, IStudentSvc
+    public class StudentSvcImpl: IStudentSvc
     {
-        public StudentSvcImpl(PointAppDBContext context)
-            : base(context)
+        PointAppDBContext db = new PointAppDBContext();
+
+        public void addStudent(student act)
         {
+            db.students.Add(act);
+            db.SaveChanges();
+        }
+
+        public student GetAll(int id)
+        {
+            student act = (from d in db.students
+                            where d.studentid == id
+                            select d).Single();
+
+            return act;
+        }
+
+        public void editStudent(student act)
+        {
+            var dbList = db.students.Single(p => p.studentid == act.studentid);
+
+            dbList.firstname = act.firstname;
+            dbList.lastname = act.lastname;
+            dbList.middlename = act.middlename;
+            dbList.grade = act.grade;
+            dbList.active = act.active;
+
+            db.SaveChanges();
+        }
+
+        public void deleteStudent(student act)
+        {
+            db.students.Remove(act);
+            db.SaveChanges();
         }
     }
 }

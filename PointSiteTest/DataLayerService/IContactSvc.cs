@@ -7,7 +7,11 @@ using DataLayer;
 
 namespace DataLayerService
 {
-    public interface IContactSvc : IRepository<contact>, IService
+    public interface IContactSvc : IService
     {
+        void addContact(contact con);
+        contact GetAll(int id);
+        void editContact(contact con);
+        void deleteContact(contact con);
     }
 }

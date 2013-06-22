@@ -8,58 +8,37 @@ using DataLayer;
 
 namespace DataLayerBusiness
 {
-    public class SessioncalMgr
+    public class SessioncalMgr : Manager
     {
-        public PointAppDBContext context;
-
-        Factory factory = Factory.GetInstance();
+        public ISessioncalSvc svc;
 
         public SessioncalMgr()
         {
-            this.context = new PointAppDBContext();
+            svc = (ISessioncalSvc)GetService(typeof(ISessioncalSvc).Name);
         }
 
-        public SessioncalMgr(PointAppDBContext dbContext)
+
+        public void Create(sessioncal cal)
         {
-            this.context = dbContext;
+            svc.addSessioncal(cal);
         }
 
-        public void Create(sessioncal newcal)
+        public void Update(sessioncal cal)
         {
-            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
-
-            calSvc.Insert(newcal);
-            calSvc.Save();
+            svc.editSessioncal(cal);
         }
 
-        public void Update(sessioncal newcal)
+        public void Delete(sessioncal cal)
         {
-            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
-
-            calSvc.Update(newcal);
-            calSvc.Save();
+            svc.deleteSessioncal(cal);
         }
 
-        public void Delete(sessioncal newcal)
+
+        public sessioncal Retrieved(int id)
         {
-            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
+            sessioncal db = svc.GetAll(id);
 
-            calSvc.Delete(newcal);
-            calSvc.Save();
-        }
-
-        public sessioncal Find(int id)
-        {
-            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
-
-            return calSvc.GetById(id);
-        }
-
-        public IEnumerable<sessioncal> GetSessioncal()
-        {
-            ISessioncalSvc calSvc = (ISessioncalSvc)factory.GetService("ISessioncalSvc", context);
-
-            return calSvc.GetAll();
+            return db;
         }
 
 

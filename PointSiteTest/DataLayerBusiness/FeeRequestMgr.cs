@@ -8,59 +8,39 @@ using DataLayer;
 
 namespace DataLayerBusiness
 {
-    public class FeerequestMgr
+    public class FeerequestMgr : Manager
     {
-        public PointAppDBContext context;
-
-        Factory factory = Factory.GetInstance();
+        public IFeerequestSvc svc;
 
         public FeerequestMgr()
         {
-            this.context = new PointAppDBContext();
+            svc = (IFeerequestSvc)GetService(typeof(IFeerequestSvc).Name);
         }
 
-        public FeerequestMgr(PointAppDBContext dbContext)
-        {
-            this.context = dbContext;
-        }
 
         public void Create(feerequest request)
         {
-            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
-
-            requestSvc.Insert(request);
-            requestSvc.Save();
+            svc.addRequest(request);
         }
 
         public void Update(feerequest request)
         {
-            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
-
-            requestSvc.Update(request);
-            requestSvc.Save();
+            svc.editRequest(request);
         }
 
         public void Delete(feerequest request)
         {
-            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
-
-            requestSvc.Delete(request);
-            requestSvc.Save();
+            svc.deleteRequest(request);
         }
 
-        public feerequest Find(int id)
+
+        public feerequest Retrieved(int id)
         {
-            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
+            feerequest db = svc.GetAll(id);
 
-            return requestSvc.GetById(id);
+            return db;
         }
 
-        public IEnumerable<feerequest> GetFeerequest()
-        {
-            IFeerequestSvc requestSvc = (IFeerequestSvc)factory.GetService("IFeerequestSvc", context);
-
-            return requestSvc.GetAll();
-        }
 
 
     }

@@ -33,6 +33,9 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="LinqKit">
+      <HintPath>..\packages\LinqKit.1.0\lib\35\LinqKit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -47,11 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivitySvcImpl.cs" />
+    <Compile Include="Exceptions\ServiceNotFoundException.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="IActivitySvc.cs" />
-    <Compile Include="IRepository.cs" />
     <Compile Include="IService.cs" />
-    <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

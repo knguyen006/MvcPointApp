@@ -8,60 +8,38 @@ using DataLayer;
 
 namespace DataLayerBusiness
 {
-    public class StudentMgr
+    public class StudentMgr : Manager
     {
-        public PointAppDBContext context;
-
-        Factory factory = Factory.GetInstance();
+        public IStudentSvc svc;
 
         public StudentMgr()
         {
-            this.context = new PointAppDBContext();
+            svc = (IStudentSvc)GetService(typeof(IStudentSvc).Name);
         }
 
-        public StudentMgr(PointAppDBContext dbContext)
+
+        public void Create(student stu)
         {
-            this.context = dbContext;
+            svc.addStudent(stu);
         }
 
-        public void Create(student newstudent)
+        public void Update(student stu)
         {
-            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
-
-            studentSvc.Insert(newstudent);
-            studentSvc.Save();
+            svc.editStudent(stu);
         }
 
-        public void Update(student newstudent)
+        public void Delete(student stu)
         {
-            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
-
-            studentSvc.Update(newstudent);
-            studentSvc.Save();
+            svc.deleteStudent(stu);
         }
 
-        public void Delete(student newstudent)
+
+        public student Retrieved(int id)
         {
-            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
+            student db = svc.GetAll(id);
 
-            studentSvc.Delete(newstudent);
-            studentSvc.Save();
+            return db;
         }
-
-        public student Find(int id)
-        {
-            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
-
-            return studentSvc.GetById(id);
-        }
-
-        public IEnumerable<student> GetStudent()
-        {
-            IStudentSvc studentSvc = (IStudentSvc)factory.GetService("IStudentSvc", context);
-
-            return studentSvc.GetAll();
-        }
-
 
     }
 }
