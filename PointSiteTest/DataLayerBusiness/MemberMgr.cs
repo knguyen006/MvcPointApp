@@ -33,16 +33,22 @@ namespace DataLayerBusiness
             svc.deleteMember(mem);
         }
 
-
         public member Retrieved(int id)
         {
-            return svc.GetAll(id);
+            return svc.GetById(id);
+        }
+
+        public List<member> GetAll()
+        {
+            return svc.GetAll();
         }
 
         public member GetAccount(member mem)
         {
             return svc.GetAccount(mem);
         }
+
+
 
     }
 }

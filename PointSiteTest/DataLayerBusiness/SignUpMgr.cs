@@ -36,11 +36,13 @@ namespace DataLayerBusiness
 
         public signup Retrieved(int id)
         {
-            signup db = svc.GetAll(id);
-
-            return db;
+            return svc.GetById(id);
         }
 
+        public List<signup> GetAll()
+        {
+            return svc.GetAll();
+        }
 
     }
 }

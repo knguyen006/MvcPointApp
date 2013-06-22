@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public sessiontype GetAll(int id)
+        public sessiontype GetById(int id)
         {
-            sessiontype type = (from d in db.sessiontypes
-                            where d.sessiontypeid == id
-                            select d).Single();
+            return db.sessiontypes.Find(id);
+        }
 
-            return type;
+        public List<sessiontype> GetAll()
+        {
+            return db.sessiontypes.ToList();
         }
 
         public void editSessiontype(sessiontype type)

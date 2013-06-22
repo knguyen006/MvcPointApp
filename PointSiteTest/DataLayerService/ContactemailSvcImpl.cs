@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public contactemail GetAll(int id)
+        public contactemail GetById(int id)
         {
-            contactemail email = (from d in db.contactemails
-                            where d.contactemailid == id
-                            select d).Single();
+            return db.contactemails.Find(id);
+        }
 
-            return email;
+        public List<contactemail> GetAll()
+        {
+            return db.contactemails.ToList();
         }
 
         public void editEmail(contactemail email)

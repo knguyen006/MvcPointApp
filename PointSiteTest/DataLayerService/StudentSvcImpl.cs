@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public student GetAll(int id)
+        public student GetById(int id)
         {
-            student act = (from d in db.students
-                            where d.studentid == id
-                            select d).Single();
+            return db.students.Find(id);
+        }
 
-            return act;
+        public List<student> GetAll()
+        {
+            return db.students.ToList();
         }
 
         public void editStudent(student act)

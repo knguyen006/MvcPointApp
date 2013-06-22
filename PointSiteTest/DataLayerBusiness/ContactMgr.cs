@@ -36,12 +36,13 @@ namespace DataLayerBusiness
 
         public contact Retrieved(int id)
         {
-            contact db = svc.GetAll(id);
-
-            return db;
+            return svc.GetById(id);
         }
 
-
+        public List<contact> GetAll()
+        {
+            return svc.GetAll();
+        }
 
     }
 }

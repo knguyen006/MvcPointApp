@@ -36,11 +36,12 @@ namespace DataLayerBusiness
 
         public contactemail Retrieved(int id)
         {
-            contactemail db = svc.GetAll(id);
-
-            return db;
+            return svc.GetById(id);
         }
-        
 
+        public List<contactemail> GetAll()
+        {
+            return svc.GetAll();
+        }
     }
 }

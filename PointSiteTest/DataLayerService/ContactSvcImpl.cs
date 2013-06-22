@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public contact GetAll(int id)
+        public contact GetById(int id)
         {
-            contact con = (from d in db.contacts
-                            where d.contactid == id
-                            select d).Single();
+            return db.contacts.Find(id);
+        }
 
-            return con;
+        public List<contact> GetAll()
+        {
+            return db.contacts.ToList();
         }
 
         public void editContact(contact con)

@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public activity GetAll(int id)
+        public activity GetById(int id)
         {
-            activity act = (from d in db.activities
-                            where d.activityid == id
-                            select d).Single();
-            
-            return act;
+            return db.activities.Find(id);
+        }
+
+        public List<activity> GetAll()
+        {
+            return db.activities.ToList();
         }
 
         public void editActivity(activity act)

@@ -36,9 +36,12 @@ namespace DataLayerBusiness
 
         public sessioncal Retrieved(int id)
         {
-            sessioncal db = svc.GetAll(id);
+            return svc.GetById(id);
+        }
 
-            return db;
+        public List<sessioncal> GetAll()
+        {
+            return svc.GetAll();
         }
 
 

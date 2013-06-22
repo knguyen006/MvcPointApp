@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public approle GetAll(int id)
+        public approle GetById(int id)
         {
-            approle role = (from d in db.approles
-                            where d.approleid == id
-                            select d).Single();
+            return db.approles.Find(id);
+        }
 
-            return role;
+        public List<approle> GetAll()
+        {
+            return db.approles.ToList();
         }
 
         public void editRole(approle role)

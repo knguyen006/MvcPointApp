@@ -10,7 +10,8 @@ namespace DataLayerService
     public interface IMemberSvc : IService
     {
         void addMember(member mem);
-        member GetAll(int id);
+        member GetById(int id);
+        List<member> GetAll();
         void editMember(member mem);
         void deleteMember(member mem);
 

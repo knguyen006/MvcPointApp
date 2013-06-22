@@ -10,8 +10,10 @@ namespace DataLayerService
     public interface IActivitySvc : IService
     {
         void addActivity(activity act);
-        activity GetAll(int id);
+        activity GetById(int id);
+        List<activity> GetAll();
         void editActivity(activity act);
         void deleteActivity(activity act);
+        
     }
 }

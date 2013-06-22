@@ -10,7 +10,8 @@ namespace DataLayerService
     public interface ISignupSvc : IService
     {
         void addSignup(signup sign);
-        signup GetAll(int id);
+        signup GetById(int id);
+        List<signup> GetAll();
         void editSignup(signup sign);
         void deleteSignup(signup sign);
     }

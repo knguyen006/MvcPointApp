@@ -10,7 +10,8 @@ namespace DataLayerService
     public interface IApproleSvc : IService
     {
         void addRole(approle role);
-        approle GetAll(int id);
+        approle GetById(int id);
+        List<approle> GetAll();
         void editRole(approle role);
         void deleteRole(approle role);
 

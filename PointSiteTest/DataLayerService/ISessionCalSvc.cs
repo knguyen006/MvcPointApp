@@ -10,7 +10,8 @@ namespace DataLayerService
     public interface ISessioncalSvc : IService
     {
         void addSessioncal(sessioncal cal);
-        sessioncal GetAll(int id);
+        sessioncal GetById(int id);
+        List<sessioncal> GetAll();
         void editSessioncal(sessioncal cal);
         void deleteSessioncal(sessioncal cal);
     }

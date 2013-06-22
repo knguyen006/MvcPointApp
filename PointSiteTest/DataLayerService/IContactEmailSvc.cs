@@ -10,7 +10,8 @@ namespace DataLayerService
     public interface IContactemailSvc : IService
     {
         void addEmail(contactemail email);
-        contactemail GetAll(int id);
+        contactemail GetById(int id);
+        List<contactemail> GetAll();
         void editEmail(contactemail email);
         void deleteEmail(contactemail email);
     }

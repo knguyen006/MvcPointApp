@@ -55,6 +55,7 @@
     <Compile Include="MemberMgr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessioncalMgr.cs" />
+    <Compile Include="SessionContext.cs" />
     <Compile Include="SessiontypeMgr.cs" />
     <Compile Include="SignupMgr.cs" />
     <Compile Include="StudentMgr.cs" />

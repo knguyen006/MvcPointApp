@@ -35,9 +35,12 @@ namespace DataLayerBusiness
 
         public approle Retrieved(int id)
         {
-            approle db = svc.GetAll(id);
+            return svc.GetById(id);
+        }
 
-            return db;
+        public List<approle> GetAll()
+        {
+            return svc.GetAll();
         }
 
     }

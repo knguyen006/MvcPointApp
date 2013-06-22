@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public feerequest GetAll(int id)
+        public feerequest GetById(int id)
         {
-            feerequest request = (from d in db.feerequests
-                            where d.feerequestid == id
-                            select d).Single();
+            return db.feerequests.Find(id);
+        }
 
-            return request;
+        public List<feerequest> GetAll()
+        {
+            return db.feerequests.ToList();
         }
 
         public void editRequest(feerequest request)

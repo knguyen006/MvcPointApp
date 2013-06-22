@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public member GetAll(int id)
+        public member GetById(int id)
         {
-            member mem = (from d in db.members
-                            where d.memberid == id
-                            select d).Single();
+            return db.members.Find(id);
+        }
 
-            return mem;
+        public List<member> GetAll()
+        {
+            return db.members.ToList();
         }
 
         public void editMember(member mem)

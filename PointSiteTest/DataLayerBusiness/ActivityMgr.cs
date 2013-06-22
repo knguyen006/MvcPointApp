@@ -36,9 +36,12 @@ namespace DataLayerBusiness
 
         public activity Retrieved(int id)
         {
-            activity db = svc.GetAll(id);
+            return svc.GetById(id);
+        }
 
-            return db;
+        public List<activity> GetList()
+        {
+            return svc.GetAll();
         }
 
 

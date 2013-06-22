@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public sessioncal GetAll(int id)
+        public sessioncal GetById(int id)
         {
-            sessioncal cal = (from d in db.sessioncals
-                                where d.sessioncalid == id
-                                select d).Single();
+            return db.sessioncals.Find(id);
+        }
 
-            return cal;
+        public List<sessioncal> GetAll()
+        {
+            return db.sessioncals.ToList();
         }
 
         public void editSessioncal(sessioncal cal)

@@ -10,7 +10,8 @@ namespace DataLayerService
     public interface IContactSvc : IService
     {
         void addContact(contact con);
-        contact GetAll(int id);
+        contact GetById(int id);
+        List<contact> GetAll();
         void editContact(contact con);
         void deleteContact(contact con);
     }

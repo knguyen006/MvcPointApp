@@ -10,7 +10,8 @@ namespace DataLayerService
     public interface IStudentSvc : IService
     {
         void addStudent(student stu);
-        student GetAll(int id);
+        student GetById(int id);
+        List<student> GetAll();
         void editStudent(student stu);
         void deleteStudent(student stu);
     }

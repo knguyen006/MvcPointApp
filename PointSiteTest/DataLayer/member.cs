@@ -11,8 +11,6 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class member
     {
@@ -25,19 +23,9 @@ namespace DataLayer
             this.members = new HashSet<member>();
         }
     
-        [Required]
         public int memberid { get; set; }
-        [Required]
-        [Display(Name="User name")]
         public string username { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Current Password")]
         public string userpass { get; set; }
-
-        [Required]
-        [Display(Name="Password phrase")]
         public string passphrase { get; set; }
         public string memberstatus { get; set; }
         public Nullable<int> approleid { get; set; }

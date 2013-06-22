@@ -17,13 +17,14 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public signup GetAll(int id)
+        public signup GetById(int id)
         {
-            signup sign = (from d in db.signups
-                                where d.signupid == id
-                                select d).Single();
+            return db.signups.Find(id);
+        }
 
-            return sign;
+        public List<signup> GetAll()
+        {
+            return db.signups.ToList();
         }
 
         public void editSignup(signup sign)

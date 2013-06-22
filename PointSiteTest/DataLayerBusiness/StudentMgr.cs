@@ -36,10 +36,12 @@ namespace DataLayerBusiness
 
         public student Retrieved(int id)
         {
-            student db = svc.GetAll(id);
-
-            return db;
+            return svc.GetById(id);
         }
 
+        public List<student> GetAll()
+        {
+            return svc.GetAll();
+        }
     }
 }

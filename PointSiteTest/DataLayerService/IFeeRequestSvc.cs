@@ -10,7 +10,8 @@ namespace DataLayerService
     public interface IFeerequestSvc : IService
     {
         void addRequest(feerequest request);
-        feerequest GetAll(int id);
+        feerequest GetById(int id);
+        List<feerequest> GetAll();
         void editRequest(feerequest request);
         void deleteRequest(feerequest request);
     }

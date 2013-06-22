@@ -36,12 +36,13 @@ namespace DataLayerBusiness
 
         public feerequest Retrieved(int id)
         {
-            feerequest db = svc.GetAll(id);
-
-            return db;
+            return svc.GetById(id);
         }
 
-
+        public List<feerequest> GetAll()
+        {
+            return svc.GetAll();
+        }
 
     }
 }
