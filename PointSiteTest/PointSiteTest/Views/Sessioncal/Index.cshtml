@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DataLayer.sessioncal>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SuggessPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sessiondate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sessiontype.typename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sessionnum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sessionamt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sessionpoint)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sessiondate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sessiontype.typename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sessionnum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sessionamt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sessionpoint)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.sessioncalid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.sessioncalid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.sessioncalid })
+        </td>
+    </tr>
+}
+
+</table>

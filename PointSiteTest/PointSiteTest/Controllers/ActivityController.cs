@@ -29,12 +29,13 @@ namespace PointSiteTest.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            activity activity = db.activities.Find(id);
-            if (activity == null)
+            activity act = mgr.Retrieved(id);
+            //activity activity = db.activities.Find(id);
+            if (act == null)
             {
                 return HttpNotFound();
             }
-            return View(activity);
+            return View(act);
         }
 
         //

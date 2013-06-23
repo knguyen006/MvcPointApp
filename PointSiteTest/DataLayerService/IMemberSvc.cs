@@ -15,6 +15,7 @@ namespace DataLayerService
         void editMember(member mem);
         void deleteMember(member mem);
 
-        member GetAccount(member mem);
+        List<member> GetAccount(member mem);
+        bool UserIsValid(string nuser, string npass);
     }
 }

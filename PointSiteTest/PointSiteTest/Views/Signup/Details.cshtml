@@ -1,0 +1,44 @@
+﻿@model DataLayer.signup
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_SuggessPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>signup</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.member.username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.member.username)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessioncal.sessioncalid)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessioncal.sessioncalid)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.pointearn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.pointearn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isshow)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isshow)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.signupid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,85 @@
+﻿@model DataLayer.member
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_SuggessPage.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>member</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.username)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.username)
+            @Html.ValidationMessageFor(model => model.username)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.userpass)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.userpass)
+            @Html.ValidationMessageFor(model => model.userpass)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.passphrase)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.passphrase)
+            @Html.ValidationMessageFor(model => model.passphrase)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.memberstatus)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.memberstatus)
+            @Html.ValidationMessageFor(model => model.memberstatus)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.approleid, "approle")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("approleid", String.Empty)
+            @Html.ValidationMessageFor(model => model.approleid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.studentid, "student")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("studentid", String.Empty)
+            @Html.ValidationMessageFor(model => model.studentid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.contactid, "contact")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("contactid", String.Empty)
+            @Html.ValidationMessageFor(model => model.contactid)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

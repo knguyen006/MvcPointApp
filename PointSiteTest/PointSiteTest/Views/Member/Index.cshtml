@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DataLayer.member>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SuggessPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userpass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.passphrase)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.memberstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.approle.rolename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.student.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contact.firstname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userpass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.passphrase)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.memberstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.approle.rolename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.student.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contact.firstname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.memberid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.memberid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.memberid })
+        </td>
+    </tr>
+}
+
+</table>

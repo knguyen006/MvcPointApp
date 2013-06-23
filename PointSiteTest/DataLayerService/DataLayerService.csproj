@@ -57,12 +57,14 @@
     <Compile Include="IContactemailSvc.cs" />
     <Compile Include="IContactSvc.cs" />
     <Compile Include="IFeerequestSvc.cs" />
+    <Compile Include="ILoginSvc.cs" />
     <Compile Include="IMemberSvc.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ISessioncalSvc.cs" />
     <Compile Include="ISessiontypeSvc.cs" />
     <Compile Include="ISignupSvc.cs" />
     <Compile Include="IStudentSvc.cs" />
+    <Compile Include="LoginSvcImpl.cs" />
     <Compile Include="MemberSvcImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessioncalSvcImpl.cs" />

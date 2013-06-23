@@ -39,7 +39,7 @@ namespace DataLayerBusiness
             return svc.GetById(id);
         }
 
-        public List<signup> GetAll()
+        public List<signup> GetList()
         {
             return svc.GetAll();
         }

@@ -48,9 +48,35 @@ namespace DataLayerService
             db.SaveChanges();
         }
 
-        public member GetAccount(member mem)
+        public List<member> GetAccount(member mem)
         {
-            return db.members.Where(m => m.username==m.username & m.userpass == m.userpass).FirstOrDefault();
+            //var logindb = db.members.Single(p => p.username == mem.username && p.userpass == mem.userpass);
+
+            //return logindb;
+
+            //return db.members.Where(m => m.username==m.username & m.userpass == m.userpass).FirstOrDefault();
+            var logindb = (from d in db.members
+                           where d.username.Contains(mem.username)
+                           select d);
+            return logindb.ToList();
+        }
+
+        public bool UserIsValid(string nuser, string npass)
+        {
+            bool isValid = false;
+
+            using (var db = new PointAppDBContext())
+            {
+                var memdb = db.members.FirstOrDefault(u => u.username == nuser && u.userpass == npass);
+                if (memdb != null)
+                {
+                    if (memdb.userpass != null)
+                    {
+                        isValid = true;
+                    }
+                }
+            }
+            return isValid;
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿@model DataLayer.sessiontype
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_SuggessPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>sessiontype</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.typename)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.typename)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.note)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.note)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.sessiontypeid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -38,17 +38,19 @@ namespace DataLayerBusiness
             return svc.GetById(id);
         }
 
-        public List<member> GetAll()
+        public List<member> GetList()
         {
             return svc.GetAll();
         }
 
-        public member GetAccount(member mem)
+        public List<member> GetAccount(member mem)
         {
-            return svc.GetAccount(mem);
+            return svc.GetAccount(mem).ToList();
         }
 
-
-
+        public bool UserIsValid(string nuser, string npass)
+        {
+            return svc.UserIsValid(nuser, npass);
+        }
     }
 }

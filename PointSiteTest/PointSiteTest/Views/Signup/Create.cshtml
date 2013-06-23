@@ -1,0 +1,61 @@
+﻿@model DataLayer.signup
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_SuggessPage.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>signup</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.memberid, "member")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("memberid", String.Empty)
+            @Html.ValidationMessageFor(model => model.memberid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.sessioncalid, "sessioncal")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("sessioncalid", String.Empty)
+            @Html.ValidationMessageFor(model => model.sessioncalid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.pointearn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.pointearn)
+            @Html.ValidationMessageFor(model => model.pointearn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.isshow)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.isshow)
+            @Html.ValidationMessageFor(model => model.isshow)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

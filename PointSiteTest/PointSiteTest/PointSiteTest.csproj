@@ -183,8 +183,17 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\ApproleController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\ContactemailController.cs" />
+    <Compile Include="Controllers\FeerequestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\SessioncalController.cs" />
+    <Compile Include="Controllers\SessiontypeController.cs" />
+    <Compile Include="Controllers\SignupController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\WelcomeController.cs" />
     <Compile Include="Models\Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -306,6 +315,56 @@
     <Content Include="Views\Activity\Create.cshtml" />
     <Content Include="Views\Activity\Edit.cshtml" />
     <Content Include="Views\Activity\Delete.cshtml" />
+    <Content Include="Views\Approle\Index.cshtml" />
+    <Content Include="Views\Approle\Details.cshtml" />
+    <Content Include="Views\Approle\Create.cshtml" />
+    <Content Include="Views\Approle\Edit.cshtml" />
+    <Content Include="Views\Approle\Delete.cshtml" />
+    <Content Include="Views\Sessiontype\Index.cshtml" />
+    <Content Include="Views\Sessiontype\Details.cshtml" />
+    <Content Include="Views\Sessiontype\Create.cshtml" />
+    <Content Include="Views\Sessiontype\Edit.cshtml" />
+    <Content Include="Views\Sessiontype\Delete.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\Details.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\Delete.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\Details.cshtml" />
+    <Content Include="Views\Contact\Create.cshtml" />
+    <Content Include="Views\Contact\Edit.cshtml" />
+    <Content Include="Views\Contact\Delete.cshtml" />
+    <Content Include="Views\Contactemail\Index.cshtml" />
+    <Content Include="Views\Contactemail\Details.cshtml" />
+    <Content Include="Views\Contactemail\Create.cshtml" />
+    <Content Include="Views\Contactemail\Edit.cshtml" />
+    <Content Include="Views\Contactemail\Delete.cshtml" />
+    <Content Include="Views\Signup\Index.cshtml" />
+    <Content Include="Views\Signup\Details.cshtml" />
+    <Content Include="Views\Signup\Create.cshtml" />
+    <Content Include="Views\Signup\Edit.cshtml" />
+    <Content Include="Views\Signup\Delete.cshtml" />
+    <Content Include="Views\Sessioncal\Index.cshtml" />
+    <Content Include="Views\Sessioncal\Details.cshtml" />
+    <Content Include="Views\Sessioncal\Create.cshtml" />
+    <Content Include="Views\Sessioncal\Edit.cshtml" />
+    <Content Include="Views\Sessioncal\Delete.cshtml" />
+    <Content Include="Views\Feerequest\Index.cshtml" />
+    <Content Include="Views\Feerequest\Details.cshtml" />
+    <Content Include="Views\Feerequest\Create.cshtml" />
+    <Content Include="Views\Feerequest\Edit.cshtml" />
+    <Content Include="Views\Feerequest\Delete.cshtml" />
+    <Content Include="Views\Member\Index.cshtml" />
+    <Content Include="Views\Member\Details.cshtml" />
+    <Content Include="Views\Member\Create.cshtml" />
+    <Content Include="Views\Member\Edit.cshtml" />
+    <Content Include="Views\Member\Delete.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_SuggessPage.cshtml" />
+    <Content Include="Views\Welcome\Index.cshtml" />
+    <Content Include="Views\Account\Logout.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayerBusiness\DataLayerBusiness.csproj">
@@ -324,9 +383,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Account\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,0 +1,48 @@
+﻿@model DataLayer.signup
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_SuggessPage.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>signup</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.member.username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.member.username)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessioncal.sessioncalid)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessioncal.sessioncalid)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.pointearn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.pointearn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isshow)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isshow)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

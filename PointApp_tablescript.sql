@@ -107,25 +107,13 @@ create table member
 (
   memberid int identity(1,1) not null,
   username nvarchar(30) not null,
-  userpass nvarchar(32) not null,
-  passphrase nvarchar(50) not null,
-  memberstatus nvarchar(10) not null,
-  approleid int default 2,
-  studentid int,
-  contactid int
+  userpass nvarchar(200) not null,
+  passsault nvarchar(200) not null
 );
 
 
 go
 alter table member add constraint member_pk primary key (memberid);
-go
-alter table member add constraint member_approle_fk foreign key (approleid) references approle(approleid);
-
-go
-alter table member add constraint member_student_fk foreign key (studentid) references student(studentid);
-
-go
-alter table member add constraint member_contact_fk foreign key (contactid) references contact(contactid);
 
 ---------------------------
 -- member2student
@@ -163,14 +151,23 @@ CREATE TABLE [dbo].[member2contact] (
 -- member2dependent
 -- assign dependent
 GO
-CREATE TABLE [dbo].[member2dependent] (
-    [memberid]    INT NOT NULL,
-    [dependentid] INT NOT NULL,
-	--status NVARCHAR(10),
-	CONSTRAINT [member2dependent_pk] PRIMARY KEY ([memberid], [dependentid]),
-    CONSTRAINT [member2dependent_member_fk] FOREIGN KEY ([memberid]) REFERENCES [dbo].[member] ([memberid]),
-	CONSTRAINT [member2dependent_dependent_fk] FOREIGN KEY ([dependentid]) REFERENCES [dbo].[member] ([memberid])
+CREATE TABLE [dbo].[profile] (
+  profileid int identity(1,1) not null,
+  memberid int,
+  memberstatus nvarchar(10) not null,
+  approleid int default 2,
+  studentid int,
+  contactid int
 );
+
+go
+alter table profile add constraint profile_pk primary key (profileid);
+go
+alter table profile add constraint profile_role_fk foreign key (approleid) references approle(approleid);
+go
+alter table profile add constraint profile_student_fk foreign key (approleid) references approle(approleid);
+go
+alter table profile add constraint profile_contact_fk foreign key (approleid) references approle(approleid);
 
 --------------------------------------
 -- session_cal table
@@ -246,6 +243,7 @@ alter table feerequest add constraint feerequest_member_fk foreign key (memberid
 
 ------------------------------------------
 /* **** INSERT STATEMENT *** */
+/*
 GO
 INSERT INTO approle (rolename, note)
 	VALUES ('admin', 'This is admin role');
@@ -306,4 +304,4 @@ INSERT INTO signup (memberid, sessioncalid, pointearn)
 GO
 INSERT INTO feerequest (memberid, requestdate, requestamt, pointbal)
 	VALUES (3, '5/30/2013', 10, 10);	
-
+*/

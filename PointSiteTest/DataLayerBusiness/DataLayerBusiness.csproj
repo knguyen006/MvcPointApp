@@ -51,11 +51,11 @@
     <Compile Include="ContactemailMgr.cs" />
     <Compile Include="ContactMgr.cs" />
     <Compile Include="FeerequestMgr.cs" />
+    <Compile Include="LoginMgr.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="MemberMgr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessioncalMgr.cs" />
-    <Compile Include="SessionContext.cs" />
     <Compile Include="SessiontypeMgr.cs" />
     <Compile Include="SignupMgr.cs" />
     <Compile Include="StudentMgr.cs" />
