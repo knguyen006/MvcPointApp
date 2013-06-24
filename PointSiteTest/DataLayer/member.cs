@@ -28,12 +28,12 @@ namespace DataLayer
         public int memberid { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength=6)]
+        //[StringLength(20, MinimumLength=6)]
         [Display(Name="User name: ")]
         public string username { get; set; }
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength=6)]
+        //[StringLength(20, MinimumLength=6)]
         [Display(Name="Password: ")]
         public string userpass { get; set; }
         public string passphrase { get; set; }

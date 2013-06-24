@@ -8,6 +8,7 @@ using DataLayerBusiness;
 using System.Web.Security;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 namespace PointSiteTest.Controllers
 {
@@ -55,16 +56,37 @@ namespace PointSiteTest.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Registration(member mem)
         {
-            if (ModelState.IsValid)
+            try
             {
-                mgr.Create(mem);
+                if (ModelState.IsValid)
+                {
+                    using (var db = new PointAppDBContext())
+                    {
 
-                return RedirectToAction("Index", "Home");
+                        mgr.Create(mem);
+
+                        return RedirectToAction("Index", "Home");
+
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Create record is incorrect!");
+                }
             }
-            return View(mem);
+            catch (DbEntityValidationException ex)
+            {
+                var errors = ex.EntityValidationErrors.First(); //.ValidationErrors.First();
+                foreach (var propertyError in errors.ValidationErrors)
+                {
+                    this.ModelState.AddModelError
+                     (propertyError.PropertyName, propertyError.ErrorMessage);
+                }
+                return View();
+            }
+            return View();
         }
 
         public ActionResult Logout()
