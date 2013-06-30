@@ -1,0 +1,54 @@
+﻿@model DataLayer.sessioncal
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>sessioncal</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessiondate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessiondate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessiontype.typename)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessiontype.typename)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessionnum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessionnum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessionamt)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessionamt)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessionpoint)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessionpoint)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

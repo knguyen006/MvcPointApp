@@ -1,0 +1,51 @@
+﻿@model DataLayer.profile
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>profile</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.member.username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.member.username)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.memberstatus)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.memberstatus)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.student1.firstname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.student1.firstname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.student.firstname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.student.firstname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.family.familyname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.family.familyname)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.profileid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

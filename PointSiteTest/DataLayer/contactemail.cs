@@ -11,11 +11,18 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class contactemail
     {
+        [Required]
         public int contactemailid { get; set; }
-        public Nullable<int> contactid { get; set; }
+
+        [Required]
+        public int contactid { get; set; }
+
+        [Required(ErrorMessage="Email address is required")]
+        [Display(Name="Email address ")]
         public string emailaddress { get; set; }
     
         public virtual contact contact { get; set; }

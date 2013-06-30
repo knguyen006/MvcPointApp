@@ -11,7 +11,8 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class sessiontype
     {
         public sessiontype()
@@ -19,8 +20,13 @@ namespace DataLayer
             this.sessioncals = new HashSet<sessioncal>();
         }
     
+        [Required]
         public int sessiontypeid { get; set; }
+
+        [Required(ErrorMessage = "Type name is required.")]
+        [Display(Name="Type name ")]
         public string typename { get; set; }
+
         public string note { get; set; }
     
         public virtual ICollection<sessioncal> sessioncals { get; set; }

@@ -11,7 +11,8 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class sessioncal
     {
         public sessioncal()
@@ -19,11 +20,24 @@ namespace DataLayer
             this.signups = new HashSet<signup>();
         }
     
+        [Required]
         public int sessioncalid { get; set; }
-        public Nullable<System.DateTime> sessiondate { get; set; }
-        public Nullable<int> sessiontypeid { get; set; }
-        public Nullable<int> sessionnum { get; set; }
+
+        [Required(ErrorMessage = "Session date is required.")]
+        [Display(Name="Date of session ")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        public System.DateTime sessiondate { get; set; }
+
+
+        public int sessiontypeid { get; set; }
+        [Required(ErrorMessage="Number of session is required.")]
+        [Display(Name="Number of session ")]
+        public int sessionnum { get; set; }
+
+        [Display(Name="Session amount ")]
         public Nullable<decimal> sessionamt { get; set; }
+        
+        [Display(Name="Session point ")]
         public Nullable<int> sessionpoint { get; set; }
     
         public virtual sessiontype sessiontype { get; set; }

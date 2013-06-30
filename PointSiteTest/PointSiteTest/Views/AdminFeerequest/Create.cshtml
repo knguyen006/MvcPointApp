@@ -1,0 +1,60 @@
+﻿@model DataLayer.feerequest
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>feerequest</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.memberid, "member")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("memberid", String.Empty)
+            @Html.ValidationMessageFor(model => model.memberid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.requestdate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.requestdate)
+            @Html.ValidationMessageFor(model => model.requestdate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.requestamt)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.requestamt)
+            @Html.ValidationMessageFor(model => model.requestamt)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.pointbal)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.pointbal)
+            @Html.ValidationMessageFor(model => model.pointbal)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

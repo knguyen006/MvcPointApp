@@ -5,9 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using DataLayer;
 using DataLayerBusiness;
-using System.Web.Security;
 using System.Data;
-using System.Data.Entity;
+using System.Web.Security;
 using System.Data.Entity.Validation;
 
 namespace PointSiteTest.Controllers
@@ -34,62 +33,57 @@ namespace PointSiteTest.Controllers
         {
             if (ModelState.IsValid)
             {
-                MemberMgr mgr = new MemberMgr();
-
                 if (mgr.UserIsValid(mem.username, mem.userpass))
                 {
                     FormsAuthentication.SetAuthCookie(mem.username, false);
-                    return RedirectToAction("Index", "Welcome", "Welcome");
+                    if(mgr.GetAdminUser(mem.username))
+                        return RedirectToAction("AdminWelcome", "Account");
+                    else
+                        return RedirectToAction("Welcome", "Account");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Login is incorrect!");
+                    ModelState.AddModelError("", "Login is incorrect");
                 }
             }
             return View();
         }
 
         [HttpGet]
-        public ActionResult Registration()
+        public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Registration(member mem)
+        public ActionResult Register(member mem)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    using (var db = new PointAppDBContext())
-                    {
+                mgr.Create(mem);
 
-                        mgr.Create(mem);
-
-                        return RedirectToAction("Index", "Home");
-
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Create record is incorrect!");
-                }
+                return RedirectToAction("Login", "Account");
             }
-            catch (DbEntityValidationException ex)
+            else
             {
-                var errors = ex.EntityValidationErrors.First(); //.ValidationErrors.First();
-                foreach (var propertyError in errors.ValidationErrors)
-                {
-                    this.ModelState.AddModelError
-                     (propertyError.PropertyName, propertyError.ErrorMessage);
-                }
-                return View();
+                ModelState.AddModelError("", "Create record is incorrect!");
             }
+
             return View();
         }
 
+
         public ActionResult Logout()
+        {
+            return View();
+        }
+
+        public ActionResult Welcome()
+        {
+            return View();
+        }
+
+        public ActionResult AdminWelcome()
         {
             return View();
         }

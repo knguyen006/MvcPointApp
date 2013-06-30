@@ -12,43 +12,34 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class member
     {
         public member()
         {
+            this.contacts = new HashSet<contact>();
             this.feerequests = new HashSet<feerequest>();
+            this.profiles = new HashSet<profile>();
             this.signups = new HashSet<signup>();
             this.activities = new HashSet<activity>();
-            this.member1 = new HashSet<member>();
-            this.members = new HashSet<member>();
         }
     
         [Required]
         public int memberid { get; set; }
 
         [Required]
-        //[StringLength(20, MinimumLength=6)]
-        [Display(Name="User name: ")]
+        [Display(Name="User name ")]
         public string username { get; set; }
+
         [Required]
-        [DataType(DataType.Password)]
-        //[StringLength(20, MinimumLength=6)]
-        [Display(Name="Password: ")]
+        [Display(Name="Password ")]
         public string userpass { get; set; }
-        public string passphrase { get; set; }
-        public string memberstatus { get; set; }
-        public Nullable<int> approleid { get; set; }
-        public Nullable<int> studentid { get; set; }
-        public Nullable<int> contactid { get; set; }
+        public string passsalt { get; set; }
     
-        public virtual approle approle { get; set; }
-        public virtual contact contact { get; set; }
+        public virtual ICollection<contact> contacts { get; set; }
         public virtual ICollection<feerequest> feerequests { get; set; }
-        public virtual student student { get; set; }
+        public virtual ICollection<profile> profiles { get; set; }
         public virtual ICollection<signup> signups { get; set; }
         public virtual ICollection<activity> activities { get; set; }
-        public virtual ICollection<member> member1 { get; set; }
-        public virtual ICollection<member> members { get; set; }
     }
 }

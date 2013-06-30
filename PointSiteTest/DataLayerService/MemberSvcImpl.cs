@@ -4,17 +4,71 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataLayer;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace DataLayerService
 {
-    public class MemberSvcImpl: IMemberSvc
+    public class MemberSvcImpl : IMemberSvc
     {
         PointAppDBContext db = new PointAppDBContext();
 
         public void addMember(member mem)
         {
-            db.members.Add(mem);
-            db.SaveChanges();
+            try
+            {
+                using (var dbList = new PointAppDBContext())
+                {
+                    var crypto = new SimpleCrypto.PBKDF2();
+                    var encrpPass = crypto.Compute(mem.userpass);
+                    var memdb = db.members.Create();
+
+                    memdb.username = mem.username;
+                    memdb.userpass = encrpPass;
+                    memdb.passsalt = crypto.Salt;
+                    //memdb.memberid = Guid.NewGuid();
+
+                    db.members.Add(memdb);
+                    db.SaveChanges();
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var errors = ex.EntityValidationErrors.First();
+
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+
+                /*
+                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                  {
+                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                    {
+                      Console.WriteLine("Property: {0} Error: {1}", validationError.PropertyName,validationError.ErrorMessage);                 
+                    
+                    }
+                  }
+                /*
+                var sb = new System.Text.StringBuilder();
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new Exception(sb.ToString());
+                 */
+            }
         }
 
         public member GetById(int id)
@@ -33,11 +87,7 @@ namespace DataLayerService
 
             dbList.username = mem.username;
             dbList.userpass = mem.userpass;
-            dbList.passphrase = mem.passphrase;
-            dbList.memberstatus = mem.memberstatus;
-            dbList.approleid = mem.approleid;
-            dbList.studentid = mem.studentid;
-            dbList.contactid = mem.contactid;
+            dbList.passsalt = mem.passsalt;
 
             db.SaveChanges();
         }
@@ -50,11 +100,6 @@ namespace DataLayerService
 
         public List<member> GetAccount(member mem)
         {
-            //var logindb = db.members.Single(p => p.username == mem.username && p.userpass == mem.userpass);
-
-            //return logindb;
-
-            //return db.members.Where(m => m.username==m.username & m.userpass == m.userpass).FirstOrDefault();
             var logindb = (from d in db.members
                            where d.username.Contains(mem.username)
                            select d);
@@ -64,13 +109,14 @@ namespace DataLayerService
         public bool UserIsValid(string nuser, string npass)
         {
             bool isValid = false;
+            var crypto = new SimpleCrypto.PBKDF2();
 
             using (var db = new PointAppDBContext())
             {
-                var memdb = db.members.FirstOrDefault(u => u.username == nuser && u.userpass == npass);
-                if (memdb != null)
+                var mem = db.members.FirstOrDefault(u => u.username == nuser);
+                if (mem != null)
                 {
-                    if (memdb.userpass != null)
+                    if (mem.userpass == crypto.Compute(npass, mem.passsalt))
                     {
                         isValid = true;
                     }
@@ -78,5 +124,21 @@ namespace DataLayerService
             }
             return isValid;
         }
+
+        public bool GetAdminUser(string nuser)
+        {
+            bool isValid = false;
+            using (var db = new PointAppDBContext())
+            {
+                var dbList = db.members.SingleOrDefault(u => u.username == nuser && u.username == "adminuser");
+                if (dbList != null)
+                {
+                    isValid = true;
+                }
+            }
+
+            return isValid;
+        }
+
     }
 }

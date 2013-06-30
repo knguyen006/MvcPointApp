@@ -1,0 +1,844 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PointAppDBContainer.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="PointAppDBContainerStoreContainer">
+          <EntitySet Name="activity" EntityType="PointAppDBContainer.Store.activity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="approle" EntityType="PointAppDBContainer.Store.approle" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="contact" EntityType="PointAppDBContainer.Store.contact" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="contactemail" EntityType="PointAppDBContainer.Store.contactemail" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="family" EntityType="PointAppDBContainer.Store.family" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="feerequest" EntityType="PointAppDBContainer.Store.feerequest" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="member" EntityType="PointAppDBContainer.Store.member" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="member2activity" EntityType="PointAppDBContainer.Store.member2activity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="profile" EntityType="PointAppDBContainer.Store.profile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sessioncal" EntityType="PointAppDBContainer.Store.sessioncal" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sessiontype" EntityType="PointAppDBContainer.Store.sessiontype" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="signup" EntityType="PointAppDBContainer.Store.signup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="student" EntityType="PointAppDBContainer.Store.student" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="contact_member_fk" Association="PointAppDBContainer.Store.contact_member_fk">
+            <End Role="member" EntitySet="member" />
+            <End Role="contact" EntitySet="contact" />
+          </AssociationSet>
+          <AssociationSet Name="contactemail_contact_fk" Association="PointAppDBContainer.Store.contactemail_contact_fk">
+            <End Role="contact" EntitySet="contact" />
+            <End Role="contactemail" EntitySet="contactemail" />
+          </AssociationSet>
+          <AssociationSet Name="feerequest_member_fk" Association="PointAppDBContainer.Store.feerequest_member_fk">
+            <End Role="member" EntitySet="member" />
+            <End Role="feerequest" EntitySet="feerequest" />
+          </AssociationSet>
+          <AssociationSet Name="member2activity_act_fk" Association="PointAppDBContainer.Store.member2activity_act_fk">
+            <End Role="activity" EntitySet="activity" />
+            <End Role="member2activity" EntitySet="member2activity" />
+          </AssociationSet>
+          <AssociationSet Name="member2activity_member_fk" Association="PointAppDBContainer.Store.member2activity_member_fk">
+            <End Role="member" EntitySet="member" />
+            <End Role="member2activity" EntitySet="member2activity" />
+          </AssociationSet>
+          <AssociationSet Name="profile_dependent_fk" Association="PointAppDBContainer.Store.profile_dependent_fk">
+            <End Role="student" EntitySet="student" />
+            <End Role="profile" EntitySet="profile" />
+          </AssociationSet>
+          <AssociationSet Name="profile_family_fk" Association="PointAppDBContainer.Store.profile_family_fk">
+            <End Role="family" EntitySet="family" />
+            <End Role="profile" EntitySet="profile" />
+          </AssociationSet>
+          <AssociationSet Name="profile_member_fk" Association="PointAppDBContainer.Store.profile_member_fk">
+            <End Role="member" EntitySet="member" />
+            <End Role="profile" EntitySet="profile" />
+          </AssociationSet>
+          <AssociationSet Name="profile_student_fk" Association="PointAppDBContainer.Store.profile_student_fk">
+            <End Role="student" EntitySet="student" />
+            <End Role="profile" EntitySet="profile" />
+          </AssociationSet>
+          <AssociationSet Name="sessioncal_type_fk" Association="PointAppDBContainer.Store.sessioncal_type_fk">
+            <End Role="sessiontype" EntitySet="sessiontype" />
+            <End Role="sessioncal" EntitySet="sessioncal" />
+          </AssociationSet>
+          <AssociationSet Name="signup_member_fk" Association="PointAppDBContainer.Store.signup_member_fk">
+            <End Role="member" EntitySet="member" />
+            <End Role="signup" EntitySet="signup" />
+          </AssociationSet>
+          <AssociationSet Name="signup_sessioncal_fk" Association="PointAppDBContainer.Store.signup_sessioncal_fk">
+            <End Role="sessioncal" EntitySet="sessioncal" />
+            <End Role="signup" EntitySet="signup" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="activity">
+          <Key>
+            <PropertyRef Name="activityid" />
+          </Key>
+          <Property Name="activityid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="actname" Type="nvarchar" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="approle">
+          <Key>
+            <PropertyRef Name="approleid" />
+          </Key>
+          <Property Name="approleid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rolename" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="note" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="contactid" />
+          </Key>
+          <Property Name="contactid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="memberid" Type="int" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="lastname" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="middlename" Type="nvarchar" MaxLength="30" />
+          <Property Name="address" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="altaddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="city" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="state" Type="nchar" MaxLength="2" />
+          <Property Name="zip" Type="nvarchar" MaxLength="10" />
+          <Property Name="homephone" Type="nvarchar" MaxLength="20" />
+          <Property Name="workphone" Type="nvarchar" MaxLength="20" />
+          <Property Name="mobilephone" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="contactemail">
+          <Key>
+            <PropertyRef Name="contactemailid" />
+          </Key>
+          <Property Name="contactemailid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="contactid" Type="int" />
+          <Property Name="emailaddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="family">
+          <Key>
+            <PropertyRef Name="familyid" />
+          </Key>
+          <Property Name="familyid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="familyname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="note" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="feerequest">
+          <Key>
+            <PropertyRef Name="feerequestid" />
+          </Key>
+          <Property Name="feerequestid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="memberid" Type="int" />
+          <Property Name="requestdate" Type="date" />
+          <Property Name="requestamt" Type="money" />
+          <Property Name="pointbal" Type="int" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="memberid" />
+          </Key>
+          <Property Name="memberid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="userpass" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="passsalt" Type="nvarchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="member2activity">
+          <Key>
+            <PropertyRef Name="memberid" />
+            <PropertyRef Name="activityid" />
+          </Key>
+          <Property Name="memberid" Type="int" Nullable="false" />
+          <Property Name="activityid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="profileid" />
+          </Key>
+          <Property Name="profileid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="memberid" Type="int" />
+          <Property Name="memberstatus" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="studentid" Type="int" />
+          <Property Name="dependentid" Type="int" />
+          <Property Name="familyid" Type="int" />
+        </EntityType>
+        <EntityType Name="sessioncal">
+          <Key>
+            <PropertyRef Name="sessioncalid" />
+          </Key>
+          <Property Name="sessioncalid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="sessiondate" Type="date" />
+          <Property Name="sessiontypeid" Type="int" />
+          <Property Name="sessionnum" Type="int" />
+          <Property Name="sessionamt" Type="money" />
+          <Property Name="sessionpoint" Type="int" />
+        </EntityType>
+        <EntityType Name="sessiontype">
+          <Key>
+            <PropertyRef Name="sessiontypeid" />
+          </Key>
+          <Property Name="sessiontypeid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="typename" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="note" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="signup">
+          <Key>
+            <PropertyRef Name="signupid" />
+          </Key>
+          <Property Name="signupid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="memberid" Type="int" />
+          <Property Name="sessioncalid" Type="int" />
+          <Property Name="pointearn" Type="int" />
+          <Property Name="isshow" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="studentid" />
+          </Key>
+          <Property Name="studentid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="30" />
+          <Property Name="middlename" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="grade" Type="int" />
+          <Property Name="active" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <Association Name="contact_member_fk">
+          <End Role="member" Type="PointAppDBContainer.Store.member" Multiplicity="1" />
+          <End Role="contact" Type="PointAppDBContainer.Store.contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="memberid" />
+            </Principal>
+            <Dependent Role="contact">
+              <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contactemail_contact_fk">
+          <End Role="contact" Type="PointAppDBContainer.Store.contact" Multiplicity="0..1" />
+          <End Role="contactemail" Type="PointAppDBContainer.Store.contactemail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contact">
+              <PropertyRef Name="contactid" />
+            </Principal>
+            <Dependent Role="contactemail">
+              <PropertyRef Name="contactid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="feerequest_member_fk">
+          <End Role="member" Type="PointAppDBContainer.Store.member" Multiplicity="0..1" />
+          <End Role="feerequest" Type="PointAppDBContainer.Store.feerequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="memberid" />
+            </Principal>
+            <Dependent Role="feerequest">
+              <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="member2activity_act_fk">
+          <End Role="activity" Type="PointAppDBContainer.Store.activity" Multiplicity="1" />
+          <End Role="member2activity" Type="PointAppDBContainer.Store.member2activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="activity">
+              <PropertyRef Name="activityid" />
+            </Principal>
+            <Dependent Role="member2activity">
+              <PropertyRef Name="activityid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="member2activity_member_fk">
+          <End Role="member" Type="PointAppDBContainer.Store.member" Multiplicity="1" />
+          <End Role="member2activity" Type="PointAppDBContainer.Store.member2activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="memberid" />
+            </Principal>
+            <Dependent Role="member2activity">
+              <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profile_dependent_fk">
+          <End Role="student" Type="PointAppDBContainer.Store.student" Multiplicity="0..1" />
+          <End Role="profile" Type="PointAppDBContainer.Store.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentid" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="dependentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profile_family_fk">
+          <End Role="family" Type="PointAppDBContainer.Store.family" Multiplicity="0..1" />
+          <End Role="profile" Type="PointAppDBContainer.Store.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="family">
+              <PropertyRef Name="familyid" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="familyid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profile_member_fk">
+          <End Role="member" Type="PointAppDBContainer.Store.member" Multiplicity="0..1" />
+          <End Role="profile" Type="PointAppDBContainer.Store.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="memberid" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profile_student_fk">
+          <End Role="student" Type="PointAppDBContainer.Store.student" Multiplicity="0..1" />
+          <End Role="profile" Type="PointAppDBContainer.Store.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentid" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sessioncal_type_fk">
+          <End Role="sessiontype" Type="PointAppDBContainer.Store.sessiontype" Multiplicity="0..1" />
+          <End Role="sessioncal" Type="PointAppDBContainer.Store.sessioncal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sessiontype">
+              <PropertyRef Name="sessiontypeid" />
+            </Principal>
+            <Dependent Role="sessioncal">
+              <PropertyRef Name="sessiontypeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="signup_member_fk">
+          <End Role="member" Type="PointAppDBContainer.Store.member" Multiplicity="0..1" />
+          <End Role="signup" Type="PointAppDBContainer.Store.signup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="memberid" />
+            </Principal>
+            <Dependent Role="signup">
+              <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="signup_sessioncal_fk">
+          <End Role="sessioncal" Type="PointAppDBContainer.Store.sessioncal" Multiplicity="0..1" />
+          <End Role="signup" Type="PointAppDBContainer.Store.signup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sessioncal">
+              <PropertyRef Name="sessioncalid" />
+            </Principal>
+            <Dependent Role="signup">
+              <PropertyRef Name="sessioncalid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+      warning 6013: The table/view 'C:\DOCS\MSSE680\MVCPOINTAPP\POINTSITETEST\POINTSITETEST\APP_DATA\POINTAPPDB.MDF.dbo.v_pointbal' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="v_pointbal">
+        <Property Name="familyid" Type="int" />
+        <Property Name="familyearn" Type="int" />
+      </EntityType>-->
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PointAppDBContainer" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PointAppDBContext" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="activities" EntityType="PointAppDBContainer.activity" />
+          <EntitySet Name="approles" EntityType="PointAppDBContainer.approle" />
+          <EntitySet Name="contacts" EntityType="PointAppDBContainer.contact" />
+          <EntitySet Name="contactemails" EntityType="PointAppDBContainer.contactemail" />
+          <EntitySet Name="families" EntityType="PointAppDBContainer.family" />
+          <EntitySet Name="feerequests" EntityType="PointAppDBContainer.feerequest" />
+          <EntitySet Name="members" EntityType="PointAppDBContainer.member" />
+          <EntitySet Name="profiles" EntityType="PointAppDBContainer.profile" />
+          <EntitySet Name="sessioncals" EntityType="PointAppDBContainer.sessioncal" />
+          <EntitySet Name="sessiontypes" EntityType="PointAppDBContainer.sessiontype" />
+          <EntitySet Name="signups" EntityType="PointAppDBContainer.signup" />
+          <EntitySet Name="students" EntityType="PointAppDBContainer.student" />
+          <AssociationSet Name="contact_member_fk" Association="PointAppDBContainer.contact_member_fk">
+            <End Role="member" EntitySet="members" />
+            <End Role="contact" EntitySet="contacts" />
+          </AssociationSet>
+          <AssociationSet Name="contactemail_contact_fk" Association="PointAppDBContainer.contactemail_contact_fk">
+            <End Role="contact" EntitySet="contacts" />
+            <End Role="contactemail" EntitySet="contactemails" />
+          </AssociationSet>
+          <AssociationSet Name="profile_family_fk" Association="PointAppDBContainer.profile_family_fk">
+            <End Role="family" EntitySet="families" />
+            <End Role="profile" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="feerequest_member_fk" Association="PointAppDBContainer.feerequest_member_fk">
+            <End Role="member" EntitySet="members" />
+            <End Role="feerequest" EntitySet="feerequests" />
+          </AssociationSet>
+          <AssociationSet Name="profile_member_fk" Association="PointAppDBContainer.profile_member_fk">
+            <End Role="member" EntitySet="members" />
+            <End Role="profile" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="signup_member_fk" Association="PointAppDBContainer.signup_member_fk">
+            <End Role="member" EntitySet="members" />
+            <End Role="signup" EntitySet="signups" />
+          </AssociationSet>
+          <AssociationSet Name="profile_dependent_fk" Association="PointAppDBContainer.profile_dependent_fk">
+            <End Role="student" EntitySet="students" />
+            <End Role="profile" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="profile_student_fk" Association="PointAppDBContainer.profile_student_fk">
+            <End Role="student" EntitySet="students" />
+            <End Role="profile" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="sessioncal_type_fk" Association="PointAppDBContainer.sessioncal_type_fk">
+            <End Role="sessiontype" EntitySet="sessiontypes" />
+            <End Role="sessioncal" EntitySet="sessioncals" />
+          </AssociationSet>
+          <AssociationSet Name="signup_sessioncal_fk" Association="PointAppDBContainer.signup_sessioncal_fk">
+            <End Role="sessioncal" EntitySet="sessioncals" />
+            <End Role="signup" EntitySet="signups" />
+          </AssociationSet>
+          <AssociationSet Name="member2activity" Association="PointAppDBContainer.member2activity">
+            <End Role="activity" EntitySet="activities" />
+            <End Role="member" EntitySet="members" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="activity">
+          <Key>
+            <PropertyRef Name="activityid" />
+          </Key>
+          <Property Name="activityid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="actname" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="members" Relationship="PointAppDBContainer.member2activity" FromRole="activity" ToRole="member" />
+        </EntityType>
+        <EntityType Name="approle">
+          <Key>
+            <PropertyRef Name="approleid" />
+          </Key>
+          <Property Name="approleid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="rolename" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="note" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="contactid" />
+          </Key>
+          <Property Name="contactid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="memberid" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="lastname" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="middlename" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="altaddress" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="2" Unicode="true" FixedLength="true" />
+          <Property Name="zip" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="homephone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="workphone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="mobilephone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="member" Relationship="PointAppDBContainer.contact_member_fk" FromRole="contact" ToRole="member" />
+          <NavigationProperty Name="contactemails" Relationship="PointAppDBContainer.contactemail_contact_fk" FromRole="contact" ToRole="contactemail" />
+        </EntityType>
+        <EntityType Name="contactemail">
+          <Key>
+            <PropertyRef Name="contactemailid" />
+          </Key>
+          <Property Name="contactemailid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="contactid" Type="Int32" />
+          <Property Name="emailaddress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="contact" Relationship="PointAppDBContainer.contactemail_contact_fk" FromRole="contactemail" ToRole="contact" />
+        </EntityType>
+        <EntityType Name="family">
+          <Key>
+            <PropertyRef Name="familyid" />
+          </Key>
+          <Property Name="familyid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="familyname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="note" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="profiles" Relationship="PointAppDBContainer.profile_family_fk" FromRole="family" ToRole="profile" />
+        </EntityType>
+        <EntityType Name="feerequest">
+          <Key>
+            <PropertyRef Name="feerequestid" />
+          </Key>
+          <Property Name="feerequestid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="memberid" Type="Int32" />
+          <Property Name="requestdate" Type="DateTime" Precision="0" />
+          <Property Name="requestamt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="pointbal" Type="Int32" />
+          <NavigationProperty Name="member" Relationship="PointAppDBContainer.feerequest_member_fk" FromRole="feerequest" ToRole="member" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="memberid" />
+          </Key>
+          <Property Name="memberid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="userpass" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="passsalt" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="contacts" Relationship="PointAppDBContainer.contact_member_fk" FromRole="member" ToRole="contact" />
+          <NavigationProperty Name="feerequests" Relationship="PointAppDBContainer.feerequest_member_fk" FromRole="member" ToRole="feerequest" />
+          <NavigationProperty Name="profiles" Relationship="PointAppDBContainer.profile_member_fk" FromRole="member" ToRole="profile" />
+          <NavigationProperty Name="signups" Relationship="PointAppDBContainer.signup_member_fk" FromRole="member" ToRole="signup" />
+          <NavigationProperty Name="activities" Relationship="PointAppDBContainer.member2activity" FromRole="member" ToRole="activity" />
+        </EntityType>
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="profileid" />
+          </Key>
+          <Property Name="profileid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="memberid" Type="Int32" />
+          <Property Name="memberstatus" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="studentid" Type="Int32" />
+          <Property Name="dependentid" Type="Int32" />
+          <Property Name="familyid" Type="Int32" />
+          <NavigationProperty Name="family" Relationship="PointAppDBContainer.profile_family_fk" FromRole="profile" ToRole="family" />
+          <NavigationProperty Name="member" Relationship="PointAppDBContainer.profile_member_fk" FromRole="profile" ToRole="member" />
+          <NavigationProperty Name="student" Relationship="PointAppDBContainer.profile_dependent_fk" FromRole="profile" ToRole="student" />
+          <NavigationProperty Name="student1" Relationship="PointAppDBContainer.profile_student_fk" FromRole="profile" ToRole="student" />
+        </EntityType>
+        <EntityType Name="sessioncal">
+          <Key>
+            <PropertyRef Name="sessioncalid" />
+          </Key>
+          <Property Name="sessioncalid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="sessiondate" Type="DateTime" Precision="0" />
+          <Property Name="sessiontypeid" Type="Int32" />
+          <Property Name="sessionnum" Type="Int32" />
+          <Property Name="sessionamt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="sessionpoint" Type="Int32" />
+          <NavigationProperty Name="sessiontype" Relationship="PointAppDBContainer.sessioncal_type_fk" FromRole="sessioncal" ToRole="sessiontype" />
+          <NavigationProperty Name="signups" Relationship="PointAppDBContainer.signup_sessioncal_fk" FromRole="sessioncal" ToRole="signup" />
+        </EntityType>
+        <EntityType Name="sessiontype">
+          <Key>
+            <PropertyRef Name="sessiontypeid" />
+          </Key>
+          <Property Name="sessiontypeid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="typename" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="note" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="sessioncals" Relationship="PointAppDBContainer.sessioncal_type_fk" FromRole="sessiontype" ToRole="sessioncal" />
+        </EntityType>
+        <EntityType Name="signup">
+          <Key>
+            <PropertyRef Name="signupid" />
+          </Key>
+          <Property Name="signupid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="memberid" Type="Int32" />
+          <Property Name="sessioncalid" Type="Int32" />
+          <Property Name="pointearn" Type="Int32" />
+          <Property Name="isshow" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="member" Relationship="PointAppDBContainer.signup_member_fk" FromRole="signup" ToRole="member" />
+          <NavigationProperty Name="sessioncal" Relationship="PointAppDBContainer.signup_sessioncal_fk" FromRole="signup" ToRole="sessioncal" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="studentid" />
+          </Key>
+          <Property Name="studentid" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="lastname" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="middlename" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="grade" Type="Int32" />
+          <Property Name="active" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="profiles" Relationship="PointAppDBContainer.profile_dependent_fk" FromRole="student" ToRole="profile" />
+          <NavigationProperty Name="profiles1" Relationship="PointAppDBContainer.profile_student_fk" FromRole="student" ToRole="profile" />
+        </EntityType>
+        <Association Name="contact_member_fk">
+          <End Role="member" Type="PointAppDBContainer.member" Multiplicity="1" />
+          <End Role="contact" Type="PointAppDBContainer.contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="memberid" />
+            </Principal>
+            <Dependent Role="contact">
+              <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contactemail_contact_fk">
+          <End Role="contact" Type="PointAppDBContainer.contact" Multiplicity="0..1" />
+          <End Role="contactemail" Type="PointAppDBContainer.contactemail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contact">
+              <PropertyRef Name="contactid" />
+            </Principal>
+            <Dependent Role="contactemail">
+              <PropertyRef Name="contactid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profile_family_fk">
+          <End Role="family" Type="PointAppDBContainer.family" Multiplicity="0..1" />
+          <End Role="profile" Type="PointAppDBContainer.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="family">
+              <PropertyRef Name="familyid" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="familyid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="feerequest_member_fk">
+          <End Role="member" Type="PointAppDBContainer.member" Multiplicity="0..1" />
+          <End Role="feerequest" Type="PointAppDBContainer.feerequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="memberid" />
+            </Principal>
+            <Dependent Role="feerequest">
+              <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profile_member_fk">
+          <End Role="member" Type="PointAppDBContainer.member" Multiplicity="0..1" />
+          <End Role="profile" Type="PointAppDBContainer.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="memberid" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="signup_member_fk">
+          <End Role="member" Type="PointAppDBContainer.member" Multiplicity="0..1" />
+          <End Role="signup" Type="PointAppDBContainer.signup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="memberid" />
+            </Principal>
+            <Dependent Role="signup">
+              <PropertyRef Name="memberid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profile_dependent_fk">
+          <End Role="student" Type="PointAppDBContainer.student" Multiplicity="0..1" />
+          <End Role="profile" Type="PointAppDBContainer.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentid" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="dependentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="profile_student_fk">
+          <End Role="student" Type="PointAppDBContainer.student" Multiplicity="0..1" />
+          <End Role="profile" Type="PointAppDBContainer.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="studentid" />
+            </Principal>
+            <Dependent Role="profile">
+              <PropertyRef Name="studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sessioncal_type_fk">
+          <End Role="sessiontype" Type="PointAppDBContainer.sessiontype" Multiplicity="0..1" />
+          <End Role="sessioncal" Type="PointAppDBContainer.sessioncal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sessiontype">
+              <PropertyRef Name="sessiontypeid" />
+            </Principal>
+            <Dependent Role="sessioncal">
+              <PropertyRef Name="sessiontypeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="signup_sessioncal_fk">
+          <End Role="sessioncal" Type="PointAppDBContainer.sessioncal" Multiplicity="0..1" />
+          <End Role="signup" Type="PointAppDBContainer.signup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sessioncal">
+              <PropertyRef Name="sessioncalid" />
+            </Principal>
+            <Dependent Role="signup">
+              <PropertyRef Name="sessioncalid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="member2activity">
+          <End Role="activity" Type="PointAppDBContainer.activity" Multiplicity="*" />
+          <End Role="member" Type="PointAppDBContainer.member" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PointAppDBContainerStoreContainer" CdmEntityContainer="PointAppDBContext">
+          <EntitySetMapping Name="activities">
+            <EntityTypeMapping TypeName="PointAppDBContainer.activity">
+              <MappingFragment StoreEntitySet="activity">
+                <ScalarProperty Name="activityid" ColumnName="activityid" />
+                <ScalarProperty Name="actname" ColumnName="actname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="approles">
+            <EntityTypeMapping TypeName="PointAppDBContainer.approle">
+              <MappingFragment StoreEntitySet="approle">
+                <ScalarProperty Name="approleid" ColumnName="approleid" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contacts">
+            <EntityTypeMapping TypeName="PointAppDBContainer.contact">
+              <MappingFragment StoreEntitySet="contact">
+                <ScalarProperty Name="contactid" ColumnName="contactid" />
+                <ScalarProperty Name="memberid" ColumnName="memberid" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="altaddress" ColumnName="altaddress" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="homephone" ColumnName="homephone" />
+                <ScalarProperty Name="workphone" ColumnName="workphone" />
+                <ScalarProperty Name="mobilephone" ColumnName="mobilephone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contactemails">
+            <EntityTypeMapping TypeName="PointAppDBContainer.contactemail">
+              <MappingFragment StoreEntitySet="contactemail">
+                <ScalarProperty Name="contactemailid" ColumnName="contactemailid" />
+                <ScalarProperty Name="contactid" ColumnName="contactid" />
+                <ScalarProperty Name="emailaddress" ColumnName="emailaddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="families">
+            <EntityTypeMapping TypeName="PointAppDBContainer.family">
+              <MappingFragment StoreEntitySet="family">
+                <ScalarProperty Name="familyid" ColumnName="familyid" />
+                <ScalarProperty Name="familyname" ColumnName="familyname" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="feerequests">
+            <EntityTypeMapping TypeName="PointAppDBContainer.feerequest">
+              <MappingFragment StoreEntitySet="feerequest">
+                <ScalarProperty Name="feerequestid" ColumnName="feerequestid" />
+                <ScalarProperty Name="memberid" ColumnName="memberid" />
+                <ScalarProperty Name="requestdate" ColumnName="requestdate" />
+                <ScalarProperty Name="requestamt" ColumnName="requestamt" />
+                <ScalarProperty Name="pointbal" ColumnName="pointbal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="PointAppDBContainer.member">
+              <MappingFragment StoreEntitySet="member">
+                <ScalarProperty Name="memberid" ColumnName="memberid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userpass" ColumnName="userpass" />
+                <ScalarProperty Name="passsalt" ColumnName="passsalt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profiles">
+            <EntityTypeMapping TypeName="PointAppDBContainer.profile">
+              <MappingFragment StoreEntitySet="profile">
+                <ScalarProperty Name="profileid" ColumnName="profileid" />
+                <ScalarProperty Name="memberid" ColumnName="memberid" />
+                <ScalarProperty Name="memberstatus" ColumnName="memberstatus" />
+                <ScalarProperty Name="studentid" ColumnName="studentid" />
+                <ScalarProperty Name="dependentid" ColumnName="dependentid" />
+                <ScalarProperty Name="familyid" ColumnName="familyid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sessioncals">
+            <EntityTypeMapping TypeName="PointAppDBContainer.sessioncal">
+              <MappingFragment StoreEntitySet="sessioncal">
+                <ScalarProperty Name="sessioncalid" ColumnName="sessioncalid" />
+                <ScalarProperty Name="sessiondate" ColumnName="sessiondate" />
+                <ScalarProperty Name="sessiontypeid" ColumnName="sessiontypeid" />
+                <ScalarProperty Name="sessionnum" ColumnName="sessionnum" />
+                <ScalarProperty Name="sessionamt" ColumnName="sessionamt" />
+                <ScalarProperty Name="sessionpoint" ColumnName="sessionpoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sessiontypes">
+            <EntityTypeMapping TypeName="PointAppDBContainer.sessiontype">
+              <MappingFragment StoreEntitySet="sessiontype">
+                <ScalarProperty Name="sessiontypeid" ColumnName="sessiontypeid" />
+                <ScalarProperty Name="typename" ColumnName="typename" />
+                <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="signups">
+            <EntityTypeMapping TypeName="PointAppDBContainer.signup">
+              <MappingFragment StoreEntitySet="signup">
+                <ScalarProperty Name="signupid" ColumnName="signupid" />
+                <ScalarProperty Name="memberid" ColumnName="memberid" />
+                <ScalarProperty Name="sessioncalid" ColumnName="sessioncalid" />
+                <ScalarProperty Name="pointearn" ColumnName="pointearn" />
+                <ScalarProperty Name="isshow" ColumnName="isshow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="PointAppDBContainer.student">
+              <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="studentid" ColumnName="studentid" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="member2activity" TypeName="PointAppDBContainer.member2activity" StoreEntitySet="member2activity">
+            <EndProperty Name="activity">
+              <ScalarProperty Name="activityid" ColumnName="activityid" />
+            </EndProperty>
+            <EndProperty Name="member">
+              <ScalarProperty Name="memberid" ColumnName="memberid" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

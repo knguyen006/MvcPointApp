@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{85A5241F-352B-419E-A85C-2EF5F0500CE8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataLayer</RootNamespace>
+    <AssemblyName>DataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleCrypto">
+      <HintPath>..\packages\SimpleCrypto.0.3.28.24\lib\SimpleCrypto.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="activity.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="approle.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="contact.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="contactemail.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="family.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="feerequest.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="member.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointAppDBContainer.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointAppDBContainer.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointAppDBContainer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointAppDBContainer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointAppDBContainer.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="profile.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sessioncal.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sessiontype.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="signup.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="student.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_pointbal.cs">
+      <DependentUpon>PointAppDBContainer.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="PointAppDBContainer.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PointAppDBContainer.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PointAppDBContainer.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PointAppDBContainer.edmx</DependentUpon>
+      <LastGenOutput>PointAppDBContainer.Context.cs</LastGenOutput>
+    </None>
+    <None Include="PointAppDBContainer.edmx.diagram">
+      <DependentUpon>PointAppDBContainer.edmx</DependentUpon>
+    </None>
+    <None Include="PointAppDBContainer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PointAppDBContainer.edmx</DependentUpon>
+      <LastGenOutput>PointAppDBContainer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

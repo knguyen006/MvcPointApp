@@ -52,5 +52,10 @@ namespace DataLayerBusiness
         {
             return svc.UserIsValid(nuser, npass);
         }
+
+        public bool GetAdminUser(string nuser)
+        {
+            return svc.GetAdminUser(nuser);
+        }
     }
 }

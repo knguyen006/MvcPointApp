@@ -17,5 +17,8 @@ namespace DataLayerService
 
         List<member> GetAccount(member mem);
         bool UserIsValid(string nuser, string npass);
+
+        bool GetAdminUser(string nuser);
+
     }
 }

@@ -1,0 +1,71 @@
+﻿@model DataLayer.profile
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>profile</legend>
+
+        @Html.HiddenFor(model => model.profileid)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.memberid, "member")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("memberid", String.Empty)
+            @Html.ValidationMessageFor(model => model.memberid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.memberstatus)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.memberstatus)
+            @Html.ValidationMessageFor(model => model.memberstatus)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.studentid, "student1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("studentid", String.Empty)
+            @Html.ValidationMessageFor(model => model.studentid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dependentid, "student")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("dependentid", String.Empty)
+            @Html.ValidationMessageFor(model => model.dependentid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.familyid, "family")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("familyid", String.Empty)
+            @Html.ValidationMessageFor(model => model.familyid)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

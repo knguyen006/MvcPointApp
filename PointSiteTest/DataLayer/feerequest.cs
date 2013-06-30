@@ -11,13 +11,25 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class feerequest
     {
+        [Required]
         public int feerequestid { get; set; }
-        public Nullable<int> memberid { get; set; }
-        public Nullable<System.DateTime> requestdate { get; set; }
-        public Nullable<decimal> requestamt { get; set; }
+
+        [Required]
+        public int memberid { get; set; }
+
+        [Required(ErrorMessage="Request date is required.")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [Display(Name="Request date ")]
+        public System.DateTime requestdate { get; set; }
+
+        [Display(Name="Request amount ")]
+        public decimal requestamt { get; set; }
+
+        [Display(Name="Point balance ")]
         public Nullable<int> pointbal { get; set; }
     
         public virtual member member { get; set; }

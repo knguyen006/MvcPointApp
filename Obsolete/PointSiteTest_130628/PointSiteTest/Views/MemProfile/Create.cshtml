@@ -1,0 +1,77 @@
+﻿@model DataLayer.profile
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>profile</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.memberid, "member")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("memberid", String.Empty)
+            @*Html.EditorFor(model => model.memberid)*@
+            @Html.ValidationMessageFor(model => model.memberid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.memberstatus)
+        </div>
+        <div class="editor-field">
+            @*Html.EditorFor(model => model.memberstatus)*@
+            @Html.DropDownListFor(model => model.memberstatus, new SelectList(
+                  new List<Object>{
+                       new { value = "PARENT" , text = "PARENT"  },
+                       new { value = "STUDENT" , text = "STUDENT" }
+                    },
+                  "value",
+                  "text",
+                   2))
+            @Html.ValidationMessageFor(model => model.memberstatus)
+        </div>
+        <p class="message-error">For student only:</p>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.studentid, "Student")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("studentid", String.Empty)
+            @Html.ValidationMessageFor(model => model.studentid)
+        </div>
+        <p class="message-error">For Parent only:</p>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dependentid, "Add Dependent")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("dependentid", String.Empty)
+            @Html.ValidationMessageFor(model => model.dependentid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.familyname, "Family Name")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.familyname)
+            @*Html.DropDownList("familyid", String.Empty)*@
+            @Html.ValidationMessageFor(model => model.familyname)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

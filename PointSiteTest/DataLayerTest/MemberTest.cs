@@ -37,10 +37,7 @@ namespace DataLayerTest
             //set data
             obj.username = "Addnewmember";
             obj.userpass = "Addnewpass";
-            obj.passphrase = "Add phrase";
-            obj.memberstatus = "Student";
-            //obj.contactid = c.contactid;
-            //obj.studentid = s.studentid;
+            obj.passsalt = "addphrase";
             db.members.Add(obj);
 
             //save changes
@@ -54,10 +51,7 @@ namespace DataLayerTest
             //Assert statement
             Assert.AreEqual(savedObj.username, obj.username);
             Assert.AreEqual(savedObj.userpass, obj.userpass);
-            Assert.AreEqual(savedObj.passphrase, obj.passphrase);
-            Assert.AreEqual(savedObj.memberstatus, obj.memberstatus);
-            //Assert.AreEqual(savedObj.contactid, obj.contactid);
-            //Assert.AreEqual(savedObj.studentid, obj.studentid);
+            Assert.AreEqual(savedObj.passsalt, obj.passsalt);
 
             //cleanup
             db.members.Remove(savedObj);
@@ -76,10 +70,7 @@ namespace DataLayerTest
             //set data
             obj.username = "Updatemember";
             obj.userpass = "Updatepass";
-            obj.passphrase = "Update phrase";
-            obj.memberstatus = "Student";
-            //obj.contactid = c.contactid;
-            //obj.studentid = s.studentid;
+            obj.passsalt = "updatephrase";
             db.members.Add(obj);
             db.SaveChanges();
 
@@ -91,10 +82,7 @@ namespace DataLayerTest
             //set data
             savedObj.username = "Updatemember";
             savedObj.userpass = "Updatepass";
-            savedObj.passphrase = "Update update phrase";
-            savedObj.memberstatus = "Student";
-            //savedObj.contactid = c.contactid;
-            //savedObj.studentid = s.studentid;
+            savedObj.passsalt = "updatephrase";
             db.SaveChanges();
 
             //check to see if there is existing record
@@ -105,10 +93,7 @@ namespace DataLayerTest
             //Assert statement
             Assert.AreEqual(updatedObj.username, savedObj.username);
             Assert.AreEqual(updatedObj.userpass, savedObj.userpass);
-            Assert.AreEqual(updatedObj.passphrase, savedObj.passphrase);
-            Assert.AreEqual(updatedObj.memberstatus, savedObj.memberstatus);
-            //Assert.AreEqual(updatedObj.contactid, savedObj.contactid);
-            //Assert.AreEqual(updatedObj.studentid, savedObj.studentid);
+            Assert.AreEqual(updatedObj.passsalt, savedObj.passsalt);
 
             //cleanup
             db.members.Remove(updatedObj);
@@ -128,10 +113,7 @@ namespace DataLayerTest
             //set data
             obj.username = "Deletemember";
             obj.userpass = "Deletepass";
-            obj.passphrase = "Delete phrase";
-            obj.memberstatus = "Student";
-            //obj.contactid = c.contactid;
-            //obj.studentid = s.studentid;
+            obj.passsalt = "deletephrase";
             db.members.Add(obj);
 
             db.members.Add(obj);
@@ -164,12 +146,8 @@ namespace DataLayerTest
 
             //set data
             obj.username = "Listmember";
-            obj.userpass = "Listpass";
-            obj.passphrase = "Listphrase";
-            obj.memberstatus = "Student";
-            obj.approleid = 2;
-            //obj.contactid = c.contactid;
-            //obj.studentid = s.studentid;
+            obj.userpass = "listpass";
+            obj.passsalt = "listpass";
             db.members.Add(obj);
 
             db.members.Add(obj);

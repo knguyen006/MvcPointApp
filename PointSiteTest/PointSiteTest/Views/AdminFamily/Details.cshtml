@@ -1,0 +1,29 @@
+﻿@model DataLayer.family
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>family</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.familyname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.familyname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.note)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.note)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.familyid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

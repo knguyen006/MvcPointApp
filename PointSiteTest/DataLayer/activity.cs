@@ -11,7 +11,8 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class activity
     {
         public activity()
@@ -19,7 +20,11 @@ namespace DataLayer
             this.members = new HashSet<member>();
         }
     
+        [Required]
         public int activityid { get; set; }
+
+        [Required(ErrorMessage = "Activity name is required.")]
+        [Display(Name = "Activity name ")]
         public string actname { get; set; }
     
         public virtual ICollection<member> members { get; set; }

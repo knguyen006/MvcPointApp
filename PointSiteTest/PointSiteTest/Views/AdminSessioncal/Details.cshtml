@@ -1,0 +1,50 @@
+﻿@model DataLayer.sessioncal
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>sessioncal</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessiondate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessiondate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessiontype.typename)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessiontype.typename)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessionnum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessionnum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessionamt)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessionamt)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.sessionpoint)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.sessionpoint)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.sessioncalid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

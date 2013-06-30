@@ -11,21 +11,37 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class student
     {
         public student()
         {
-            this.members = new HashSet<member>();
+            this.profiles = new HashSet<profile>();
+            this.profiles1 = new HashSet<profile>();
         }
     
+        [Required]
         public int studentid { get; set; }
+
+        [Required(ErrorMessage="First name is required.")]
+        [Display(Name="First name ")]
         public string firstname { get; set; }
+
+        [Required(ErrorMessage = "Last name is required.")]
+        [Display(Name="Last name ")]
         public string lastname { get; set; }
+
+        [Display(Name="Middle ")]
         public string middlename { get; set; }
-        public Nullable<int> grade { get; set; }
+
+        [Display(Name="Grade ")]
+        public int grade { get; set; }
+
+        [Display(Name="Active ")]
         public string active { get; set; }
     
-        public virtual ICollection<member> members { get; set; }
+        public virtual ICollection<profile> profiles { get; set; }
+        public virtual ICollection<profile> profiles1 { get; set; }
     }
 }

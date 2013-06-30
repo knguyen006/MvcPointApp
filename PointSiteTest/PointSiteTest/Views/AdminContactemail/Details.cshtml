@@ -1,0 +1,29 @@
+﻿@model DataLayer.contactemail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>contactemail</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.contact.firstname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.contact.firstname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.emailaddress)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emailaddress)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.contactemailid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

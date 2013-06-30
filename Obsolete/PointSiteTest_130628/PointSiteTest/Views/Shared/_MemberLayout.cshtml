@@ -1,0 +1,56 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - LPAC MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("LPAC Point Tracking System", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.ActionLink("Log Out", "Logout", "Account")
+                    </section>
+                    <nav>
+                        <ul id="submenu">
+                            <li>@Html.ActionLink("Member", "Index", "MemMember")</li>
+                            <li>@Html.ActionLink("Family Name", "Index", "MemFamily")</li>
+                            <li>@Html.ActionLink("Profile", "Index", "MemProfile")</li>
+                            <li>@Html.ActionLink("Activity", "Index", "MemActivity")</li>
+                            <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+                            <li>@Html.ActionLink("Email", "Index", "Contactemail")</li>
+                            <li>@Html.ActionLink("Fee Request", "Index", "Feerequest")</li>
+                            <li>@Html.ActionLink("Calendar", "Index", "Sessioncal")</li>
+                            <li>@Html.ActionLink("Type", "Index", "Sessiontype")</li>
+                            <li>@Html.ActionLink("Sign Up", "Index", "Signup")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - LPAC - MVC Application</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

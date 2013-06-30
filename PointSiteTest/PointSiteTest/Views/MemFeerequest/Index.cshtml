@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DataLayer.feerequest>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.member.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.requestdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.requestamt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pointbal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.requestdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.requestamt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pointbal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.feerequestid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.feerequestid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.feerequestid })
+        </td>
+    </tr>
+}
+
+</table>

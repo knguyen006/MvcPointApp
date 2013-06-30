@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DataLayer.profile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.member.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.memberstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.student1.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.student.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.family.familyname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.memberstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.student1.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.student.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.family.familyname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.profileid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.profileid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.profileid })
+        </td>
+    </tr>
+}
+
+</table>

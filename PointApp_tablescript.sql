@@ -17,46 +17,6 @@ create table student
 go
 alter table student add constraint student_pk primary key (studentid);
 
-------------------------------------
--- contact table
--- contact information for all member
-go
-create table contact 
-(
-  contactid int identity(1,1) not null,
-  firstname nvarchar(30) not null,
-  lastname nvarchar(30) not null,
-  middlename nvarchar(30),
-  address nvarchar(100) not null,
-  altaddress nvarchar(100),
-  city nvarchar(30) not null,
-  state nchar(2) default 'CO',
-  zip nvarchar(10),
-  homephone nvarchar(20),
-  workphone nvarchar(20),
-  mobilephone nvarchar(20)
-);
-
-
-go
-alter table contact add constraint contact_pk primary key (contactid);
-
---------------------------------
--- contact_email table
--- multiple email
-go
-create table contactemail 
-(
-  contactemailid int identity(1,1) not null,
-  contactid int,
-  emailaddress nvarchar(30) 
-);
-
-
-go
-alter table contactemail add constraint contactemail_pk primary key (contactemailid);
-go
-alter table contactemail add constraint contactemail_contact_fk foreign key (contactid) references contact(contactid);
 
 -------------------------------------------
 -- activity table
@@ -84,6 +44,21 @@ create table sessiontype
 go
 alter table sessiontype add constraint sessiontype_pk primary key (sessiontypeid);
 
+-----------------------
+-- session_type table
+-- event type including pizza, empty bowl
+go
+create table family 
+(
+  familyid int identity(1,1) not null,
+  familyname nvarchar(50) not null,
+  note nvarchar(250)
+);
+
+
+go
+alter table family add constraint family_pk primary key (familyid);
+
 -----------------------------
 -- approle table
 -- user role
@@ -108,12 +83,59 @@ create table member
   memberid int identity(1,1) not null,
   username nvarchar(30) not null,
   userpass nvarchar(200) not null,
-  passsault nvarchar(200) not null
+  passsalt nvarchar(200) not null,
 );
 
 
 go
 alter table member add constraint member_pk primary key (memberid);
+--go
+--alter table contactemail add constraint member_approle_fk foreign key (approleid) references approle(approleid);
+
+
+------------------------------------
+-- contact table
+-- contact information for all member
+go
+create table contact 
+(
+  contactid int identity(1,1) not null,
+  memberid int NOT NULL,
+  firstname nvarchar(30) not null,
+  lastname nvarchar(30) not null,
+  middlename nvarchar(30),
+  address nvarchar(100) not null,
+  altaddress nvarchar(100),
+  city nvarchar(30) not null,
+  state nchar(2) default 'CO',
+  zip nvarchar(10),
+  homephone nvarchar(20),
+  workphone nvarchar(20),
+  mobilephone nvarchar(20),
+  CONSTRAINT [contact_member_fk] FOREIGN KEY ([memberid]) REFERENCES [dbo].[member] ([memberid])
+);
+
+
+go
+alter table contact add constraint contact_pk primary key (contactid);
+--go
+--alter table contact add constraint contact_member_fk foreign key (memberid) references member(memberid);
+--------------------------------
+-- contact_email table
+-- multiple email
+go
+create table contactemail 
+(
+  contactemailid int identity(1,1) not null,
+  contactid int not null,
+  emailaddress nvarchar(50) 
+);
+
+
+go
+alter table contactemail add constraint contactemail_pk primary key (contactemailid);
+go
+alter table contactemail add constraint contactemail_contact_fk foreign key (contactid) references contact(contactid);
 
 ---------------------------
 -- member2student
@@ -155,19 +177,24 @@ CREATE TABLE [dbo].[profile] (
   profileid int identity(1,1) not null,
   memberid int,
   memberstatus nvarchar(10) not null,
-  approleid int default 2,
+  --approleid int default 2,
   studentid int,
-  contactid int
+  dependentid int,
+  familyid int
 );
 
 go
 alter table profile add constraint profile_pk primary key (profileid);
+--go
+--alter table profile add constraint profile_role_fk foreign key (approleid) references approle(approleid);
 go
-alter table profile add constraint profile_role_fk foreign key (approleid) references approle(approleid);
+alter table profile add constraint profile_student_fk foreign key (studentid) references student(studentid);
 go
-alter table profile add constraint profile_student_fk foreign key (approleid) references approle(approleid);
+alter table profile add constraint profile_member_fk foreign key (memberid) references member(memberid);
 go
-alter table profile add constraint profile_contact_fk foreign key (approleid) references approle(approleid);
+alter table profile add constraint profile_family_fk foreign key (familyid) references family(familyid);
+go
+alter table profile add constraint profile_dependent_fk foreign key (dependentid) references student(studentid);
 
 --------------------------------------
 -- session_cal table
@@ -229,18 +256,20 @@ go
 create table feerequest 
 (
   feerequestid int identity(1,1) not null,
-  memberid int,
+  memberid int NOT NULL,
   requestdate date,
   requestamt money,
-  pointbal int default 0
+  pointbal int default 0,
+  CONSTRAINT [feerequest_pk] PRIMARY KEY CLUSTERED ([feerequestid] ASC),
+  CONSTRAINT [feerequest_member_fk] FOREIGN KEY ([memberid]) REFERENCES [dbo].[member] ([memberid])
 );
 
-
+/*
 go
 alter table feerequest add constraint feerequest_pk primary key (feerequestid);
 go
 alter table feerequest add constraint feerequest_member_fk foreign key (memberid) references member(memberid);
-
+*/
 ------------------------------------------
 /* **** INSERT STATEMENT *** */
 /*
@@ -305,3 +334,25 @@ GO
 INSERT INTO feerequest (memberid, requestdate, requestamt, pointbal)
 	VALUES (3, '5/30/2013', 10, 10);	
 */
+
+GO
+CREATE VIEW v_pointbal AS
+SELECT a.familyname,
+       SUM(a.pointearn) familyearn
+  FROM 
+(SELECT m.memberid,
+		p.familyname,
+		s.pointearn
+  FROM member m, profile p, signup s
+ WHERE m.memberid = p.memberid
+   AND m.memberid = s.memberid
+   AND p.memberstatus = 'PARENT'
+UNION
+SELECT m.memberid,
+		p.familyname,
+		s.pointearn
+  FROM member m, profile p, signup s
+ WHERE m.memberid = p.memberid
+   AND m.memberid = s.memberid
+   AND p.dependentid IS NOT NULL)a
+GROUP BY a.familyname

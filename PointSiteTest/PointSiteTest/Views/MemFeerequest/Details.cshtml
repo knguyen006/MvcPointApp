@@ -1,0 +1,44 @@
+﻿@model DataLayer.feerequest
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>feerequest</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.member.username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.member.username)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.requestdate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.requestdate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.requestamt)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.requestamt)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.pointbal)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.pointbal)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.feerequestid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

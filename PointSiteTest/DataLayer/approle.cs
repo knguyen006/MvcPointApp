@@ -11,18 +11,16 @@ namespace DataLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class approle
     {
-        public approle()
-        {
-            this.members = new HashSet<member>();
-        }
-    
+        [Required]
         public int approleid { get; set; }
+
+        [Required(ErrorMessage = "Role name is required.")]
+        [Display(Name = "Role name ")]
         public string rolename { get; set; }
         public string note { get; set; }
-    
-        public virtual ICollection<member> members { get; set; }
     }
 }
